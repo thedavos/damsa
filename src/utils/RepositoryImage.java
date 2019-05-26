@@ -1,4 +1,4 @@
-package Utils;
+package utils;
 
 import java.io.*;
 import java.util.Base64;
@@ -28,7 +28,7 @@ public class RepositoryImage {
 		}
 		
 	}
-	
+
 	public String myInputStreamReader(InputStream in) throws IOException {
 	    InputStreamReader reader = new InputStreamReader(in);
 	    StringBuilder sb = new StringBuilder();
