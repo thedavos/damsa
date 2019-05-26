@@ -4,6 +4,7 @@ import clases.Cliente;
 import models.ClientModel;
 
 import java.util.ArrayList;
+import Utils.RepositoryImage;
 
 public class App {
 	public static void main(String[] args) throws Exception {
@@ -22,8 +23,9 @@ public class App {
 //		ClientModel model = new ClientModel();
 //		model.createClient(client);
 //		Cliente client = model.getClient(75454144);
-		Object obj = "hey";
-	
-		System.out.println(obj);
+//		Object obj = "hey";
+		RepositoryImage repo = new RepositoryImage();
+		repo.authorize_account();
+//		System.out.println(obj);
     }
 }
