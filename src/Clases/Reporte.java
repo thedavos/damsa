@@ -2,11 +2,19 @@ package Clases;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+/**
+ * Clase que permite generar reportes a tráves de archivos 
+ * en formato .csv o .txt y los guarda en un repositorio remoto
+ * de backblaze
+ * <p>
+ * Utilizando el método {@code makeReport}}
+ * 
+ * @author David Vargas
+ */
 public class Reporte {
 	private String nameFile;
 	private String title;
