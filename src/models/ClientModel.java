@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 // Java packages
 import java.sql.Connection;
@@ -8,11 +8,8 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
-// Utilidades
-import Utils.ConnectionDB;
-
-// User Class
-import Clases.Cliente;
+import clases.Cliente;
+import utils.ConnectionDB;
 
 public class ClientModel {
 	

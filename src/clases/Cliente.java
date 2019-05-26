@@ -1,6 +1,6 @@
-package Clases;
+package clases;
 
-import Clases.Usuario;
+import clases.Usuario;
 
 public class Cliente extends Usuario {
 	private int age, dni;

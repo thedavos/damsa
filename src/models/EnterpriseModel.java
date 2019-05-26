@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Clases.Empresa;
-import Utils.ConnectionDB;
+import clases.Empresa;
+import utils.ConnectionDB;
 
 public class EnterpriseModel {
 	

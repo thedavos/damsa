@@ -1,7 +1,7 @@
-package App;
+package app;
 
-import Clases.Cliente;
-import Models.ClientModel;
+import clases.Cliente;
+import models.ClientModel;
 
 import java.util.ArrayList;
 

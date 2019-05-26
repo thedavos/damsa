@@ -1,4 +1,4 @@
-package Clases;
+package clases;
 
 public class Usuario {
 	private int phone, cellPhone, id;
