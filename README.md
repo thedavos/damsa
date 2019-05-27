@@ -1,5 +1,7 @@
-# Damsa
+# Damse
 Java Aplicación de Escritorio que permite la gestión de almacenamiento de materiales, compra,  reportes y control de usuarios.
+
+### Entidades
 
 ### Gestión de Almacenamiento de Materiales
 
