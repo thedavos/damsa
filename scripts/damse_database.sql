@@ -5,7 +5,7 @@ use damse;
 create table cliente(
   cliente_id int unsigned auto_increment,
   codigo varchar(20) unique not null,
-  dni char(8) unsigned not null,
+  dni char(8) not null,
   contraseña varchar(30) not null,
   nombre varchar(30) not null,
   apellidos varchar(30) not null,
@@ -25,9 +25,9 @@ create table cliente(
 create table empresa(
   empresa_id int unsigned auto_increment,
   codigo varchar(20) unique not null,
-  ruc varchar(11),
+  ruc varchar(11) not null,
   contraseña varchar(30) not null,
-  nombre varchar(30),
+  nombre varchar(30) not null,
   creado datetime not null default now(),
   modificado datetime null on update now(),
   direccion varchar(80),
@@ -42,13 +42,13 @@ create table empresa(
 create table admin(
   admin_id int unsigned auto_increment,
   codigo varchar(20) unique not null,
-  dni char(8),
+  dni char(8) not null,
   contraseña varchar(30) not null,
-  nombre varchar(30),
+  nombre varchar(30) not null,
   creado datetime not null default now(),
   modificado datetime null on update now(),
   direccion varchar(80),
-  correo varchar(80) unique,
+  correo varchar(80) unique not null,
   telefono varchar(15),
   celular varchar(10),
   profile_url varchar(80),
@@ -76,7 +76,7 @@ create table facturaDetalle(
   factura_id int,
   material_id int,
   cantidad int not null,
-  PRIMARY KEY (factura_id, material_id)
+  primary key(factura_id, material_id)
 );
 
 create table material(
