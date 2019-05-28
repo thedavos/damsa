@@ -15,8 +15,7 @@ Java Aplicación de Escritorio que permite la gestión de almacenamiento de mate
 |     edad    	|  Short 	| Obligatorio 	| la edad no puede pasar de 3 dígitos                                                        	|
 |    genero   	|  Char  	| Obligatorio 	| El dato debe ser o 'M' o 'F'                                                               	|
 |  direccion  	| String 	|             	|                                                                                            	|
-|    correo   	| String 	|             	| Debe tener el @, y el .com, .es o .pe al final del correo.
-                                                                                         	|
+|    correo   	| String 	|             	| Debe tener el @, y el .com, .es o .pe al final del correo.                                             |
 |   telefono  	| String 	|             	| el dato ingresado no puede ser mayor a 6 dígitos, excluyendo el 044.  ej: 044673146        	|
 |   celular   	| String 	|             	| el dato ingresado no puede ser mayor a 9 dígitos. excluyendo el +51.  ej: +51991424673     	|
 | profile_url 	|  Image 	|             	| Pendiente: buscar un botón en java para ingresar una imagen desde  el sistema de archivos. 	|
