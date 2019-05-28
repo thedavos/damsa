@@ -3,6 +3,24 @@ Java Aplicación de Escritorio que permite la gestión de almacenamiento de mate
 
 ### Entidades
 
+#### Cliente
+
+
+|    Campo    	|  Tipo  	| Restricción 	|                                           Detalle                                          	|
+|:-----------:	|:------:	|:-----------:	|:------------------------------------------------------------------------------------------:	|
+|     dni     	| String 	| Obligatorio 	| el dni no puede tener más de 8 letras                                                      	|
+|  contraseña 	| String 	| Obligatorio 	|                                                                                            	|
+|    nombre   	| String 	| Obligatorio 	|                                                                                            	|
+|  apellidos  	| String 	| Obligatorio 	|                                                                                            	|
+|     edad    	|  Short 	| Obligatorio 	| la edad no puede pasar de 3 dígitos                                                        	|
+|    genero   	|  Char  	| Obligatorio 	| El dato debe ser o 'M' o 'F'                                                               	|
+|  direccion  	| String 	|             	|                                                                                            	|
+|    correo   	| String 	|             	|                                                                                            	|
+|   telefono  	| String 	|             	| el dato ingresado no puede ser mayor a 6 dígitos, excluyendo el 044.  ej: 044673146        	|
+|   celular   	| String 	|             	| el dato ingresado no puede ser mayor a 9 dígitos. excluyendo el +51.  ej: +51991424673     	|
+| profile_url 	|  Image 	|             	| Pendiente: buscar un botón en java para ingresar una imagen desde  el sistema de archivos. 	|
+
+
 ### Gestión de Almacenamiento de Materiales
 
 #### Cliente
