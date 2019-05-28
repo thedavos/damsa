@@ -61,7 +61,7 @@ create table sesion_usuario(
   codigo_usuario varchar(20) not null,
   creado datetime not null default now(),
   modificado datetime null on update now(),
-  primary key(sesion_id),
+  primary key(sesion_id)
 );
 
 create table factura(
