@@ -1,31 +1,31 @@
 package app;
 
-import clases.Cliente;
-import models.ClientModel;
+import clases.Admin;
+import models.AdminModel;
 
 import java.util.ArrayList;
 import utils.RepositoryImage;
 
 public class App {
 	public static void main(String[] args) throws Exception {
-//		Cliente client = new Cliente(
-//				75454144,
-//				"David",
-//				"Vargas Domínguez",
-//				'M',
-//				23,
-//				"davos@gmail.com",
-//				"Los Robles 321",
-//				994321035,
-//				291543
-//				);
-//		
-//		ClientModel model = new ClientModel();
-//		model.createClient(client);
-//		Cliente client = model.getClient(75454144);
-//		Object obj = "hey";
-		RepositoryImage repo = new RepositoryImage();
-		repo.authorize_account();
-//		System.out.println(obj);
+		
+		Admin admin = new Admin(
+				74736630,
+				"misael123",
+				"Misael",
+				"Cano Varas",
+				'M',
+				17,
+				"misael@gmail.com",
+				"",
+				123456,
+				997939992,
+				""
+				);
+		
+		AdminModel am = new AdminModel();
+		
+		am.createAdmin(admin);
+		System.out.println(admin);
     }
 }
