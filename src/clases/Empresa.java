@@ -1,23 +1,30 @@
 package clases;
 
-import clases.Usuario;
-
 public class Empresa extends Usuario {
 	
-	private String code, ruc;
+	private String ruc;
+	private static int counter;
+	
+	public Empresa() {
+		setRole("Empresa");
+	}
 	
 	public Empresa(String ruc, String name, String email, String address, int phone, int cellPhone) {
 		super(name, email, address, phone, cellPhone);
 		this.ruc = ruc;
-		this.code = "e" + name.toLowerCase();
+		counter += 1;
+		String code = "e" + name.toLowerCase() + "000" + counter;
+		setCode(code);
+		setRole("Empresa");
 	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
+	
+	public Empresa(String ruc, String name) {
+		this.ruc = ruc;
+		counter += 1;
+		String code = "e" + name.toLowerCase() + "000" + counter;
+		setCode(code);
+		setName(name);
+		setRole("Empresa");
 	}
 
 	public String getRuc() {
