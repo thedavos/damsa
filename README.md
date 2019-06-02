@@ -1,51 +1,5 @@
-# Damse
+# Damsa
 Java Aplicación de Escritorio que permite la gestión de almacenamiento de materiales, compra,  reportes y control de usuarios.
-
-### Entidades
-
-#### Cliente
-
-
-|    Campo    	|  Tipo  	| Restricción 	|                                           Detalle                                          	|
-|:-----------:	|:------:	|:-----------:	|:------------------------------------------------------------------------------------------:	|
-|     dni     	| String 	| Obligatorio 	| el dni no puede tener más de 8 letras                                                      	|
-|  contraseña 	| String 	| Obligatorio 	| La contraseña debe tener: mayúsculas, minúsculas, números                                  	|
-|    nombre   	| String 	| Obligatorio 	|                                                                                            	|
-|  apellidos  	| String 	| Obligatorio 	|                                                                                            	|
-|     edad    	|  Short 	| Obligatorio 	| la edad no puede pasar de 3 dígitos                                                        	|
-|    genero   	|  Char  	| Obligatorio 	| El dato debe ser o 'M' o 'F'                                                               	|
-|  direccion  	| String 	|             	|                                                                                            	|
-|    correo   	| String 	|             	| Debe tener el @, y el .com, .es o .pe al final del correo.                                             |
-|   telefono  	| String 	|             	| el dato ingresado no puede ser mayor a 6 dígitos, excluyendo el 044.  ej: 044673146        	|
-|   celular   	| String 	|             	| el dato ingresado no puede ser mayor a 9 dígitos. excluyendo el +51.  ej: +51991424673     	|
-| profile_url 	|  Image 	|             	| Pendiente: buscar un botón en java para ingresar una imagen desde  el sistema de archivos. 	|
-
-
-#### Empresa
-
-|    Campo    	|  Tipo  	| Restricción 	|                                           Detalle                                          	|
-|:-----------:	|:------:	|:-----------:	|:------------------------------------------------------------------------------------------:	|
-|     ruc     	| String 	| Obligatorio 	| el dni no puede tener más de 11 letras                                                     	|
-|  contraseña 	| String 	| Obligatorio 	| La contraseña debe tener: mayúsculas, minúsculas, números                                  	|
-|    nombre   	| String 	| Obligatorio 	|                                                                                            	|
-|  direccion  	| String 	|             	|                                                                                            	|
-|    correo   	| String 	|             	| Debe tener el @, y el .com, .es o .pe al final del correo.                                 	|
-|   telefono  	| String 	|             	| el dato ingresado no puede ser mayor a 6 dígitos, excluyendo el 044.  ej: 044673146        	|
-|   celular   	| String 	|             	| el dato ingresado no puede ser mayor a 9 dígitos. excluyendo el +51.  ej: +51991424673     	|
-| profile_url 	|  Image 	|             	| Pendiente: buscar un botón en java para ingresar una imagen desde  el sistema de archivos. 	|
-
-
-#### Material
-
-|     Campo    	|  Tipo  	| Restricción 	|                                           Detalle                                          	|
-|:------------:	|:------:	|:-----------:	|:------------------------------------------------------------------------------------------:	|
-|    nombre    	| String 	| Obligatorio 	|                                                                                            	|
-|  descripcion 	| String 	| Obligatorio 	|                                                                                            	|
-| precio_venta 	| Double 	| Obligatorio 	|                                                                                            	|
-|     tipo     	| String 	| Obligatorio 	|                                                                                            	|
-|    estado    	| String 	| Obligatorio 	|                                                                                            	|
-| material_img 	|  Image 	|             	| Pendiente: buscar un botón en java para ingresar una imagen desde  el sistema de archivos. 	|
-
 
 ### Gestión de Almacenamiento de Materiales
 

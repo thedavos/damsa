@@ -11,10 +11,14 @@ public class RepositoryImage {
 	
 	public void authorize_account() {
 		HttpURLConnection connection = null;
-		String headerForAuthorizeAccount = "Basic " + Base64.getEncoder().encodeToString((applicationKeyId + ":" + applicationKey).getBytes());
+		String headerForAuthorizeAccount =
+				"Basic " + Base64.getEncoder().encodeToString(
+						(applicationKeyId + ":" + applicationKey).getBytes());
 		
 		try {
-		    URL url = new URL("https://api.backblazeb2.com/b2api/v2/b2_authorize_account");
+		    URL url = new URL
+		    		("https://api.backblazeb2.com/b2api/v2/b2_authorize_account");
+		    
 		    connection = (HttpURLConnection)url.openConnection();
 		    connection.setRequestMethod("GET");
 		    connection.setRequestProperty("Authorization", headerForAuthorizeAccount);
