@@ -1,0 +1,4 @@
+mysql -h b10rpladoweqjjgn97ba-mysql.services.clever-cloud.com -P 3306 -u u5mihwrfaijyeblj -p b10rpladoweqjjgn97ba
+
+database_name: b10rpladoweqjjgn97ba
+password: 7AM1Z9XXlnXdEeHOF0HP
