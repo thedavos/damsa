@@ -13,6 +13,7 @@ import utils.ConnectionDB;
 
 public class ClientModel {
 	
+	final private String tableName = "cliente";
 	private Connection conn = null;
 	
 	private Connection connect() {
@@ -25,7 +26,7 @@ public class ClientModel {
 		String query = "";
 		
 		try {
-			query = "INSERT INTO Cliente("
+			query = "INSERT INTO " + tableName + " ("
 					+ "dni, "
 					+ "codigo, "
 					+ "nombre, "
@@ -35,8 +36,10 @@ public class ClientModel {
 					+ "direccion, "
 					+ "correo, "
 					+ "telefono, "
-					+ "celular)"
-					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "celular, "
+					+ "contraseña, "
+					+ "profile_url)"
+					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
 			preparedStmt.setInt(1, cliente.getDni());
@@ -49,7 +52,8 @@ public class ClientModel {
 			preparedStmt.setString(8, cliente.getEmail());
 			preparedStmt.setInt(9, cliente.getPhone());
 			preparedStmt.setInt(10, cliente.getCellphone());
-			
+			preparedStmt.setString(11, cliente.getPassword());
+			preparedStmt.setString(12, cliente.getProfileUrl());
 			preparedStmt.execute();
 			
 			preparedStmt.close();
@@ -65,7 +69,7 @@ public class ClientModel {
 		Cliente client = null;
 		
 		try {
-			query = "SELECT * FROM Cliente WHERE "
+			query = "SELECT * FROM " + tableName + " WHERE "
 					+ "dni = '" + dni + "' AND "
 					+ "estado = 1";
 			
@@ -85,6 +89,7 @@ public class ClientModel {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
+				String profileUrl = result.getString("profile_url");
 				
 				client = new Cliente(
 						dnii, 
@@ -98,9 +103,66 @@ public class ClientModel {
 						cellPhone
 				);
 				
+				client.setId(id);
+				client.setCode(code);
+				client.setProfileUrl(profileUrl);
+				
+				return client;
+			}
+			
+			statement.close();
+			this.conn.close();
+			this.conn = null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return client;
+	}
+	
+	public Cliente getClient(String cod) {
+		String query = "";
+		Cliente client = null;
+		
+		try {
+			query = "SELECT * FROM " + tableName + " WHERE "
+					+ "codigo = '" + cod + "' AND "
+					+ "estado = 1";
+			
+			Statement statement = this.connect().createStatement();
+			ResultSet result = statement.executeQuery(query);
+			
+			while(result.next()) {
+				
+				int id = result.getInt("id");
+				String code = result.getString("codigo");
+				int dnii = result.getInt("dni");
+				String name = result.getString("nombre");
+				String lastname = result.getString("apellidos");
+				int age = result.getInt("edad");
+				char gender = result.getString("genero").charAt(0);
+				String address = result.getString("direccion");
+				String email = result.getString("correo");
+				int phone = result.getInt("telefono");
+				int cellPhone = result.getInt("celular");
+				String profileUrl = result.getString("profile_url");
+				
+				client = new Cliente(
+						dnii, 
+						name,
+						lastname,
+						gender,
+						age,
+						email,
+						address,
+						phone,
+						cellPhone
+				);
 				
 				client.setId(id);
 				client.setCode(code);
+				client.setProfileUrl(profileUrl);
 				
 				return client;
 			}
@@ -121,7 +183,7 @@ public class ClientModel {
 		String query = "";
 		
 		try {
-			query = "SELECT * FROM Cliente WHERE "
+			query = "SELECT * FROM " + tableName + " WHERE "
 					+ "is_admin = 0 AND "
 					+ "estado = 1";
 			
@@ -140,6 +202,7 @@ public class ClientModel {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
+				String profileUrl = result.getString("profile_url");
 				
 				Cliente client = new Cliente(
 						dni, 
@@ -156,6 +219,7 @@ public class ClientModel {
 				
 				client.setId(id);
 				client.setCode(code);
+				client.setProfileUrl(profileUrl);
 				
 				clients.add(client);
 			}
@@ -170,17 +234,32 @@ public class ClientModel {
 		return clients;	
 	}
 	
-	public void updateClientField(Cliente client, String field, Object value) {
+	public void updateClient(Cliente cliente, int dni) {
 		String query = "";
 		
 		try {
-			query = "UPDATE Cliente SET ? = ? WHERE dni = ?";
-			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
-			preparedStmt.setString(1, field);
-			preparedStmt.setObject(2, value);
-			preparedStmt.setInt(3, client.getDni());
+			query = "UPDATE " + tableName + " SET "
+					+ "dni = ?, "
+					+ "nombre = ?, "
+					+ "apellidos = ?, "
+					+ "contraseña = ? "
+					+ " = ? "
+					+ "WHERE dni = ?";
 			
-			preparedStmt.executeUpdate();
+			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
+			preparedStmt.setInt(1, cliente.getDni());
+			preparedStmt.setString(2, cliente.getCode());
+			preparedStmt.setString(3, cliente.getName());
+			preparedStmt.setString(4, cliente.getLastname());
+			preparedStmt.setInt(5, cliente.getAge());
+			preparedStmt.setString(6, String.valueOf(cliente.getGender()));
+			preparedStmt.setString(7, cliente.getAddress());
+			preparedStmt.setString(8, cliente.getEmail());
+			preparedStmt.setInt(9, cliente.getPhone());
+			preparedStmt.setInt(10, cliente.getCellphone());
+			preparedStmt.setString(11, cliente.getPassword());
+			preparedStmt.setString(12, cliente.getProfileUrl());
+			preparedStmt.executeUpdate(query);
 			
 			preparedStmt.close();
 			this.conn.close();

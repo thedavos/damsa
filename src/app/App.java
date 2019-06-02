@@ -1,31 +1,17 @@
 package app;
 
-import clases.Cliente;
-import models.ClientModel;
+import clases.Admin;
+import models.AdminModel;
 
 import java.util.ArrayList;
 import utils.RepositoryImage;
 
 public class App {
 	public static void main(String[] args) throws Exception {
-//		Cliente client = new Cliente(
-//				75454144,
-//				"David",
-//				"Vargas Domínguez",
-//				'M',
-//				23,
-//				"davos@gmail.com",
-//				"Los Robles 321",
-//				994321035,
-//				291543
-//				);
-//		
-//		ClientModel model = new ClientModel();
-//		model.createClient(client);
-//		Cliente client = model.getClient(75454144);
-//		Object obj = "hey";
-		RepositoryImage repo = new RepositoryImage();
-		repo.authorize_account();
-//		System.out.println(obj);
+		
+		AdminModel am = new AdminModel();
+		
+		Admin admin = am.getAdmin(75454144);
+		System.out.println(admin.getName());
     }
 }
