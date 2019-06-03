@@ -85,9 +85,11 @@ create table facturaDetalle(
 create table material(
   material_id int unsigned auto_increment,
   codigo_usuario varchar(20) not null,
+  codigo_material varchar(20) not null,
   nombre varchar(20) not null,
   descripcion varchar(150) not null,
   precio_venta decimal(4, 2) not null,
+  cantidad int not null
   tipo varchar(10) not null,
   estado varchar(10) not null,
   material_img varchar(80),

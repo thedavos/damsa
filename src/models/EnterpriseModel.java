@@ -24,24 +24,26 @@ public class EnterpriseModel {
 		String query = "";
 		
 		try {
-			query = "INSERT INTO Empresa("
+			query = "INSERT INTO empresa("
 					+ "ruc, "
 					+ "codigo, "
 					+ "nombre, "
 					+ "direccion, "
 					+ "correo, "
 					+ "telefono, "
-					+ "celular)"
-					+ " values (?, ?, ?, ?, ?, ?, ?)";
+					+ "celular, "
+					+ "contraseña)"
+					+ " values (?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
 			preparedStmt.setString(1, empresa.getRuc());
 			preparedStmt.setString(2, empresa.getCode());
 			preparedStmt.setString(3, empresa.getName());
-			preparedStmt.setString(7, empresa.getAddress());
-			preparedStmt.setString(8, empresa.getEmail());
-			preparedStmt.setInt(9, empresa.getPhone());
-			preparedStmt.setInt(10, empresa.getCellphone());
+			preparedStmt.setString(4, empresa.getAddress());
+			preparedStmt.setString(5, empresa.getEmail());
+			preparedStmt.setInt(6, empresa.getPhone());
+			preparedStmt.setInt(7, empresa.getCellphone());
+			preparedStmt.setString(8, empresa.getPassword());
 			
 			preparedStmt.execute();
 			
@@ -58,7 +60,7 @@ public class EnterpriseModel {
 		Empresa empresa = null;
 		
 		try {
-			query = "SELECT * FROM Empresa WHERE "
+			query = "SELECT * FROM empresa WHERE "
 					+ "ruc = '" + ruc + "' AND "
 					+ "estado = 1";
 			
@@ -67,7 +69,7 @@ public class EnterpriseModel {
 			
 			while(result.next()) {
 				
-				int id = result.getInt("id");
+				int id = result.getInt("empresa_id");
 				String code = result.getString("codigo");
 				String rucc = result.getString("ruc");
 				String name = result.getString("nombre");
@@ -107,13 +109,13 @@ public class EnterpriseModel {
 		String query = "";
 		
 		try {
-			query = "SELECT * FROM Empresa WHERE estado = 1";
+			query = "SELECT * FROM empresa WHERE estado = 1";
 			
 			Statement statement = this.connect().createStatement();
 			ResultSet result = statement.executeQuery(query);
 			
 			while (result.next()) {
-				int id = result.getInt("id");
+				int id = result.getInt("empresa_id");
 				String code = result.getString("codigo");
 				String ruc = result.getString("ruc");
 				String name = result.getString("nombre");
@@ -151,7 +153,7 @@ public class EnterpriseModel {
 		String query = "";
 		
 		try {
-			query = "UPDATE Empresa SET ? = ? WHERE ruc = ?";
+			query = "UPDATE empresa SET ? = ? WHERE ruc = ?";
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
 			preparedStmt.setString(1, field);
 			preparedStmt.setObject(2, value);
