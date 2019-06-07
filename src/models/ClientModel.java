@@ -37,7 +37,7 @@ public class ClientModel {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseÃ±a, "
+					+ "contraseña, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -78,7 +78,7 @@ public class ClientModel {
 			
 			while(result.next()) {
 				
-				int id = result.getInt("id");
+				int id = result.getInt("cliente_id");
 				String code = result.getString("codigo");
 				int dnii = result.getInt("dni");
 				String name = result.getString("nombre");
@@ -242,7 +242,7 @@ public class ClientModel {
 					+ "dni = ?, "
 					+ "nombre = ?, "
 					+ "apellidos = ?, "
-					+ "contraseÃ±a = ? "
+					+ "contraseña = ? "
 					+ " = ? "
 					+ "WHERE dni = ?";
 			

@@ -36,7 +36,7 @@ public class AdminModel {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseÃ±a, "
+					+ "contraseña, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -88,7 +88,7 @@ public class AdminModel {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
-				String password = result.getString("contraseÃ±a");
+				String password = result.getString("contraseña");
 				String profileUrl = result.getString("profile_url");
 				
 				admin = new Admin(
@@ -148,7 +148,7 @@ public class AdminModel {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
-				String password = result.getString("contraseÃ±a");
+				String password = result.getString("contraseña");
 				String profileUrl = result.getString("profile_url");
 				
 				admin = new Admin(
