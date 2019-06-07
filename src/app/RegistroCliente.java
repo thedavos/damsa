@@ -50,7 +50,11 @@ public class RegistroCliente extends JFrame {
 	public RegistroCliente() {
 		setBackground(SystemColor.activeCaption);
 		setTitle("Registro Cliente");
+<<<<<<< HEAD
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+=======
+		
+>>>>>>> master
 		setBounds(100, 100, 454, 305);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);

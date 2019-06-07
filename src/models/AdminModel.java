@@ -1,18 +1,18 @@
 package models;
 
-// Java packages
+//Java packages
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
+import java.sql.ResultSet;
 
-import clases.Cliente;
+import clases.Admin;
 import utils.ConnectionDB;
 
-public class ClientModel {
+public class AdminModel {
 	
+	final private String tableName = "admin";
 	private Connection conn = null;
 	
 	private Connection connect() {
@@ -21,11 +21,11 @@ public class ClientModel {
 		return this.conn;
 	}
 	
-	public void createClient(Cliente cliente) {
+	public void createAdmin(Admin admin) {
 		String query = "";
 		
 		try {
-			query = "INSERT INTO Cliente("
+			query = "INSERT INTO " + tableName + " ("
 					+ "dni, "
 					+ "codigo, "
 					+ "nombre, "
@@ -35,28 +35,24 @@ public class ClientModel {
 					+ "direccion, "
 					+ "correo, "
 					+ "telefono, "
-<<<<<<< HEAD
-					+ "celular)"
-					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-=======
 					+ "celular, "
 					+ "contraseña, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
->>>>>>> master
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
-			preparedStmt.setInt(1, cliente.getDni());
-			preparedStmt.setString(2, cliente.getCode());
-			preparedStmt.setString(3, cliente.getName());
-			preparedStmt.setString(4, cliente.getLastname());
-			preparedStmt.setInt(5, cliente.getAge());
-			preparedStmt.setString(6, String.valueOf(cliente.getGender()));
-			preparedStmt.setString(7, cliente.getAddress());
-			preparedStmt.setString(8, cliente.getEmail());
-			preparedStmt.setInt(9, cliente.getPhone());
-			preparedStmt.setInt(10, cliente.getCellphone());
-			
+			preparedStmt.setInt(1, admin.getDni());
+			preparedStmt.setString(2, admin.getCode());
+			preparedStmt.setString(3, admin.getName());
+			preparedStmt.setString(4, admin.getLastname());
+			preparedStmt.setInt(5, admin.getAge());
+			preparedStmt.setString(6, String.valueOf(admin.getGender()));
+			preparedStmt.setString(7, admin.getAddress());
+			preparedStmt.setString(8, admin.getEmail());
+			preparedStmt.setInt(9, admin.getPhone());
+			preparedStmt.setInt(10, admin.getCellphone());
+			preparedStmt.setString(11, admin.getPassword());
+			preparedStmt.setString(12, admin.getProfileUrl());
 			preparedStmt.execute();
 			
 			preparedStmt.close();
@@ -67,12 +63,12 @@ public class ClientModel {
 		}
 	}
 	
-	public Cliente getClient(int dni) {
+	public Admin getAdmin(int dni) {
 		String query = "";
-		Cliente client = null;
+		Admin admin = null;
 		
 		try {
-			query = "SELECT * FROM Cliente WHERE "
+			query = "SELECT * FROM " + tableName + " WHERE "
 					+ "dni = '" + dni + "' AND "
 					+ "estado = 1";
 			
@@ -81,7 +77,7 @@ public class ClientModel {
 			
 			while(result.next()) {
 				
-				int id = result.getInt("cliente_id");
+				int id = result.getInt("admin_id");
 				String code = result.getString("codigo");
 				int dnii = result.getInt("dni");
 				String name = result.getString("nombre");
@@ -92,9 +88,12 @@ public class ClientModel {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
+				String password = result.getString("contraseña");
+				String profileUrl = result.getString("profile_url");
 				
-				client = new Cliente(
+				admin = new Admin(
 						dnii, 
+						password,
 						name,
 						lastname,
 						gender,
@@ -102,14 +101,15 @@ public class ClientModel {
 						email,
 						address,
 						phone,
-						cellPhone
+						cellPhone, 
+						profileUrl
 				);
 				
+				admin.setId(id);
+				admin.setCode(code);
+				admin.setProfileUrl(profileUrl);
 				
-				client.setId(id);
-				client.setCode(code);
-				
-				return client;
+				return admin;
 			}
 			
 			statement.close();
@@ -120,25 +120,26 @@ public class ClientModel {
 		}
 		
 		
-		return client;
+		return admin;
 	}
 	
-	public ArrayList<Cliente> getClients() {
-		ArrayList<Cliente> clients = new ArrayList<Cliente>();
+	public Admin getAdmin(String cod) {
 		String query = "";
+		Admin admin = null;
 		
 		try {
-			query = "SELECT * FROM Cliente WHERE "
-					+ "is_admin = 0 AND "
+			query = "SELECT * FROM " + tableName + " WHERE "
+					+ "codigo = '" + cod + "' AND "
 					+ "estado = 1";
 			
 			Statement statement = this.connect().createStatement();
 			ResultSet result = statement.executeQuery(query);
 			
-			while (result.next()) {
-				int id = result.getInt("id");
+			while(result.next()) {
+				
+				int id = result.getInt("admin_id");
 				String code = result.getString("codigo");
-				int dni = result.getInt("dni");
+				int dnii = result.getInt("dni");
 				String name = result.getString("nombre");
 				String lastname = result.getString("apellidos");
 				int age = result.getInt("edad");
@@ -147,9 +148,12 @@ public class ClientModel {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
+				String password = result.getString("contraseña");
+				String profileUrl = result.getString("profile_url");
 				
-				Cliente client = new Cliente(
-						dni, 
+				admin = new Admin(
+						dnii, 
+						password,
 						name,
 						lastname,
 						gender,
@@ -157,14 +161,15 @@ public class ClientModel {
 						email,
 						address,
 						phone,
-						cellPhone
+						cellPhone, 
+						profileUrl
 				);
 				
+				admin.setId(id);
+				admin.setCode(code);
+				admin.setProfileUrl(profileUrl);
 				
-				client.setId(id);
-				client.setCode(code);
-				
-				clients.add(client);
+				return admin;
 			}
 			
 			statement.close();
@@ -174,38 +179,7 @@ public class ClientModel {
 			e.printStackTrace();
 		}
 		
-		return clients;	
-	}
-	
-	public void updateClientField(Cliente client, String field, Object value) {
-		String query = "";
 		
-		try {
-<<<<<<< HEAD
-			query = "UPDATE Cliente SET ? = ? WHERE dni = ?";
-=======
-			query = "UPDATE " + tableName + " SET "
-					+ "dni = ?, "
-					+ "nombre = ?, "
-					+ "apellidos = ?, "
-					+ "contraseña = ? "
-					+ " = ? "
-					+ "WHERE dni = ?";
-			
->>>>>>> master
-			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
-			preparedStmt.setString(1, field);
-			preparedStmt.setObject(2, value);
-			preparedStmt.setInt(3, client.getDni());
-			
-			preparedStmt.executeUpdate();
-			
-			preparedStmt.close();
-			this.conn.close();
-			this.conn = null;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		return admin;
 	}
 }
-
