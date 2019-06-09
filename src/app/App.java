@@ -55,6 +55,7 @@ public class App {
 //            textoBinario += String.format("%1s", Integer.toBinaryString(letra));
 //        }
 //		System.out.println(Integer.toBinaryString(texto));
-		
+		System.out.println("Hi");
+
     }
 }
