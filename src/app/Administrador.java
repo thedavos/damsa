@@ -1,4 +1,4 @@
-package app;
+package src.app;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -15,7 +15,11 @@ public class Administrador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
+
 	private JPasswordField txtContraseña;
+
+	
+
 
 	/**
 	 * Launch the application.
@@ -56,7 +60,8 @@ public class Administrador extends JDialog {
 		txtContraseña = new JPasswordField();
 		txtContraseña.setBounds(120, 83, 91, 20);
 		contentPanel.add(txtContraseña);
-		
+;
+
 		JLabel label = new JLabel("");
 		label.setBounds(240, 11, 184, 123);
 		contentPanel.add(label);

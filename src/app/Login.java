@@ -1,6 +1,7 @@
-package app;
+package src.app;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -20,11 +21,13 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import app.*;
-import models.*;
-import clases.Cliente;
+import src.app.*;
+import src.models.*;
+import src.clases.Cliente;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import src.utils.Timer;
 
 
 public class Login extends JDialog {
@@ -32,11 +35,11 @@ public class Login extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
 	private JPasswordField txtContraseña;
-
 	public Cliente cliente;
-	static private Login dialog;
+	static public Login dialog;
 	public int num;
 	
+	static public JLabel lblCounter;
 
 
 	/**
@@ -45,13 +48,12 @@ public class Login extends JDialog {
 	public static void main(String[] args) {
 		try {
 
-			
-
 			dialog = new Login();
 
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
-			
+			initThread();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,7 +65,6 @@ public class Login extends JDialog {
 	
 	
 	public Login() {
-
 		
 		setTitle("Login");
 
@@ -75,20 +76,25 @@ public class Login extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
+
 		lblUsuario.setBounds(72, 83, 46, 14);
 		contentPanel.add(lblUsuario);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setBounds(149, 80, 86, 20);
-		contentPanel.add(txtUsuario);
+
+		lblUsuario.setBounds(72, 83, 97, 14);
+		contentPanel.add(lblUsuario);
 		txtUsuario.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setBounds(72, 114, 72, 14);
-		contentPanel.add(lblContrasea);
-		
+
 		txtContraseña = new JPasswordField();
 		txtContraseña.setBounds(149, 111, 86, 17);
+
+		lblContrasea.setBounds(72, 114, 97, 14);
+		contentPanel.add(lblContrasea);
+
 		contentPanel.add(txtContraseña);
 		
 		JComboBox cboElije = new JComboBox();
@@ -97,22 +103,23 @@ public class Login extends JDialog {
 		cboElije.setBounds(72, 150, 86, 20);
 		contentPanel.add(cboElije);
 
-		
-		
-		
 		JLabel lblNewLabel = new JLabel("Admin");
+		lblNewLabel.addMouseListener(new MouseAdapter() {
 
-				
-		JLabel lblNewLabel1 = new JLabel("Admin");
-		lblNewLabel1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
 			}
 		});
 
+
+		Component lblNewLabel1;
 		lblNewLabel1.setBounds(27, 203, 86, 14);
 		contentPanel.add(lblNewLabel1);
+
+		lblNewLabel.setBounds(27, 203, 86, 14);
+		contentPanel.add(lblNewLabel);
+
 		
 		JLabel lblTimer = new JLabel("timer");
 		lblTimer.setBounds(10, 11, 46, 14);
@@ -123,19 +130,32 @@ public class Login extends JDialog {
 		contentPanel.add(lblCounter);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(245, 45, 179, 136);
-		contentPanel.add(lblNewLabel_1);
+
+		lblNewLabel.setBounds(12, 209, 86, 14);
+		contentPanel.add(lblNewLabel);
+		
+		JLabel lblTimer1 = new JLabel("La ventana se cerrarÃ¡ en");
+		lblTimer1.setBounds(100, 19, 208, 14);
+		contentPanel.add(lblTimer1);
+		
+		lblCounter = new JLabel("10");
+		lblCounter.setBounds(274, 19, 31, 14);
+		contentPanel.add(lblCounter);
+		
+		JLabel lblNewLabel_11 = new JLabel("Imagen");
+		lblNewLabel_11.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_11.setBounds(245, 45, 179, 136);
+		contentPanel.add(lblNewLabel_11);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnIngresar = new JButton("Ingresar");
-
 				btnIngresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
+
 						int usu;
 						String con;
 						usu = Integer.parseInt(txtUsuario.getText());
@@ -144,6 +164,22 @@ public class Login extends JDialog {
 						try {
 							ClientModel cli = new ClientModel();
 							cliente = cli.getClient(usu);							
+
+						int usu, dni;
+						String con;
+						usu = Integer.parseInt(txtUsuario.getText());
+						con = txtContraseña.getText();
+						System.out.println(usu);
+						System.out.println(con);
+						
+						// Instanciando modelos
+						ClientModel cli = new ClientModel();
+						
+						try {
+							cliente = cli.getClient(usu);	
+							cliente.getDni();
+							cliente.getPassword();
+
 							if (num==0){ 
 								frmPrincipal frm = new frmPrincipal();
 								
@@ -158,12 +194,16 @@ public class Login extends JDialog {
 								
 								dialog.dispose();
 							}
-							else if(num==-1)
-								JOptionPane.showMessageDialog(null,"No existe ni cliente,Ni un usuario");
+
+
+							else JOptionPane.showMessageDialog(null,"No existe ni cliente, Ni un usuario");
+
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"Ingrese sus Datos Correctamente");
 						}
-					}
+						
+						}
+						
 				});
 
 				btnIngresar.setActionCommand("OK");
@@ -174,13 +214,14 @@ public class Login extends JDialog {
 				JButton btnRegistra = new JButton("Registrar");
 				btnRegistra.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-
 						int num=0;						
-						num=cboElije.getSelectedIndex();
-						if (num==1) {
+						int num=cboElije.getSelectedIndex();
+						
+						if (num == 1) {
 							RegistroEmpresa rgempre = new RegistroEmpresa();
 							rgempre.setVisible(true);
-						}else if(num==0){
+						} else if( num == 0){
+
 							RegistroCliente rgcli = new RegistroCliente();
 							rgcli.setVisible(true);
 						}
@@ -194,7 +235,23 @@ public class Login extends JDialog {
 			}
 		}
 		
-	}
+	
+		
 
 }	
+
+
+	static void initThread() {
+		Timer counter = new Timer();
+		counter.start();
+		try {
+			counter.startCounter();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+
+}
 

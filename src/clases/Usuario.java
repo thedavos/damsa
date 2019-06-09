@@ -1,4 +1,4 @@
-package clases;
+package src.clases;
 
 public abstract class Usuario {
 	private int phone, cellPhone, id;

@@ -1,4 +1,4 @@
-package app;
+package src.app;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import app.*;
+import src.app.*;
 
 public class loginAdmin extends JDialog {
 

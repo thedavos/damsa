@@ -1,4 +1,4 @@
-package utils;
+package src.utils;
 
 // Mysql
 import java.sql.Connection;

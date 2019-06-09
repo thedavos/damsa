@@ -1,4 +1,4 @@
-package models;
+package src.models;
 
 //Java packages
 import java.sql.Connection;
@@ -7,8 +7,8 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import clases.Admin;
-import utils.ConnectionDB;
+import src.clases.Admin;
+import src.utils.ConnectionDB;
 
 public class AdminModel {
 	

@@ -1,4 +1,4 @@
-package models;
+package src.models;
 
 // Java packages
 import java.sql.Connection;
@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
-import clases.Cliente;
-import utils.ConnectionDB;
+import src.clases.Cliente;
+import src.utils.ConnectionDB;
 
 public class ClientModel {
 	
@@ -104,8 +104,64 @@ public class ClientModel {
 						phone,
 						cellPhone
 				);
+
+				client.setId(id);
+				client.setCode(code);
+				client.setProfileUrl(profileUrl);
 				
+				return client;
+			}
+			
+			statement.close();
+			this.conn.close();
+			this.conn = null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return client;
+	}
+	
+	public Cliente getClient(String cod) {
+		String query = "";
+		Cliente client = null;
+		
+		try {
+			query = "SELECT * FROM " + tableName + " WHERE "
+					+ "codigo = '" + cod + "' AND "
+					+ "estado = 1";
+			
+			Statement statement = this.connect().createStatement();
+			ResultSet result = statement.executeQuery(query);
+			
+			while(result.next()) {
 				
+				int id = result.getInt("cliente_id");
+				String code = result.getString("codigo");
+				int dnii = result.getInt("dni");
+				String name = result.getString("nombre");
+				String lastname = result.getString("apellidos");
+				int age = result.getInt("edad");
+				char gender = result.getString("genero").charAt(0);
+				String address = result.getString("direccion");
+				String email = result.getString("correo");
+				int phone = result.getInt("telefono");
+				int cellPhone = result.getInt("celular");
+				String profileUrl = result.getString("profile_url");
+				
+				client = new Cliente(
+						dnii, 
+						name,
+						lastname,
+						gender,
+						age,
+						email,
+						address,
+						phone,
+						cellPhone
+				);
+
 				client.setId(id);
 				client.setCode(code);
 				
@@ -128,8 +184,12 @@ public class ClientModel {
 		String query = "";
 		
 		try {
+
 			query = "SELECT * FROM Cliente WHERE "
-					+ "is_admin = 0 AND "
+					+ "is_admin = 0 AND ";
+
+			query = "SELECT * FROM " + tableName + " WHERE "
+
 					+ "estado = 1";
 			
 			Statement statement = this.connect().createStatement();

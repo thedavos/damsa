@@ -1,4 +1,4 @@
-package app;
+package src.app;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -50,7 +50,6 @@ public class RegistroCliente extends JFrame {
 	public RegistroCliente() {
 		setBackground(SystemColor.activeCaption);
 		setTitle("Registro Cliente");
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setBounds(100, 100, 454, 305);

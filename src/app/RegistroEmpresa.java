@@ -1,4 +1,4 @@
-package app;
+package src.app;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -44,9 +44,6 @@ public class RegistroEmpresa extends JFrame {
 
 		setTitle("Registro Empresa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		setTitle("Registro Empresa");		
-
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

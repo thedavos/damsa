@@ -1,4 +1,4 @@
-package app;
+package src.app;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -13,8 +13,8 @@ import javax.swing.BoxLayout;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.SystemColor;
-import app.*;
-import clases.*;
+import src.app.*;
+import src.clases.*;
 
 public class frmPrincipal extends JFrame {
 

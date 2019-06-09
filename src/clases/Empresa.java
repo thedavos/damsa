@@ -1,6 +1,6 @@
-package clases;
+package src.clases;
 
-import clases.Usuario;
+import src.clases.Usuario;
 
 public class Empresa extends Usuario {
 	
