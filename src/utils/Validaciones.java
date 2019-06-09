@@ -6,7 +6,7 @@ import java.util.regex.*;
 
 public class Validaciones {
 	
-	public void valcontraseña()
+	public static boolean valcontraseña(String contraseña)
 	{
 		try 
 		{
@@ -15,9 +15,11 @@ public class Validaciones {
 				String clave = "[a-z0-9]{4,10}";
 				/* System.out.println(Pattern.matches(usuario, txtUsuario.getText()));
 				System.out.println(Pattern.matches(clave, txtClave.getText())); */
+				return true;
 			
 		} 
 		catch (Exception e) {
+			return false;
 			// TODO: handle exception
 		}
 	}
@@ -66,7 +68,7 @@ public class Validaciones {
 		try {
 			String telefono = "[0-9]{6}";
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 	}
 	
