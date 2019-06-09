@@ -30,6 +30,7 @@ import java.awt.event.MouseEvent;
 import src.utils.Timer;
 
 
+
 public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -113,7 +114,8 @@ public class Login extends JDialog {
 		});
 
 
-		Component lblNewLabel1;
+	
+		Component lblNewLabel1 = null;
 		lblNewLabel1.setBounds(27, 203, 86, 14);
 		contentPanel.add(lblNewLabel1);
 
@@ -154,67 +156,37 @@ public class Login extends JDialog {
 				JButton btnIngresar = new JButton("Ingresar");
 				btnIngresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
-
-						int usu;
-						String con;
-						usu = Integer.parseInt(txtUsuario.getText());
-						con = txtContraseña.getText();
-						
+						int  num;
+						num=cboElije.getSelectedIndex();
 						try {
-							ClientModel cli = new ClientModel();
-							cliente = cli.getClient(usu);							
-
-						int usu, dni;
-						String con;
-						usu = Integer.parseInt(txtUsuario.getText());
-						con = txtContraseña.getText();
-						System.out.println(usu);
-						System.out.println(con);
-						
-						// Instanciando modelos
-						ClientModel cli = new ClientModel();
-						
-						try {
-							cliente = cli.getClient(usu);	
-							cliente.getDni();
-							cliente.getPassword();
-
-							if (num==0){ 
-								frmPrincipal frm = new frmPrincipal();
-								
-								frm.setVisible(true);
-								
+							if(num==0){
+								frmPrincipal frm = new frmPrincipal();								
+								frm.setVisible(true);								
 								dialog.dispose();
-								
-							}	
+							}
 							else if(num==1){
 								frmPrincipal frm = new frmPrincipal();
 								frm.setVisible(true);
-								
 								dialog.dispose();
 							}
-
-
-							else JOptionPane.showMessageDialog(null,"No existe ni cliente, Ni un usuario");
-
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"Ingrese sus Datos Correctamente");
 						}
+					
 						
-						}
-						
-				});
+					}
+					});
+				
 
 				btnIngresar.setActionCommand("OK");
 				buttonPane.add(btnIngresar);
 				getRootPane().setDefaultButton(btnIngresar);
 			}
-			{
+			
 				JButton btnRegistra = new JButton("Registrar");
 				btnRegistra.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						int num=0;						
+												
 						int num=cboElije.getSelectedIndex();
 						
 						if (num == 1) {
@@ -232,13 +204,10 @@ public class Login extends JDialog {
 				});
 				btnRegistra.setActionCommand("Cancel");
 				buttonPane.add(btnRegistra);
+			
 			}
-		}
-		
-	
-		
 
-}	
+		}	
 
 
 	static void initThread() {

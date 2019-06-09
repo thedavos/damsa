@@ -12,13 +12,19 @@ import javax.swing.JMenuItem;
 import javax.swing.BoxLayout;
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.SystemColor;
 import src.app.*;
 import src.clases.*;
+import javax.swing.JDesktopPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class frmPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private JDesktopPane dpEscritorio;
+	private stock s;
 
 	/**
 	 * Launch the application.
@@ -74,6 +80,21 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnCompraYVenta);
 		
 		JMenuItem mntmStock = new JMenuItem("Stock");
+		mntmStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(s==null){
+						s = new stock();
+						Dimension tamañoFrame = s.getSize();
+						s.setLocation((dpEscritorio.getWidth()-tamañoFrame.width)/2,(dpEscritorio.getHeight()-tamañoFrame.height)/2);
+						s.show();
+				}
+				
+				
+				
+				
+			}
+		});
 		mnCompraYVenta.add(mntmStock);
 		
 		JMenuItem mMaterialVender = new JMenuItem("Material Vender");
@@ -130,5 +151,8 @@ public class frmPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		dpEscritorio = new JDesktopPane();
+		contentPane.add(dpEscritorio, BorderLayout.CENTER);
 	}
 }

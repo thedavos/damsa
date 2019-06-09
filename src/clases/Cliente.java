@@ -66,5 +66,7 @@ public class Cliente extends Usuario {
 	public void setGender(char gender) {
 		this.gender = gender;
 	}
+
+	
 	
 }

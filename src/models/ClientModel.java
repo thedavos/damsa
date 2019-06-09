@@ -107,7 +107,7 @@ public class ClientModel {
 
 				client.setId(id);
 				client.setCode(code);
-				client.setProfileUrl(profileUrl);
+				
 				
 				return client;
 			}
@@ -128,6 +128,7 @@ public class ClientModel {
 		Cliente client = null;
 		
 		try {
+			
 			query = "SELECT * FROM " + tableName + " WHERE "
 					+ "codigo = '" + cod + "' AND "
 					+ "estado = 1";
