@@ -25,7 +25,11 @@ import models.*;
 import clases.Cliente;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+<<<<<<< HEAD
 
+=======
+import utils.Timer;
+>>>>>>> davos
 
 public class Login extends JDialog {
 
@@ -33,6 +37,7 @@ public class Login extends JDialog {
 	private JTextField txtUsuario;
 	private JPasswordField txtContraseña;
 
+<<<<<<< HEAD
 
 	public Cliente cliente;
 	static private Login dialog;
@@ -40,6 +45,12 @@ public class Login extends JDialog {
 	
 	
 
+=======
+	public Cliente cliente;
+	public int num;
+	static public Login dialog;
+	static public JLabel lblCounter;
+>>>>>>> davos
 
 	/**
 	 * Launch the application.
@@ -50,9 +61,16 @@ public class Login extends JDialog {
 			Login dialog = new Login();
 
 			dialog = new Login();
+<<<<<<< HEAD
 
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+=======
+			
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+			initThread();
+>>>>>>> davos
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,20 +92,36 @@ public class Login extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
+<<<<<<< HEAD
 		lblUsuario.setBounds(72, 83, 46, 14);
 		contentPanel.add(lblUsuario);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setBounds(149, 80, 86, 20);
+=======
+		lblUsuario.setBounds(72, 83, 97, 14);
+		contentPanel.add(lblUsuario);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(179, 78, 86, 20);
+>>>>>>> davos
 		contentPanel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+<<<<<<< HEAD
 		lblContrasea.setBounds(72, 114, 72, 14);
 		contentPanel.add(lblContrasea);
 		
 		txtContraseña = new JPasswordField();
 		txtContraseña.setBounds(149, 111, 86, 17);
+=======
+		lblContrasea.setBounds(72, 114, 97, 14);
+		contentPanel.add(lblContrasea);
+		
+		txtContraseña = new JPasswordField();
+		txtContraseña.setBounds(179, 109, 86, 17);
+>>>>>>> davos
 		contentPanel.add(txtContraseña);
 		
 		JComboBox cboElije = new JComboBox();
@@ -103,6 +137,7 @@ public class Login extends JDialog {
 			}
 		});
 
+<<<<<<< HEAD
 		lblNewLabel.setBounds(27, 203, 86, 14);
 		contentPanel.add(lblNewLabel);
 		
@@ -115,6 +150,20 @@ public class Login extends JDialog {
 		contentPanel.add(lblCounter);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
+=======
+		lblNewLabel.setBounds(12, 209, 86, 14);
+		contentPanel.add(lblNewLabel);
+		
+		JLabel lblTimer = new JLabel("La ventana se cerrará en");
+		lblTimer.setBounds(100, 19, 208, 14);
+		contentPanel.add(lblTimer);
+		
+		lblCounter = new JLabel("10");
+		lblCounter.setBounds(274, 19, 31, 14);
+		contentPanel.add(lblCounter);
+		
+		JLabel lblNewLabel_1 = new JLabel("Imagen");
+>>>>>>> davos
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(245, 45, 179, 136);
 		contentPanel.add(lblNewLabel_1);
@@ -129,6 +178,7 @@ public class Login extends JDialog {
 				btnIngresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
+<<<<<<< HEAD
 						int usu;
 						String con;
 						usu = Integer.parseInt(txtUsuario.getText());
@@ -137,6 +187,22 @@ public class Login extends JDialog {
 						try {
 							ClientModel cli = new ClientModel();
 							cliente = cli.getClient(usu);							
+=======
+						int usu, dni;
+						String con;
+						usu = Integer.parseInt(txtUsuario.getText());
+						con = txtContraseña.getText();
+						System.out.println(usu);
+						System.out.println(con);
+						
+						// Instanciando modelos
+						ClientModel cli = new ClientModel();
+						
+						try {
+							cliente = cli.getClient(usu);	
+							cliente.getDni();
+							cliente.getPassword();
+>>>>>>> davos
 							if (num==0){ 
 								frmPrincipal frm = new frmPrincipal();
 								frm.setVisible(true);
@@ -148,8 +214,12 @@ public class Login extends JDialog {
 								frm.setVisible(true);
 								dialog.dispose();
 							}
+<<<<<<< HEAD
 							else if(num==-1)
 								JOptionPane.showMessageDialog(null,"No existe ni cliente,Ni un usuario");
+=======
+							else JOptionPane.showMessageDialog(null,"No existe ni cliente, Ni un usuario");
+>>>>>>> davos
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"Ingrese sus Datos Correctamente");
 						}
@@ -165,6 +235,7 @@ public class Login extends JDialog {
 				btnRegistra.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 
+<<<<<<< HEAD
 						int num=0;
 						num = cboElije.getSelectedIndex();
 						if (num==1) {
@@ -180,6 +251,14 @@ public class Login extends JDialog {
 							RegistroEmpresa rgempre = new RegistroEmpresa();
 							rgempre.setVisible(true);
 						}else if(num==0){
+=======
+						int num=cboElije.getSelectedIndex();
+						
+						if (num == 1) {
+							RegistroEmpresa rgempre = new RegistroEmpresa();
+							rgempre.setVisible(true);
+						} else if( num == 0){
+>>>>>>> davos
 							RegistroCliente rgcli = new RegistroCliente();
 							rgcli.setVisible(true);
 						}
@@ -195,5 +274,18 @@ public class Login extends JDialog {
 		
 	}
 	
+<<<<<<< HEAD
+=======
+	static void initThread() {
+		Timer counter = new Timer();
+		counter.start();
+		try {
+			counter.startCounter();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+>>>>>>> davos
 
 }

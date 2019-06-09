@@ -51,10 +51,15 @@ public class RegistroCliente extends JFrame {
 		setBackground(SystemColor.activeCaption);
 		setTitle("Registro Cliente");
 <<<<<<< HEAD
+<<<<<<< HEAD
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 =======
 		
 >>>>>>> master
+=======
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+>>>>>>> davos
 		setBounds(100, 100, 454, 305);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);

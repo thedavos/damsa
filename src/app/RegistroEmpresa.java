@@ -42,11 +42,17 @@ public class RegistroEmpresa extends JFrame {
 	 */
 	public RegistroEmpresa() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		setTitle("Registro Empresa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 =======
 		setTitle("Registro Empresa");		
 >>>>>>> master
+=======
+		setTitle("Registro Empresa");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+>>>>>>> davos
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
