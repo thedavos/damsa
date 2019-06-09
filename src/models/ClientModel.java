@@ -37,7 +37,7 @@ public class ClientModel {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseÃ±a, "
+					+ "contraseña, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -242,7 +242,7 @@ public class ClientModel {
 					+ "dni = ?, "
 					+ "nombre = ?, "
 					+ "apellidos = ?, "
-					+ "contraseÃ±a = ? "
+					+ "contraseña = ? "
 					+ " = ? "
 					+ "WHERE dni = ?";
 			
