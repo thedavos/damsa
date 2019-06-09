@@ -26,6 +26,7 @@ import clases.Cliente;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import utils.Timer;
+import utils.Validation;
 
 public class Login extends JDialog {
 
@@ -35,7 +36,7 @@ public class Login extends JDialog {
 
 	public Cliente cliente;
 	public int num;
-	static public Login dialog;
+	static public Login dialog = new Login();
 	static public JLabel lblCounter;
 
 	/**
@@ -43,11 +44,6 @@ public class Login extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-
-			Login dialog = new Login();
-
-			dialog = new Login();
-			
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			initThread();
@@ -127,32 +123,39 @@ public class Login extends JDialog {
 				btnIngresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
-						int usu, dni;
-						String con;
-						usu = Integer.parseInt(txtUsuario.getText());
+						int usu = 0, dni;
+						String con, cod = null, password;
+				
+						String userInput = txtUsuario.getText();
 						con = txtContraseña.getText();
-						System.out.println(usu);
-						System.out.println(con);
+						
+						if (Validation.isNumeric(userInput)) {
+							usu = Integer.parseInt(userInput);
+						} else {
+							cod = userInput;
+						}
 						
 						// Instanciando modelos
 						ClientModel cli = new ClientModel();
 						
 						try {
-							cliente = cli.getClient(usu);	
-							cliente.getDni();
-							cliente.getPassword();
-							if (num==0){ 
-								frmPrincipal frm = new frmPrincipal();
-								frm.setVisible(true);
-								dialog.dispose();
-								
-							}	
-							else if(num==1){
+							if (usu == 0) {
+								cliente = cli.getClient(cod);
+							} else {
+								cliente = cli.getClient(usu);
+							}
+							
+							dni = cliente.getDni();
+							cod = cliente.getCode();
+							password = cliente.getPassword();
+							
+							if (Validation.isClientValid(cliente, cod == null ? cod : dni, password)) {
 								frmPrincipal frm = new frmPrincipal();
 								frm.setVisible(true);
 								dialog.dispose();
 							}
 							else JOptionPane.showMessageDialog(null,"No existe ni cliente, Ni un usuario");
+						
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,"Ingrese sus Datos Correctamente");
 						}
@@ -193,7 +196,7 @@ public class Login extends JDialog {
 		Timer counter = new Timer();
 		counter.start();
 		try {
-			counter.startCounter();
+			counter.startCounter(dialog);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
