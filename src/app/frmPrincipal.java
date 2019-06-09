@@ -39,7 +39,13 @@ public class frmPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public frmPrincipal() {
+	public frmPrincipal(){
+		this.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
+		frmPrincipal();
+	}
+	
+	private void frmPrincipal() {
+		setTitle("Sistema de Reciclaje ");
 		
 		setBounds(100, 100, 562, 361);
 		

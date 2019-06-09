@@ -41,12 +41,12 @@ public class RegistroEmpresa extends JFrame {
 	 * Create the frame.
 	 */
 	public RegistroEmpresa() {
-<<<<<<< HEAD
+
 		setTitle("Registro Empresa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-=======
+
 		setTitle("Registro Empresa");		
->>>>>>> master
+
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-<<<<<<< HEAD
-<<<<<<< HEAD
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="D:/Proyecto sensei/damsa/libs/mysql-connector-java-5.1.6-bin.jar"/>
-=======
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="src" path="src"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="/home/davos/eclipse-workspace/damsa/libs/mysql-connector-java-5.1.6-bin.jar"/>
->>>>>>> d67f7da7f8ef212638e27b8d78995f0068da5a01
-=======
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
->>>>>>> 951ee7d3e674fe3531481dde4d6bfa7681ebd7a9
-=======
-	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.6-bin.jar"/>
->>>>>>> master
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

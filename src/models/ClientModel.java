@@ -35,15 +35,15 @@ public class ClientModel {
 					+ "direccion, "
 					+ "correo, "
 					+ "telefono, "
-<<<<<<< HEAD
+
 					+ "celular)"
-					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-=======
+					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+
 					+ "celular, "
 					+ "contraseña, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
->>>>>>> master
+
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
 			preparedStmt.setInt(1, cliente.getDni());
@@ -181,9 +181,9 @@ public class ClientModel {
 		String query = "";
 		
 		try {
-<<<<<<< HEAD
+
 			query = "UPDATE Cliente SET ? = ? WHERE dni = ?";
-=======
+
 			query = "UPDATE " + tableName + " SET "
 					+ "dni = ?, "
 					+ "nombre = ?, "
@@ -191,8 +191,7 @@ public class ClientModel {
 					+ "contraseña = ? "
 					+ " = ? "
 					+ "WHERE dni = ?";
-			
->>>>>>> master
+
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
 			preparedStmt.setString(1, field);
 			preparedStmt.setObject(2, value);
