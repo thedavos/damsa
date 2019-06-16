@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 import app.*;
 import models.*;
 import clases.Cliente;
+import clases.Empresa;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import utils.Timer;
@@ -35,7 +37,8 @@ public class Login extends JDialog {
 	private JPasswordField txtContraseña;
 
 	public Cliente cliente;
-	public int num;
+	public Empresa empresa;
+	
 	static public Login dialog = new Login();
 	static public JLabel lblCounter;
 
@@ -85,7 +88,7 @@ public class Login extends JDialog {
 		contentPanel.add(txtContraseña);
 		
 		JComboBox cboElije = new JComboBox();
-		cboElije.setModel(new DefaultComboBoxModel(new String[] {"Ciente", "Empresa"}));
+		cboElije.setModel(new DefaultComboBoxModel(new String[] {"Cliente", "Empresa"}));
 		cboElije.setSelectedIndex(-1);
 		cboElije.setBounds(72, 150, 86, 20);
 		contentPanel.add(cboElije);
@@ -123,41 +126,39 @@ public class Login extends JDialog {
 				btnIngresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						
-						int usu = 0, dni;
-						String con, cod = null, password;
-				
+						int usuario = 0;
+						String cod = null, password = null;
+						
+						int tipoUsuario=cboElije.getSelectedIndex();
 						String userInput = txtUsuario.getText();
-						con = txtContraseña.getText();
+						password = txtContraseña.getText();
 						
 						if (Validation.isNumeric(userInput)) {
-							usu = Integer.parseInt(userInput);
+							usuario = Integer.parseInt(userInput);
 						} else {
 							cod = userInput;
 						}
 						
-						// Instanciando modelos
-						ClientModel cli = new ClientModel();
-						
 						try {
-							if (usu == 0) {
-								cliente = cli.getClient(cod);
-							} else {
-								cliente = cli.getClient(usu);
+							switch (tipoUsuario) {
+								case 0:
+									ClientModel cli = new ClientModel();
+									cliente = usuario == 0 ? cli.getClient(cod) : cli.getClient(usuario);
+									System.out.println(cliente);
+									openMenu(cliente, cod != null ? cod : usuario, tipoUsuario, password);
+									break;
+								case 1:
+									EnterpriseModel em = new EnterpriseModel();
+									empresa = usuario == 0 ? em.getEnterprise(cod) : em.getEnterprise(usuario + "");
+									openMenu(empresa, cod != null ? cod : usuario + "", tipoUsuario, password);
+									break;
+								default:
+									JOptionPane.showMessageDialog(null, "Ingrese un tipo de usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
+									break;
 							}
-							
-							dni = cliente.getDni();
-							cod = cliente.getCode();
-							password = cliente.getPassword();
-							
-							if (Validation.isClientValid(cliente, cod == null ? cod : dni, password)) {
-								frmPrincipal frm = new frmPrincipal();
-								frm.setVisible(true);
-								dialog.dispose();
-							}
-							else JOptionPane.showMessageDialog(null,"No existe ni cliente, Ni un usuario");
-						
 						} catch (Exception e) {
-							JOptionPane.showMessageDialog(null,"Ingrese sus Datos Correctamente");
+							System.out.println(e.getMessage());
+							JOptionPane.showMessageDialog(null, "Ingrese sus Datos Correctamente", "ERROR", JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				});
@@ -190,6 +191,24 @@ public class Login extends JDialog {
 			}
 		}
 		
+	}
+	
+	void openMenu(Cliente cliente, Object usuario, int tipoUsuario, String password) {
+		if (Validation.isClientValid(cliente, usuario, password) && tipoUsuario != -1) {
+			frmPrincipal frm = new frmPrincipal();
+			frm.setVisible(true);
+			dialog.dispose();
+		}
+		else JOptionPane.showMessageDialog(null,"No existe ni cliente, Ni un usuario");
+	}
+	
+	void openMenu(Empresa empresa, String usuario, int tipoUsuario, String password) {
+		if (Validation.isEnterpriseValid(empresa, usuario, password) && tipoUsuario != -1) {
+			frmPrincipal frm = new frmPrincipal();
+			frm.setVisible(true);
+			dialog.dispose();
+		}
+		else JOptionPane.showMessageDialog(null,"No existe ni empresa, Ni un usuario");
 	}
 	
 	static void initThread() {

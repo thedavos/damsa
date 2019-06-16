@@ -1,6 +1,7 @@
 package utils;
 
 import clases.Cliente;
+import clases.Empresa;
 
 public class Validation {
 	public static boolean isNumeric(String str) { 
@@ -16,8 +17,18 @@ public class Validation {
 		if (
 			(cliente.getDni() == (int) input || cliente.getCode() == (String) input) 
 				&& 
-				cliente.getPassword() == password) {
-			System.out.println(cliente.getCode());
+				cliente.getPassword().equalsIgnoreCase(password)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public static boolean isEnterpriseValid(Empresa empresa, String input, String password) {
+		if (
+			(empresa.getRuc() == input || empresa.getCode() == input) 
+				&& 
+				empresa.getPassword().equalsIgnoreCase(password)) {
 			return true;
 		}
 		

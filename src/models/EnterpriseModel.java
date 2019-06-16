@@ -104,6 +104,55 @@ public class EnterpriseModel {
 		return empresa;
 	}
 	
+	public Empresa getEnterprise(Object cod) {
+		String query = "";
+		Empresa empresa = null;
+		
+		try {
+			query = "SELECT * FROM empresa WHERE "
+					+ "codigo = '" + cod + "' AND "
+					+ "estado = 1";
+			
+			Statement statement = this.connect().createStatement();
+			ResultSet result = statement.executeQuery(query);
+			
+			while(result.next()) {
+				
+				int id = result.getInt("empresa_id");
+				String code = result.getString("codigo");
+				String rucc = result.getString("ruc");
+				String name = result.getString("nombre");
+				String address = result.getString("direccion");
+				String email = result.getString("correo");
+				int phone = result.getInt("telefono");
+				int cellPhone = result.getInt("celular");
+				
+				empresa = new Empresa(
+						rucc, 
+						name,
+						email,
+						address,
+						phone,
+						cellPhone
+				);
+				
+				empresa.setId(id);
+				empresa.setCode(code);
+				
+				return empresa;
+			}
+			
+			statement.close();
+			this.conn.close();
+			this.conn = null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return empresa;
+	}
+	
 	public ArrayList<Empresa> getEnterprises() {
 		ArrayList<Empresa> enterprises = new ArrayList<Empresa>();
 		String query = "";
