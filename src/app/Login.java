@@ -34,7 +34,7 @@ public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JPasswordField txtContraseÃ±a;
+	private JPasswordField txtContraseña;
 
 	public Cliente cliente;
 	public Empresa empresa;
@@ -83,9 +83,9 @@ public class Login extends JDialog {
 		lblContrasea.setBounds(72, 114, 97, 14);
 		contentPanel.add(lblContrasea);
 		
-		txtContraseÃ±a = new JPasswordField();
-		txtContraseÃ±a.setBounds(179, 109, 86, 17);
-		contentPanel.add(txtContraseÃ±a);
+		txtContraseña = new JPasswordField();
+		txtContraseña.setBounds(179, 109, 86, 17);
+		contentPanel.add(txtContraseña);
 		
 		JComboBox cboElije = new JComboBox();
 		cboElije.setModel(new DefaultComboBoxModel(new String[] {"Cliente", "Empresa"}));
@@ -131,7 +131,7 @@ public class Login extends JDialog {
 						
 						int tipoUsuario=cboElije.getSelectedIndex();
 						String userInput = txtUsuario.getText();
-						password = txtContraseÃ±a.getText();
+						password = txtContraseña.getText();
 						
 						if (Validation.isNumeric(userInput)) {
 							usuario = Integer.parseInt(userInput);
