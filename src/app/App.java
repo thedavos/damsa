@@ -1,5 +1,6 @@
 package app;
 
+
 import clases.Admin;
 import models.AdminModel;
 
@@ -16,7 +17,6 @@ import java.util.Map;
 public class App {
 	public static void main(String[] args) throws Exception {
 		RepositoryImage ri = new RepositoryImage();
-		System.out.println(ri.authorize_account());
-
+		
     }
 }

@@ -6,13 +6,27 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.google.gson.JsonSyntaxException;
+
+import utils.FileManager;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.SystemColor;
+
+
 
 public class RegistroCliente extends JFrame {
 
@@ -156,5 +170,21 @@ public class RegistroCliente extends JFrame {
 		});
 		btnAceptar.setBounds(171, 219, 89, 23);
 		contentPane.add(btnAceptar);
+		
+		JButton btnSubirImagen = new JButton("Subir Imagen");
+		btnSubirImagen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FileManager fm = new FileManager();
+				
+				try {
+					fm.saveImage();
+				} catch (IOException | JsonSyntaxException | NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		btnSubirImagen.setBounds(280, 218, 150, 25);
+		contentPane.add(btnSubirImagen);
 	}
 }
