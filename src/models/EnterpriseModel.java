@@ -32,7 +32,7 @@ public class EnterpriseModel {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "Contraseña)"
+					+ "contraseÃ±a)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
@@ -75,7 +75,6 @@ public class EnterpriseModel {
 				String name = result.getString("nombre");
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
-				String password = result.getString("Contraseña");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -90,7 +89,6 @@ public class EnterpriseModel {
 				
 				empresa.setId(id);
 				empresa.setCode(code);
-				empresa.setPassword(password);
 				
 				return empresa;
 			}
@@ -126,7 +124,6 @@ public class EnterpriseModel {
 				String name = result.getString("nombre");
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
-				String password = result.getString("Contraseña");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -141,7 +138,6 @@ public class EnterpriseModel {
 				
 				empresa.setId(id);
 				empresa.setCode(code);
-				empresa.setPassword(password);
 				
 				return empresa;
 			}
