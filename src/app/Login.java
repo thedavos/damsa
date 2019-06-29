@@ -41,7 +41,7 @@ public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JPasswordField txtContraseña;
+	private JPasswordField txtContraseÃ±a;
 
 	public Cliente cliente;
 	public Empresa empresa;
@@ -103,9 +103,9 @@ public class Login extends JDialog {
 		lblContrasea.setBounds(21, 107, 97, 19);
 		contentPanel.add(lblContrasea);
 		
-		txtContraseña = new JPasswordField();
-		txtContraseña.setBounds(139, 107, 131, 19);
-		contentPanel.add(txtContraseña);
+		txtContraseÃ±a = new JPasswordField();
+		txtContraseÃ±a.setBounds(139, 107, 131, 19);
+		contentPanel.add(txtContraseÃ±a);
 		
 		JComboBox cboElije = new JComboBox();
 		cboElije.setModel(new DefaultComboBoxModel(new String[] {"Cliente", "Empresa"}));
