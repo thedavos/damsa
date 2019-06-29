@@ -20,7 +20,6 @@ import utils.BackblazeApi.UploadUrl;
 import utils.BackblazeApi.UploadFile;
 import utils.Encryption;
 
-
 public class RepositoryImage {
 	private String applicationKeyId = "002792ce63312bb0000000002";
 	private String applicationKey = "K002rnwo3o8z8P29Os8HMnaqrPwymsg";
@@ -97,7 +96,6 @@ public class RepositoryImage {
 	private String authorize_account() {
 		HttpURLConnection connection = null;
 		String headerForAuthorizeAccount = "Basic " + Base64.getEncoder().encodeToString((applicationKeyId + ":" + applicationKey).getBytes());
-		String jsonResponse = null;
 		
 		try {
 		    URL url = new URL("https://api.backblazeb2.com/b2api/v2/b2_authorize_account");
@@ -105,17 +103,17 @@ public class RepositoryImage {
 		    connection.setRequestMethod("GET");
 		    connection.setRequestProperty("Authorization", headerForAuthorizeAccount);
 		    InputStream in = new BufferedInputStream(connection.getInputStream());    
-		    jsonResponse = InputStreamReader(in);
-		    return jsonResponse;
+		    String jsonResponse = myInputStreamReader(in);
+		    System.out.println(jsonResponse);
 		} catch (Exception e) {
 		    e.printStackTrace();
 		} finally {
 		    connection.disconnect();
 		}
-		return jsonResponse;
+		
 	}
 
-	private String InputStreamReader(InputStream in) throws IOException {
+	public String myInputStreamReader(InputStream in) throws IOException {
 	    InputStreamReader reader = new InputStreamReader(in);
 	    StringBuilder sb = new StringBuilder();
 	    int c = reader.read();

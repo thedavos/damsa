@@ -8,14 +8,19 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Administrador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JPasswordField txtContraseÃ±a;
+	private JPasswordField txtContraseña;
 
 	/**
 	 * Launch the application.
@@ -34,47 +39,74 @@ public class Administrador extends JDialog {
 	 * Create the dialog.
 	 */
 	public Administrador() {
-		setBounds(100, 100, 450, 217);
+		
+		
+		
+		setTitle("ADMINISTRADOR");
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setResizable(false);
+		setBounds(100, 100, 368, 195);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
+		setLocationRelativeTo(null);
+		
+		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(35, 36, 46, 14);
+		lblUsuario.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblUsuario.setBounds(22, 21, 101, 20);
 		contentPanel.add(lblUsuario);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setBounds(35, 86, 75, 14);
+		lblContrasea.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblContrasea.setBounds(22, 71, 101, 20);
 		contentPanel.add(lblContrasea);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(122, 33, 86, 20);
+		txtUsuario.setBounds(133, 21, 142, 20);
 		contentPanel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
-		txtContraseÃ±a = new JPasswordField();
-		txtContraseÃ±a.setBounds(120, 83, 91, 20);
-		contentPanel.add(txtContraseÃ±a);
+		txtContraseña = new JPasswordField();
+		txtContraseña.setBounds(133, 71, 142, 20);
+		contentPanel.add(txtContraseña);
 		
-		JLabel label = new JLabel("");
-		label.setBounds(240, 11, 184, 123);
-		contentPanel.add(label);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("Ingresar");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+		JButton button = new JButton("Ingresar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JOptionPane.showMessageDialog(null, "Accceso correcto");
+				System.exit(0);
 			}
-			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+		});
+		button.setIcon(new ImageIcon(Administrador.class.getResource("/images/iconos22x22/dialog-accept.png")));
+		button.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		button.setBounds(45, 116, 122, 31);
+		button.setActionCommand("OK");
+		contentPanel.add(button);
+		
+		JButton button_1 = new JButton("Cancelar");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				cancelar();
 			}
-		}
+		});
+		button_1.setIcon(new ImageIcon(Administrador.class.getResource("/images/iconos22x22/dialog-cancel-3.png")));
+		button_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		button_1.setBounds(189, 116, 132, 31);
+		button_1.setActionCommand("Cancel");
+		contentPanel.add(button_1);
 	}
+	
+	
+	void cancelar()
+	{
+		Login l = new Login();
+		l.setVisible(true);
+		dispose();
+	}
+	
 }
