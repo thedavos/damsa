@@ -1,6 +1,5 @@
 package app;
 
-
 import clases.Admin;
 import models.AdminModel;
 

@@ -126,15 +126,16 @@ Java Aplicación de Escritorio que permite la gestión de almacenamiento de mate
 ### Menú Items
 
 #### Perfil
-- MiPerfil
-- Darse de Baja
+- MiPerfil (Usuario Normal, Empresas)
+- Darse de Baja (Usuario Normal, Empresas)
 
 #### Materiales
-- Almacenar
-- Visualizar
+- Almacenar (Usuario Normal, Empresas)
+- Visualizar (Usuario Normal, Empresas)
 
 #### Compra y Venta
-- Ver Stock
+- Ver Stock (Usuario Normal, Empresas)
+  - Comprar Material (Solo Empresas)
 - Vender Material (Solo Empresas)
 
 #### Reporte
