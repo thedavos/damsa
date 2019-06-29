@@ -78,7 +78,7 @@ public class ClientModel {
 			
 			while(result.next()) {
 				
-				int id = result.getInt("id");
+				int id = result.getInt("cliente_id");
 				String code = result.getString("codigo");
 				int dnii = result.getInt("dni");
 				String name = result.getString("nombre");
@@ -90,6 +90,7 @@ public class ClientModel {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
+				String password = result.getString("contraseña");
 				
 				client = new Cliente(
 						dnii, 
@@ -106,6 +107,7 @@ public class ClientModel {
 				client.setId(id);
 				client.setCode(code);
 				client.setProfileUrl(profileUrl);
+				client.setPassword(password);
 				
 				return client;
 			}
@@ -135,7 +137,7 @@ public class ClientModel {
 			
 			while(result.next()) {
 				
-				int id = result.getInt("id");
+				int id = result.getInt("cliente_id");
 				String code = result.getString("codigo");
 				int dnii = result.getInt("dni");
 				String name = result.getString("nombre");
@@ -147,6 +149,7 @@ public class ClientModel {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
+				String password = result.getString("contraseña");
 				
 				client = new Cliente(
 						dnii, 
@@ -163,6 +166,7 @@ public class ClientModel {
 				client.setId(id);
 				client.setCode(code);
 				client.setProfileUrl(profileUrl);
+				client.setPassword(password);
 				
 				return client;
 			}
@@ -184,7 +188,6 @@ public class ClientModel {
 		
 		try {
 			query = "SELECT * FROM " + tableName + " WHERE "
-					+ "is_admin = 0 AND "
 					+ "estado = 1";
 			
 			Statement statement = this.connect().createStatement();
