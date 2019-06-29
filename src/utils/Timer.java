@@ -10,7 +10,8 @@ public class Timer extends Thread {
 			Thread.sleep(1000);
 		}
 		
-		login.dispose();
+		//login.dispose();
+		System.exit(0);
 	}
 	
 }

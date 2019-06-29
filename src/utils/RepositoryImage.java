@@ -95,7 +95,6 @@ public class RepositoryImage {
 		HttpURLConnection connection = null;
 		String headerForAuthorizeAccount = "Basic " + Base64.getEncoder().encodeToString((applicationKeyId + ":" + applicationKey).getBytes());
 		String jsonResponse = null;
-		
 		try {
 		    URL url = new URL("https://api.backblazeb2.com/b2api/v2/b2_authorize_account");
 		    connection = (HttpURLConnection)url.openConnection();
@@ -103,16 +102,16 @@ public class RepositoryImage {
 		    connection.setRequestProperty("Authorization", headerForAuthorizeAccount);
 		    InputStream in = new BufferedInputStream(connection.getInputStream());    
 		    jsonResponse = InputStreamReader(in);
-		    return jsonResponse;
 		} catch (Exception e) {
 		    e.printStackTrace();
 		} finally {
 		    connection.disconnect();
 		}
 		return jsonResponse;
+		
 	}
 
-	private String InputStreamReader(InputStream in) throws IOException {
+	public String InputStreamReader(InputStream in) throws IOException {
 	    InputStreamReader reader = new InputStreamReader(in);
 	    StringBuilder sb = new StringBuilder();
 	    int c = reader.read();
