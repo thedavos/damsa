@@ -15,9 +15,7 @@ import java.util.Base64;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import utils.BackblazeApi.Auth;
-import utils.BackblazeApi.UploadUrl;
-import utils.BackblazeApi.UploadFile;
+import utils.BackblazeApi.*;
 import utils.Encryption;
 
 public class RepositoryImage {

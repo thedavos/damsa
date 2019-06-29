@@ -20,7 +20,7 @@ public class Administrador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JPasswordField txtContraseña;
+	private JPasswordField txtContraseÃ±a;
 
 	/**
 	 * Launch the application.
@@ -69,9 +69,9 @@ public class Administrador extends JDialog {
 		contentPanel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
-		txtContraseña = new JPasswordField();
-		txtContraseña.setBounds(133, 71, 142, 20);
-		contentPanel.add(txtContraseña);
+		txtContraseÃ±a = new JPasswordField();
+		txtContraseÃ±a.setBounds(133, 71, 142, 20);
+		contentPanel.add(txtContraseÃ±a);
 		
 		JButton button = new JButton("Ingresar");
 		button.addActionListener(new ActionListener() {
