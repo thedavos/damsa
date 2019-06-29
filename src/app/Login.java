@@ -69,6 +69,7 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
+		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
 		setResizable(false);
@@ -149,6 +150,11 @@ public class Login extends JDialog {
 		contentPanel.add(lblNewLabel_1);
 		
 		JButton button = new JButton("Ingresar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		button.setIcon(new ImageIcon(Login.class.getResource("/images/iconos22x22/dialog-accept.png")));
 		button.setActionCommand("OK");
@@ -158,6 +164,25 @@ public class Login extends JDialog {
 		JButton button_1 = new JButton("Registrar");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				int a = cboElije.getSelectedIndex();
+				
+				if(a ==0)
+				{
+					RegistroCliente cl = new RegistroCliente();
+					cl.setVisible(true);
+					dispose();
+				}else if (a == 1)
+				{
+					RegistroEmpresa em = new RegistroEmpresa();
+					em.setVisible(true);
+					dispose();
+				}else
+				{
+					JOptionPane.showMessageDialog(null, "Eliga una opcion");
+				}
+				
+				
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 13));

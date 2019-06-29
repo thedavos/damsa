@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class RegistroCliente extends JFrame {
 
@@ -52,7 +54,7 @@ public class RegistroCliente extends JFrame {
 		setTitle("Registro Cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setBounds(100, 100, 454, 305);
+		setBounds(100, 100, 666, 525);
 		contentPane = new JPanel();
 		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setBorder(new EmptyBorder(6, 5, 5, 5));
@@ -60,93 +62,106 @@ public class RegistroCliente extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblDn = new JLabel("DNI");
-		lblDn.setBounds(24, 23, 46, 14);
+		lblDn.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblDn.setBounds(38, 385, 69, 20);
 		contentPane.add(lblDn);
 		
 		txtDni = new JTextField();
-		txtDni.setBounds(88, 20, 86, 20);
+		txtDni.setBounds(205, 64, 252, 20);
 		contentPane.add(txtDni);
 		txtDni.setColumns(10);
 		
 		JLabel lblContraseas = new JLabel("Contrase\u00F1a");
-		lblContraseas.setBounds(194, 23, 86, 14);
+		lblContraseas.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblContraseas.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblContraseas.setBounds(24, 146, 150, 20);
 		contentPane.add(lblContraseas);
 		
 		txtContra = new JTextField();
 		txtContra.setColumns(10);
-		txtContra.setBounds(270, 20, 86, 20);
+		txtContra.setBounds(205, 105, 252, 20);
 		contentPane.add(txtContra);
 		
 		JLabel lblNombre = new JLabel("Nombres");
-		lblNombre.setBounds(24, 64, 69, 14);
+		lblNombre.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNombre.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblNombre.setBounds(24, 64, 150, 20);
 		contentPane.add(lblNombre);
 		
 		txtNombres = new JTextField();
 		txtNombres.setColumns(10);
-		txtNombres.setBounds(88, 61, 86, 20);
+		txtNombres.setBounds(205, 187, 186, 20);
 		contentPane.add(txtNombres);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setBounds(206, 67, 69, 14);
+		lblApellidos.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblApellidos.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblApellidos.setBounds(24, 105, 150, 20);
 		contentPane.add(lblApellidos);
 		
 		txtApellidos = new JTextField();
 		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(270, 64, 86, 20);
+		txtApellidos.setBounds(205, 146, 252, 20);
 		contentPane.add(txtApellidos);
 		
 		JLabel lblEdad = new JLabel("Edad");
-		lblEdad.setBounds(24, 95, 69, 14);
+		lblEdad.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblEdad.setBounds(24, 245, 69, 14);
 		contentPane.add(lblEdad);
 		
 		txtEdad = new JTextField();
 		txtEdad.setColumns(10);
-		txtEdad.setBounds(88, 92, 86, 20);
+		txtEdad.setBounds(88, 242, 86, 20);
 		contentPane.add(txtEdad);
 		
 		JLabel lblGenero = new JLabel("G\u00E9nero ");
-		lblGenero.setBounds(206, 98, 69, 14);
+		lblGenero.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblGenero.setBounds(206, 248, 69, 14);
 		contentPane.add(lblGenero);
 		
 		txtGenero = new JTextField();
 		txtGenero.setColumns(10);
-		txtGenero.setBounds(270, 95, 86, 20);
+		txtGenero.setBounds(270, 245, 86, 20);
 		contentPane.add(txtGenero);
 		
 		JLabel lblDireccion = new JLabel("Direccion ");
-		lblDireccion.setBounds(24, 137, 69, 14);
+		lblDireccion.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblDireccion.setBounds(24, 287, 69, 14);
 		contentPane.add(lblDireccion);
 		
 		txtDirecc = new JTextField();
 		txtDirecc.setColumns(10);
-		txtDirecc.setBounds(88, 134, 86, 20);
+		txtDirecc.setBounds(88, 284, 86, 20);
 		contentPane.add(txtDirecc);
 		
 		JLabel lblCorreo = new JLabel("Correo");
-		lblCorreo.setBounds(206, 134, 69, 14);
+		lblCorreo.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblCorreo.setBounds(206, 284, 69, 14);
 		contentPane.add(lblCorreo);
 		
 		txtCorreo = new JTextField();
 		txtCorreo.setColumns(10);
-		txtCorreo.setBounds(270, 131, 86, 20);
+		txtCorreo.setBounds(270, 281, 86, 20);
 		contentPane.add(txtCorreo);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setBounds(24, 175, 69, 14);
+		lblTelefono.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblTelefono.setBounds(24, 325, 69, 14);
 		contentPane.add(lblTelefono);
 		
 		txtTelef = new JTextField();
 		txtTelef.setColumns(10);
-		txtTelef.setBounds(88, 172, 86, 20);
+		txtTelef.setBounds(88, 322, 86, 20);
 		contentPane.add(txtTelef);
 		
 		JLabel lblCelular = new JLabel("Celular");
-		lblCelular.setBounds(206, 178, 69, 14);
+		lblCelular.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblCelular.setBounds(206, 328, 69, 14);
 		contentPane.add(lblCelular);
 		
 		txtCelular = new JTextField();
 		txtCelular.setColumns(10);
-		txtCelular.setBounds(270, 175, 86, 20);
+		txtCelular.setBounds(270, 325, 86, 20);
 		contentPane.add(txtCelular);
 		
 		JButton btnAceptar = new JButton("Aceptar");
@@ -154,7 +169,18 @@ public class RegistroCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnAceptar.setBounds(171, 219, 89, 23);
+		btnAceptar.setBounds(234, 432, 89, 23);
 		contentPane.add(btnAceptar);
+		
+		JLabel lblPorFavorIngrese = new JLabel("Por favor ingrese sus datos");
+		lblPorFavorIngrese.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblPorFavorIngrese.setBounds(21, 11, 270, 20);
+		contentPane.add(lblPorFavorIngrese);
+		
+		JLabel lblConfirmarContrasea = new JLabel("Confirmar Contrase\u00F1a");
+		lblConfirmarContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblConfirmarContrasea.setFont(new Font("Georgia", Font.PLAIN, 13));
+		lblConfirmarContrasea.setBounds(24, 187, 150, 20);
+		contentPane.add(lblConfirmarContrasea);
 	}
 }
