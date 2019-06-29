@@ -71,7 +71,10 @@ public class Login extends JDialog {
 	public Login() {
 		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
 		setResizable(false);
+
+		
 		setTitle("Login");
 		
 		setLocationRelativeTo(null);
