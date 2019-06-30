@@ -167,7 +167,7 @@ public class Login extends JDialog {
 							break;
 						case 1:
 							EnterpriseModel em = new EnterpriseModel();
-							empresa = usuario == 0 ? em.getEnterprise(cod) : em.getEnterprise(usuario + "");
+							empresa = usuario == 0 ? em.getEnterprise((Object) cod) : em.getEnterprise(usuario + "");
 							openMenu(empresa, cod != null ? cod : usuario + "", tipoUsuario, password);
 							break;
 						default:
