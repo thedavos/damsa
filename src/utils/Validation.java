@@ -1,7 +1,12 @@
 package utils;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import clases.Cliente;
 import clases.Empresa;
+
+import utils.Encryption;
 
 public class Validation {
 	public static boolean isNumeric(String str) { 
@@ -14,23 +19,30 @@ public class Validation {
 	}
 	
 	public static boolean isClientValid(Cliente cliente, Object input, String password) {
-		if (
-			(cliente.getDni() == (int) input || cliente.getCode().equalsIgnoreCase((String) input)) 
-				&& 
-				cliente.getPassword().equalsIgnoreCase(password)) {
-			return true;
+		try {
+			if (
+				(cliente.getDni() == (int) input || cliente.getCode().equalsIgnoreCase((String) input)) 
+					&& 
+					cliente.getPassword().equalsIgnoreCase(Encryption.SHA1(password))) {
+				return true;
+			}
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
 		
 		return false;
 	}
 	
 	public static boolean isEnterpriseValid(Empresa empresa, String input, String password) {
-		System.out.println(empresa.getPassword().equalsIgnoreCase(password));
-		if (
-			(empresa.getRuc().equalsIgnoreCase(input) || empresa.getCode().equalsIgnoreCase(input)) 
-				&& 
-				empresa.getPassword().equalsIgnoreCase(password)) {
-			return true;
+		try {
+			if (
+				(empresa.getRuc().equalsIgnoreCase(input) || empresa.getCode().equalsIgnoreCase(input)) 
+					&& 
+					empresa.getPassword().equalsIgnoreCase(Encryption.SHA1(password))) {
+				return true;
+			}
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
 		
 		return false;

@@ -8,9 +8,7 @@ public class App {
 		String appKey="K002rnwo3o8z8P29Os8HMnaqrPwymsg";
 		String USER_AGENT="damsa";
 		
-		String hashed = Encryption.SHA1("contraseña");
+		String hashed = Encryption.SHA1("ignacio123");
 		System.out.println(hashed);
-		
-		
 	}
 }
