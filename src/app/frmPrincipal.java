@@ -15,6 +15,8 @@ import java.awt.Dialog;
 import java.awt.SystemColor;
 import app.*;
 import clases.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class frmPrincipal extends JFrame {
 
@@ -50,6 +52,13 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnPerfil);
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
+		mntmMiperfil.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				
+			}
+		});
 		mnPerfil.add(mntmMiperfil);
 		
 		JMenuItem mntmDarseDeBaja = new JMenuItem("Darse de Baja");
