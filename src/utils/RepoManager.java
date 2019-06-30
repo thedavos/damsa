@@ -60,13 +60,22 @@ public class RepoManager {
 		return fileVersion;
 	}
 	
-	public static String getDownload() {
+	public static String getDownload(String folder, String filename) {
 		String downloadUrl = null;
-		
+		String pathFile = folder + "/" + filename;
+		try {
+			getClient()
+				.getDownloadByNameUrl(
+					getDamsaBucket().getBucketName(), 
+					pathFile);
+		} catch (B2Exception e) {
+			e.printStackTrace();
+		}
 		return downloadUrl;
 	}
 	
-	public static void updateFile() {
-		
+	public static B2FileVersion updateFile(File file, String oldFilename) {
+		file.renameTo(new File(oldFilename));
+		return saveFile(file);
 	}
 }

@@ -9,8 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import com.google.gson.JsonSyntaxException;
 
-import utils.FileManager;
-
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.imageio.ImageIO;

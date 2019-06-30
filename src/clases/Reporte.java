@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import interfaces.IRepoManager;
+
 /**
  * Clase que permite generar reportes a tráves de archivos 
  * en formato .csv o .txt y los guarda en un repositorio remoto
@@ -15,7 +17,7 @@ import java.io.OutputStreamWriter;
  * 
  * @author David Vargas
  */
-public class Reporte {
+public class Reporte implements IRepoManager {
 	private String nameFile;
 	private String title;
 	private String content;

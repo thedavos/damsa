@@ -16,6 +16,8 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import utils.Timer;
+
 public class Administrador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -91,7 +93,11 @@ public class Administrador extends JDialog {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				cancelar();
+				try {
+					cancelar();
+				} catch (Throwable e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		button_1.setIcon(new ImageIcon(Administrador.class.getResource("/images/iconos22x22/dialog-cancel-3.png")));
@@ -102,11 +108,18 @@ public class Administrador extends JDialog {
 	}
 	
 	
-	void cancelar()
+	void cancelar() throws Throwable
 	{
-		Login l = new Login();
-		l.setVisible(true);
+		Timer counter = new Timer();
+		Login login = new Login();
+
 		dispose();
+		// counter.start();
+		
+		login.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		login.setVisible(true);
+		
+		// Login.initThread();
 	}
 	
 }
