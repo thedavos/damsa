@@ -10,7 +10,7 @@ public class Cliente extends PersonaUsuario implements IRepoManager {
 	}
 	
 	/**
-	 * Creacion del objeto Cliente sin el campo contraseÃ±a
+	 * Creacion del objeto Cliente sin el campo contraseña
 	 */
 	public Cliente(int dni, String name, String lastname, char gender, int age, String email, String address, int phone, int cellPhone) {
 		super(dni, name, lastname, gender, age, email, address, phone, cellPhone);
@@ -21,7 +21,7 @@ public class Cliente extends PersonaUsuario implements IRepoManager {
 	}
 	
 	/**
-	 * Para registar al cliente con el campo contraseÃ±a
+	 * Para registar al cliente con el campo contraseña
 	 */
 	public Cliente(int dni, String password, String name, String lastname, char gender, int age, String email, String address, int phone, int cellPhone) {
 		super(dni, password, name, lastname, gender, age, email, address, phone, cellPhone);

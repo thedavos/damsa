@@ -41,7 +41,7 @@ public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JPasswordField txtContraseÃ±a;
+	private JPasswordField txtContraseña;
 
 	public Cliente cliente;
 	public Empresa empresa;
@@ -95,9 +95,9 @@ public class Login extends JDialog {
 		lblContrasea.setBounds(21, 107, 97, 19);
 		contentPanel.add(lblContrasea);
 		
-		txtContraseÃ±a = new JPasswordField();
-		txtContraseÃ±a.setBounds(139, 107, 131, 19);
-		contentPanel.add(txtContraseÃ±a);
+		txtContraseña = new JPasswordField();
+		txtContraseña.setBounds(139, 107, 131, 19);
+		contentPanel.add(txtContraseña);
 		
 		JComboBox cboElije = new JComboBox();
 		cboElije.setModel(new DefaultComboBoxModel(new String[] {"Cliente", "Empresa"}));
@@ -150,7 +150,7 @@ public class Login extends JDialog {
 				
 				int tipoUsuario=cboElije.getSelectedIndex();
 				String userInput = txtUsuario.getText();
-				password = txtContraseÃ±a.getText();
+				password = txtContraseña.getText();
 				
 				if (Validation.isNumeric(userInput)) {
 					usuario = Integer.parseInt(userInput);
@@ -226,7 +226,7 @@ public class Login extends JDialog {
 	
 	void openMenu(Cliente cliente, Object usuario, int tipoUsuario, String password) {
 		if (Validation.isClientValid(cliente, usuario, password) && tipoUsuario != -1) {
-			frmPrincipal frm = new frmPrincipal();
+			frmPrincipal frm = new frmPrincipal(cliente);
 			frm.setVisible(true);
 			dialog.dispose();
 		}
@@ -235,7 +235,7 @@ public class Login extends JDialog {
 	
 	void openMenu(Empresa empresa, String usuario, int tipoUsuario, String password) {
 		if (Validation.isEnterpriseValid(empresa, usuario, password) && tipoUsuario != -1) {
-			frmPrincipal frm = new frmPrincipal();
+			frmPrincipal frm = new frmPrincipal(empresa);
 			frm.setVisible(true);
 			dialog.dispose();
 		}

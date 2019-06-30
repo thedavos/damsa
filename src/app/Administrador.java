@@ -22,7 +22,7 @@ public class Administrador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JPasswordField txtContraseÃ±a;
+	private JPasswordField txtContraseña;
 
 	/**
 	 * Launch the application.
@@ -71,16 +71,17 @@ public class Administrador extends JDialog {
 		contentPanel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
-		txtContraseÃ±a = new JPasswordField();
-		txtContraseÃ±a.setBounds(133, 71, 142, 20);
-		contentPanel.add(txtContraseÃ±a);
+		txtContraseña = new JPasswordField();
+		txtContraseña.setBounds(133, 71, 142, 20);
+		contentPanel.add(txtContraseña);
 		
 		JButton button = new JButton("Ingresar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				JOptionPane.showMessageDialog(null, "Accceso correcto");
-				System.exit(0);
+				frmPrincipal frm = new frmPrincipal();
+				frm.setVisible(true);
+				dispose();
 			}
 		});
 		button.setIcon(new ImageIcon(Administrador.class.getResource("/images/iconos22x22/dialog-accept.png")));

@@ -67,7 +67,7 @@ public class RegistroCliente extends JFrame {
 	public RegistroCliente() {
 		setResizable(false);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setTitle("Registro Cliente");
 		setBackground(SystemColor.activeCaption);
 		setLocationRelativeTo(null);

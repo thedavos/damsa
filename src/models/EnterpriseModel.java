@@ -32,7 +32,7 @@ public class EnterpriseModel {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseÃ±a)"
+					+ "contraseña)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
