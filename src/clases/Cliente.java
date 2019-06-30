@@ -1,6 +1,8 @@
 package clases;
 
-public class Cliente extends PersonaUsuario {
+import interfaces.IRepoManager;
+
+public class Cliente extends PersonaUsuario implements IRepoManager {
 	private static int counter;
 	
 	public Cliente() {

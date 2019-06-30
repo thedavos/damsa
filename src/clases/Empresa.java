@@ -1,6 +1,8 @@
 package clases;
 
-public class Empresa extends Usuario {
+import interfaces.IRepoManager;
+
+public class Empresa extends Usuario implements IRepoManager  {
 	
 	private String ruc;
 	private static int counter;

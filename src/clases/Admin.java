@@ -1,6 +1,8 @@
 package clases;
 
-public class Admin extends PersonaUsuario {
+import interfaces.IRepoManager;
+
+public class Admin extends PersonaUsuario implements IRepoManager {
 	
 	public Admin() {
 		setRole("Admin");

@@ -48,7 +48,7 @@ public class Login extends JDialog {
 	
 	static public Login dialog = new Login();
 	static public JLabel lblCounter;
-	
+	static public Timer counter = new Timer();
 	
 
 	/**
@@ -56,11 +56,11 @@ public class Login extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Login dialog = new Login();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 			initThread();
 			
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
@@ -69,16 +69,8 @@ public class Login extends JDialog {
 	 * Create the dialog.
 	 */
 	public Login() {
-		
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		
 		setResizable(false);
-
-		
 		setTitle("Login");
-		
-		setLocationRelativeTo(null);
-
 		setBounds(100, 100, 521, 291);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -120,11 +112,10 @@ public class Login extends JDialog {
 		lblNewLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+				//dialog.dispose();
+				dispose();
 				Administrador a = new Administrador();
 				a.setVisible(true);
-				dispose();
-				
 			}
 		});
 
@@ -151,7 +142,42 @@ public class Login extends JDialog {
 		
 		JButton button = new JButton("Ingresar");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			@SuppressWarnings("deprecation")
+			public void actionPerformed(ActionEvent arg0) {
+				
+				int usuario = 0;
+				String cod = null, password = null;
+				
+				int tipoUsuario=cboElije.getSelectedIndex();
+				String userInput = txtUsuario.getText();
+				password = txtContraseña.getText();
+				
+				if (Validation.isNumeric(userInput)) {
+					usuario = Integer.parseInt(userInput);
+				} else {
+					cod = userInput;
+				}
+				
+				try {
+					switch (tipoUsuario) {
+						case 0:
+							ClientModel cli = new ClientModel();
+							cliente = usuario == 0 ? cli.getClient(cod) : cli.getClient(usuario);
+							openMenu(cliente, cod != null ? cod : usuario, tipoUsuario, password);
+							break;
+						case 1:
+							EnterpriseModel em = new EnterpriseModel();
+							empresa = usuario == 0 ? em.getEnterprise(cod) : em.getEnterprise(usuario + "");
+							openMenu(empresa, cod != null ? cod : usuario + "", tipoUsuario, password);
+							break;
+						default:
+							JOptionPane.showMessageDialog(null, "Ingrese un tipo de usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
+							break;
+					}
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					JOptionPane.showMessageDialog(null, "Ingrese sus Datos Correctamente", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}
 				
 			}
 		});
@@ -216,15 +242,13 @@ public class Login extends JDialog {
 		else JOptionPane.showMessageDialog(null,"No existe ni empresa, Ni un usuario");
 	}
 	
-	public static void initThread() {
-		Timer counter = new Timer();
-		counter.start();
+	public static void initThread() throws Throwable {
 		try {
+			counter.start();
 			counter.startCounter(dialog);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 }

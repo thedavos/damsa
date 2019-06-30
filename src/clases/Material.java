@@ -1,6 +1,8 @@
 package clases;
 
-public class Material {
+import interfaces.IRepoManager;
+
+public class Material implements IRepoManager {
 	private int id, cantidad;
 	private String codUser, codMat, nombre, desc, tipo, estado, materialUrl;
 	private double precioVenta;

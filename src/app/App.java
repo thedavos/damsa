@@ -1,16 +1,6 @@
 package app;
 
-import clases.Admin;
-import models.AdminModel;
-
-import clases.Cliente;
-import models.ClientModel;
-
-import clases.Empresa;
-import models.EnterpriseModel;
-
-import java.util.ArrayList;
-import utils.RepositoryImage;
+import utils.Encryption;
 
 public class App {
 	public static void main(String[] args) throws Exception {
@@ -18,6 +8,9 @@ public class App {
 		String appKey="K002rnwo3o8z8P29Os8HMnaqrPwymsg";
 		String USER_AGENT="damsa";
 		
-
+		String hashed = Encryption.SHA1("contraseña");
+		System.out.println(hashed);
+		
+		
 	}
 }
