@@ -1,25 +1,16 @@
 package models;
 
 //Java packages
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import clases.Admin;
+import db.ConnectionDB;
 
-import clases.*;
-import utils.ConnectionDB;
-
-public class AdminModel {
+public class AdminModel extends ConnectionDB {
 	
 	final private String tableName = "admin";
-	private Connection conn = null;
-	
-	private Connection connect() {
-		ConnectionDB db = new ConnectionDB();
-		this.conn = db.connectionMySQL();
-		return this.conn;
-	}
 	
 	public void createAdmin(Admin admin) {
 		String query = "";
@@ -36,7 +27,7 @@ public class AdminModel {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseña, "
+					+ "contraseÃ±a, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -88,7 +79,7 @@ public class AdminModel {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				String profileUrl = result.getString("profile_url");
 				
 				admin = new Admin(
@@ -148,7 +139,7 @@ public class AdminModel {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				String profileUrl = result.getString("profile_url");
 				
 				admin = new Admin(

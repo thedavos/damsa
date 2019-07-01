@@ -1,28 +1,19 @@
 package models;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import clases.Material;
-import utils.ConnectionDB;
+import db.ConnectionDB;
+import static db.Config.*;
 
-public class MaterialModel {
-	
-	final private String tableName = "material";
-	private Connection conn = null;
-	
-	private Connection connect() {
-		ConnectionDB db = new ConnectionDB();
-		this.conn = db.connectionMySQL();
-		return this.conn;
-	}
+public class MaterialModel extends ConnectionDB {
 	
 	public void createMaterial(Material mat) {
 		String query = "";
 		
 		try {
-			query = "INSERT INTO " + tableName + " ("
+			query = "INSERT INTO " + MaterialTableName + " ("
 					+ "codigo_usuario, "
 					+ "codigo_material, "
 					+ "nombre, "

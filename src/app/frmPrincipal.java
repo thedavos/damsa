@@ -108,7 +108,7 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
 		mnContacto.add(mntmDesarrolladores);
 	}
-		void diseño(){
+		void diseÃ±o(){
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -1,7 +1,6 @@
 package models;
 
 // Java packages
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -9,24 +8,16 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import clases.Cliente;
-import utils.ConnectionDB;
+import db.ConnectionDB;
+import static db.Config.*;
 
-public class ClientModel {
-	
-	final private String tableName = "cliente";
-	private Connection conn = null;
-	
-	private Connection connect() {
-		ConnectionDB db = new ConnectionDB();
-		this.conn = db.connectionMySQL();
-		return this.conn;
-	}
+public class ClientModel extends ConnectionDB {
 	
 	public void createClient(Cliente cliente) {
 		String query = "";
 		
 		try {
-			query = "INSERT INTO " + tableName + " ("
+			query = "INSERT INTO " + ClientTableName + " ("
 					+ "dni, "
 					+ "codigo, "
 					+ "nombre, "
@@ -69,7 +60,7 @@ public class ClientModel {
 		Cliente client = null;
 		
 		try {
-			query = "SELECT * FROM " + tableName + " WHERE "
+			query = "SELECT * FROM " + ClientTableName + " WHERE "
 					+ "dni = '" + dni + "' AND "
 					+ "estado = 1";
 			
@@ -128,7 +119,7 @@ public class ClientModel {
 		Cliente client = null;
 		
 		try {
-			query = "SELECT * FROM " + tableName + " WHERE "
+			query = "SELECT * FROM " + ClientTableName + " WHERE "
 					+ "codigo = '" + cod + "' AND "
 					+ "estado = 1";
 			
@@ -187,7 +178,7 @@ public class ClientModel {
 		String query = "";
 		
 		try {
-			query = "SELECT * FROM " + tableName + " WHERE "
+			query = "SELECT * FROM " + ClientTableName + " WHERE "
 					+ "estado = 1";
 			
 			Statement statement = this.connect().createStatement();
@@ -241,7 +232,7 @@ public class ClientModel {
 		String query = "";
 		
 		try {
-			query = "UPDATE " + tableName + " SET "
+			query = "UPDATE " + ClientTableName + " SET "
 					+ "dni = ?, "
 					+ "nombre = ?, "
 					+ "apellidos = ?, "

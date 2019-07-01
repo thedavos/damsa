@@ -90,7 +90,7 @@ public class Administrador extends JDialog {
 				String cod = null, password = null;
 				
 				String userInput = txtUsuario.getText();
-				password = txtContraseÃ±a.getText();
+				password = txtContraseña.getText();
 				if (Validation.isNumeric(userInput)) {
 					usuario = Integer.parseInt(userInput);
 				} else {
