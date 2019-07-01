@@ -1,25 +1,17 @@
 package models;
 
 //Java packages
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import clases.Admin;
-import utils.ConnectionDB;
+import db.ConnectionDB;
 
-public class AdminModel {
+public class AdminModel extends ConnectionDB {
 	
 	final private String tableName = "admin";
-	private Connection conn = null;
-	
-	private Connection connect() {
-		ConnectionDB db = new ConnectionDB();
-		this.conn = db.connectionMySQL();
-		return this.conn;
-	}
 	
 	public void createAdmin(Admin admin) {
 		String query = "";
