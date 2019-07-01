@@ -1,6 +1,5 @@
 package models;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,17 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import clases.Empresa;
-import utils.ConnectionDB;
+import db.ConnectionDB;
 
-public class EnterpriseModel {
-	
-	private Connection conn = null;
-	
-	private Connection connect() {
-		ConnectionDB db = new ConnectionDB();
-		this.conn = db.connectionMySQL();
-		return this.conn;
-	}
+public class EnterpriseModel extends ConnectionDB {
 	
 	public void createEnterprise(Empresa empresa) {
 		String query = "";
