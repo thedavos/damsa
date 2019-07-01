@@ -7,6 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clases.Admin;
+import clases.Empresa;
+import models.AdminModel;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -17,12 +22,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import utils.Timer;
+import utils.Validation;
 
 public class Administrador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
 	private JPasswordField txtContraseña;
+	
+	public Admin admin;
 
 	/**
 	 * Launch the application.
@@ -79,8 +87,22 @@ public class Administrador extends JDialog {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				int usuario = 0;
+				String cod = null, password = null;
+				
+				String userInput = txtUsuario.getText();
+				password = txtContraseña.getText();
+				if (Validation.isNumeric(userInput)) {
+					usuario = Integer.parseInt(userInput);
+				} else {
+					cod = userInput;
+				}
+				
+				AdminModel am = new AdminModel();
+				admin = usuario == 0 ? am.getAdmin(cod) : am.getAdmin(usuario);
+				openMenu(admin, cod != null ? cod : usuario, password);
+						
 				JOptionPane.showMessageDialog(null, "Accceso correcto");
-				System.exit(0);
 			}
 		});
 		button.setIcon(new ImageIcon(Administrador.class.getResource("/images/iconos22x22/dialog-accept.png")));
@@ -122,4 +144,12 @@ public class Administrador extends JDialog {
 		// Login.initThread();
 	}
 	
+	void openMenu(Admin admin, Object usuario, String password) {
+		if (Validation.isAdminValid(admin, usuario, password)) {
+			frmPrincipal frm = new frmPrincipal();
+			frm.setVisible(true);
+			dispose();
+		}
+		else JOptionPane.showMessageDialog(null,"No existe ni empresa, Ni un usuario");
+	}
 }
