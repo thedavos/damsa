@@ -3,9 +3,10 @@ package utils;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
+import clases.Admin;
 import clases.Cliente;
 import clases.Empresa;
-
+import clases.Usuario;
 import utils.Encryption;
 
 public class Validation {
@@ -19,9 +20,12 @@ public class Validation {
 	}
 	
 	public static boolean isClientValid(Cliente cliente, Object input, String password) {
+		
+		int dni = isNumeric(input.toString()) ? Integer.parseInt(input.toString()) : 0;
+		
 		try {
 			if (
-				(cliente.getDni() == (int) input || cliente.getCode().equalsIgnoreCase((String) input)) 
+				(cliente.getDni() == dni || cliente.getCode().equalsIgnoreCase((String) input)) 
 					&& 
 					cliente.getPassword().equalsIgnoreCase(Encryption.SHA1(password))) {
 				return true;
@@ -39,6 +43,24 @@ public class Validation {
 				(empresa.getRuc().equalsIgnoreCase(input) || empresa.getCode().equalsIgnoreCase(input)) 
 					&& 
 					empresa.getPassword().equalsIgnoreCase(Encryption.SHA1(password))) {
+				return true;
+			}
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	public static boolean isAdminValid(Admin admin, Object input, String password) {
+		
+		int dni = isNumeric(input.toString()) ? Integer.parseInt(input.toString()) : 0;
+		
+		try {
+			if (
+				(admin.getDni() == dni || admin.getCode().equalsIgnoreCase((String) input)) 
+					&& 
+					admin.getPassword().equalsIgnoreCase(Encryption.SHA1(password))) {
 				return true;
 			}
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
