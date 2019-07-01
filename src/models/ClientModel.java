@@ -37,7 +37,7 @@ public class ClientModel {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseÃ±a, "
+					+ "contraseña, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -90,7 +90,7 @@ public class ClientModel {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseÃ±a");
+				String password = result.getString("contraseña");
 				
 				client = new Cliente(
 						dnii, 
@@ -149,7 +149,7 @@ public class ClientModel {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseÃ±a");
+				String password = result.getString("contraseña");
 				
 				client = new Cliente(
 						dnii, 
@@ -245,7 +245,7 @@ public class ClientModel {
 					+ "dni = ?, "
 					+ "nombre = ?, "
 					+ "apellidos = ?, "
-					+ "contraseÃ±a = ? "
+					+ "contraseña = ? "
 					+ " = ? "
 					+ "WHERE dni = ?";
 			

@@ -10,7 +10,7 @@ public class Timer extends Thread {
 	
 	public void startCounter(Login login) throws Throwable {
 		System.out.println(login);
-		for (int i = 10; i >= 0; i--) {
+		for (int i = 30; i >= 0; i--) {
 			Login.lblCounter.setText(i + "s");
 			Thread.sleep(1000);
 		}

@@ -28,9 +28,9 @@ public class Administrador extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtUsuario;
-	private JPasswordField txtContraseña;
-	
+  
 	public Admin admin;
+	private JPasswordField txtContraseña;
 
 	/**
 	 * Launch the application.
@@ -86,12 +86,11 @@ public class Administrador extends JDialog {
 		JButton button = new JButton("Ingresar");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				int usuario = 0;
 				String cod = null, password = null;
 				
 				String userInput = txtUsuario.getText();
-				password = txtContraseña.getText();
+				password = txtContraseÃ±a.getText();
 				if (Validation.isNumeric(userInput)) {
 					usuario = Integer.parseInt(userInput);
 				} else {
