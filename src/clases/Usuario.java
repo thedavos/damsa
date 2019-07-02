@@ -3,6 +3,7 @@ package clases;
 public abstract class Usuario {
 	private int phone, cellPhone, id;
 	private String name, email, address, password, profileUrl, role, code;
+	final private String folder = "users";
 	
 	public Usuario(String name, String password, String email, String address, int phone, int cellPhone) {
 		this.phone = phone;
@@ -34,6 +35,10 @@ public abstract class Usuario {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getFolder() {
+		return folder;
 	}
 
 	public int getPhone() {

@@ -2,6 +2,7 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import static db.Config.*;
@@ -27,5 +28,15 @@ public class ConnectionDB {
 	protected Connection connect() {
 		this.conn = connectionMySQL();
 		return this.conn;
+	}
+	
+	protected void closeConnection(PreparedStatement pst) {
+		try {
+			pst.close();
+			this.conn.close();
+			this.conn = null;
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

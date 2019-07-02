@@ -6,6 +6,7 @@ public class Material implements IRepoManager {
 	private int id, cantidad;
 	private String codUser, codMat, nombre, desc, tipo, estado, materialUrl;
 	private double precioVenta;
+	final private String folder = "materials";
 	
 	public Material() {}
 
@@ -43,6 +44,10 @@ public class Material implements IRepoManager {
 		String codMat = nombre;
 		setCodUser(codUser);
 		setCodMat(codMat);
+	}
+	
+	public String getFolder() {
+		return folder;
 	}
 
 	public int getId() {

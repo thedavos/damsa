@@ -8,15 +8,15 @@ import java.sql.ResultSet;
 import clases.Admin;
 import db.ConnectionDB;
 
+import static db.Config.*;
+
 public class AdminModel extends ConnectionDB {
-	
-	final private String tableName = "admin";
 	
 	public void createAdmin(Admin admin) {
 		String query = "";
 		
 		try {
-			query = "INSERT INTO " + tableName + " ("
+			query = "INSERT INTO " + AdminTableName + " ("
 					+ "dni, "
 					+ "codigo, "
 					+ "nombre, "
@@ -59,7 +59,7 @@ public class AdminModel extends ConnectionDB {
 		Admin admin = null;
 		
 		try {
-			query = "SELECT * FROM " + tableName + " WHERE "
+			query = "SELECT * FROM " + AdminTableName + " WHERE "
 					+ "dni = '" + dni + "' AND "
 					+ "estado = 1";
 			
@@ -119,7 +119,7 @@ public class AdminModel extends ConnectionDB {
 		Admin admin = null;
 		
 		try {
-			query = "SELECT * FROM " + tableName + " WHERE "
+			query = "SELECT * FROM " + AdminTableName + " WHERE "
 					+ "codigo = '" + cod + "' AND "
 					+ "estado = 1";
 			
