@@ -40,14 +40,13 @@ public class RepoManager {
 		}
 	}
 	
-	public static B2FileVersion saveFile(File file) {
+	public static B2FileVersion saveFile(File file, String path) {
 		B2FileVersion fileVersion = null;
 		
 		final B2ContentSource source = B2FileContentSource.build(file);
-		
 		B2UploadFileRequest request = B2UploadFileRequest.builder(
 				getDamsaBucket().getBucketId(), 
-				file.getName(), 
+				path + file.getName(), 
 				B2ContentTypes.B2_AUTO	, 
 				source).build();
 		
@@ -64,18 +63,20 @@ public class RepoManager {
 		String downloadUrl = null;
 		String pathFile = folder + "/" + filename;
 		try {
-			getClient()
+			downloadUrl = getClient()
 				.getDownloadByNameUrl(
 					getDamsaBucket().getBucketName(), 
 					pathFile);
+			
+			return downloadUrl;
 		} catch (B2Exception e) {
 			e.printStackTrace();
 		}
 		return downloadUrl;
 	}
 	
-	public static B2FileVersion updateFile(File file, String oldFilename) {
+	public static B2FileVersion updateFile(File file, String path, String oldFilename) {
 		file.renameTo(new File(oldFilename));
-		return saveFile(file);
+		return saveFile(file, path);
 	}
 }

@@ -33,9 +33,7 @@ public class SesionModel extends ConnectionDB {
 			
 			ssn = new Sesion(id, code, date);
 			
-			pst.close();
-			this.conn.close();
-			this.conn = null;
+			closeConnection(pst);
 			
 			return ssn; 
 		} catch (SQLException e) {
@@ -60,7 +58,7 @@ public class SesionModel extends ConnectionDB {
 			pst.setString(4, SesionTableName);
 			pst.setInt(5, SesionId);
 			
-			ResultSet rs = pst.executeQuery(query);
+			ResultSet rs = pst.executeQuery();
 			
 			int id = rs.getInt(SesionID);
 			String code = rs.getString(CodigoUsuario);
@@ -68,9 +66,7 @@ public class SesionModel extends ConnectionDB {
 			
 			sesion = new Sesion(id, code, date);
 			
-			pst.close();
-			this.conn.close();
-			this.conn = null;
+			closeConnection(pst);
 			
 			return sesion;
 			
@@ -93,7 +89,7 @@ public class SesionModel extends ConnectionDB {
 			pst.setString(2, CodigoUsuario);
 			pst.setString(3, Created);
 			
-			ResultSet rs = pst.executeQuery(query);
+			ResultSet rs = pst.executeQuery();
 			
 			do {
 				int id = rs.getInt(SesionID);
@@ -105,9 +101,7 @@ public class SesionModel extends ConnectionDB {
 				sesions.add(sesion);
 			} while(rs.next());
 			
-			pst.close();
-			this.conn.close();
-			this.conn = null;
+			closeConnection(pst);
 			
 			return sesions;
 		} catch (SQLException e) {

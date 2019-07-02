@@ -8,8 +8,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import org.w3c.dom.css.Counter;
-
 import javax.swing.JLabel;
 
 import javax.swing.JMenu;
