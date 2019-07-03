@@ -30,7 +30,7 @@ public class Administrador extends JDialog {
 	private JTextField txtUsuario;
   
 	public Admin admin;
-	private JPasswordField txtContraseña;
+	private JPasswordField txtContrasena;
 
 	/**
 	 * Launch the application.
@@ -79,9 +79,9 @@ public class Administrador extends JDialog {
 		contentPanel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
-		txtContraseña = new JPasswordField();
-		txtContraseña.setBounds(133, 71, 142, 20);
-		contentPanel.add(txtContraseña);
+		txtContrasena = new JPasswordField();
+		txtContrasena.setBounds(133, 71, 142, 20);
+		contentPanel.add(txtContrasena);
 		
 		JButton button = new JButton("Ingresar");
 		button.addActionListener(new ActionListener() {
@@ -90,7 +90,7 @@ public class Administrador extends JDialog {
 				String cod = null, password = null;
 				
 				String userInput = txtUsuario.getText();
-				password = txtContraseña.getText();
+				password = txtContrasena.getText();
 				if (Validation.isNumeric(userInput)) {
 					usuario = Integer.parseInt(userInput);
 				} else {

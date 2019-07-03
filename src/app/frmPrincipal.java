@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.BoxLayout;
 import java.awt.Color;
 import java.awt.Dialog;
@@ -43,6 +44,8 @@ public class frmPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	//entrada de admin
 	public frmPrincipal() {
 		setBounds(100, 100, 562, 361);
 		
@@ -54,19 +57,16 @@ public class frmPrincipal extends JFrame {
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		mntmMiperfil.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				RegistroCliente cli = new RegistroCliente();
-				cli.setVisible(true);
+			public void actionPerformed(ActionEvent e) {
+				PerfilAdministrador pc=new PerfilAdministrador();
+				pc.setVisible(true);
+				dispose();
 			}
 		});
 		mnPerfil.add(mntmMiperfil);
 		
 		JMenuItem mntmDarseDeBaja = new JMenuItem("Darse de Baja");
+		
 		mnPerfil.add(mntmDarseDeBaja);
 		
 		JMenu mnReporte = new JMenu("Reporte");
@@ -108,7 +108,7 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
 		mnContacto.add(mntmDesarrolladores);
 	}
-		void diseÃ±o(){
+		void diseño(){
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -126,16 +126,27 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnPerfil);
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
-		mntmMiperfil.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			RegistroCliente cli = new RegistroCliente();
-			cli.setVisible(true);
-		}
-	});
+		mntmMiperfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PerfilCliente pc=new PerfilCliente();
+				pc.setVisible(true);
+				
+			}
+		});
 		mnPerfil.add(mntmMiperfil);
 		
 		JMenuItem mntmDarseDeBaja = new JMenuItem("Darse de Baja");
+		mntmDarseDeBaja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int input =JOptionPane.showConfirmDialog(null, "Seguro cerra cuenta", "Eliminar Cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (input==0) {
+					JOptionPane.showMessageDialog(null, "Cuenta Eliminado");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Sin Cambios");
+				}
+			}
+		});
 		mnPerfil.add(mntmDarseDeBaja);
 		
 		JMenu mnNewMenu = new JMenu("Materiales");
@@ -179,13 +190,15 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnPerfil);
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
-		mntmMiperfil.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				RegistroCliente cli = new RegistroCliente();
-				cli.setVisible(true);
+		mntmMiperfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				PerfilCliente pc=new PerfilCliente();
+				pc.setVisible(true);
+				dispose();
 			}
 		});
+		
 		mnPerfil.add(mntmMiperfil);
 		
 		JMenuItem mntmDarseDeBaja = new JMenuItem("Darse de Baja");

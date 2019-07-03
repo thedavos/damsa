@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
-public class CambiarContraseña extends JFrame {
+public class CambiarContrasena extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
@@ -28,7 +28,7 @@ public class CambiarContraseña extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CambiarContraseña frame = new CambiarContraseña();
+					CambiarContrasena frame = new CambiarContrasena();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class CambiarContraseña extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CambiarContraseña() {
+	public CambiarContrasena() {
 		setResizable(false);
 		setTitle("Cambiar Contrase\u00F1a");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

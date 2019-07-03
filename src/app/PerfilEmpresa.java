@@ -128,7 +128,7 @@ public class PerfilEmpresa extends JFrame {
 		JButton btnCambiar = new JButton("Cambiar");
 		btnCambiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CambiarContraseña cm =new CambiarContraseña();
+				CambiarContrasena cm =new CambiarContrasena();
 				cm.setVisible(true);
 			}
 		});
