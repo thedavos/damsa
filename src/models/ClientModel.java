@@ -28,7 +28,7 @@ public class ClientModel extends ConnectionDB {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseña, "
+					+ "contraseÃ±a, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -81,7 +81,7 @@ public class ClientModel extends ConnectionDB {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				
 				client = new Cliente(
 						dnii, 
@@ -140,7 +140,7 @@ public class ClientModel extends ConnectionDB {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				
 				client = new Cliente(
 						dnii, 
@@ -228,39 +228,61 @@ public class ClientModel extends ConnectionDB {
 		return clients;	
 	}
 	
-	public void updateClient(Cliente cliente, int dni) {
+	public int updateClient(Cliente cliente, int dni) {
 		String query = "";
+		int result = 0;
 		
 		try {
-			query = "UPDATE " + ClientTableName + " SET "
-					+ "dni = ?, "
-					+ "nombre = ?, "
-					+ "apellidos = ?, "
-					+ "contraseña = ? "
-					+ " = ? "
-					+ "WHERE dni = ?";
+			query = "UPDATE ? SET ?=?, ?=?, ?=?, ?=?, ?=?, ?=?, ?=?, ?=?, ?=?, ?=?, ?=? WHERE ?=?";
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
-			preparedStmt.setInt(1, cliente.getDni());
-			preparedStmt.setString(2, cliente.getCode());
-			preparedStmt.setString(3, cliente.getName());
-			preparedStmt.setString(4, cliente.getLastname());
-			preparedStmt.setInt(5, cliente.getAge());
-			preparedStmt.setString(6, String.valueOf(cliente.getGender()));
-			preparedStmt.setString(7, cliente.getAddress());
-			preparedStmt.setString(8, cliente.getEmail());
-			preparedStmt.setInt(9, cliente.getPhone());
-			preparedStmt.setInt(10, cliente.getCellphone());
-			preparedStmt.setString(11, cliente.getPassword());
-			preparedStmt.setString(12, cliente.getProfileUrl());
-			preparedStmt.executeUpdate(query);
+			preparedStmt.setString(1, ClientTableName);
+			// Columna DNI
+			preparedStmt.setString(2, ClientDNI);
+			preparedStmt.setInt(3, cliente.getDni());
+			// Columna Codigo
+			preparedStmt.setString(4, CodigoUsuario);
+			preparedStmt.setString(5, cliente.getCode());
+			// Columna Nombre
+			preparedStmt.setString(6, ClientName);
+			preparedStmt.setString(7, cliente.getName());
+			// Columna Apellido
+			preparedStmt.setString(8, ClientLastname);
+			preparedStmt.setString(9, cliente.getLastname());
+			// Columna Edad
+			preparedStmt.setString(10, ClientAge);
+			preparedStmt.setInt(11, cliente.getAge());
+			// Columna Genero
+			preparedStmt.setString(12, ClientGender);
+			preparedStmt.setString(13, String.valueOf(cliente.getGender()));
+			// Columna Direccion
+			preparedStmt.setString(14, ClientAddress);
+			preparedStmt.setString(15, cliente.getAddress());
+			// Columna Correo
+			preparedStmt.setString(16, ClientEmail);
+			preparedStmt.setString(17, cliente.getEmail());
+			// Columna Telefono
+			preparedStmt.setString(18, ClientPhone);
+			preparedStmt.setInt(19, cliente.getPhone());
+			// Columna Celular
+			preparedStmt.setString(20, ClientCellPhone);
+			preparedStmt.setInt(21, cliente.getCellphone());
+			// Columna Imagen URL
+			preparedStmt.setString(22, ClientURL);
+			preparedStmt.setString(23, cliente.getProfileUrl());
+			// Condicional
+			preparedStmt.setString(24, ClientDNI);
+			preparedStmt.setInt(25, dni);
+			result = preparedStmt.executeUpdate();
 			
-			preparedStmt.close();
-			this.conn.close();
-			this.conn = null;
+			closeConnection(preparedStmt);
+			
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return result;
 	}
 }
 

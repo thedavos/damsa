@@ -56,7 +56,8 @@ public class SesionModel extends ConnectionDB {
 			pst.setString(2, CodigoUsuario);
 			pst.setString(3, Created);
 			pst.setString(4, SesionTableName);
-			pst.setInt(5, SesionId);
+			pst.setString(5, SesionID);
+			pst.setInt(6, SesionId);
 			
 			ResultSet rs = pst.executeQuery();
 			
@@ -88,6 +89,7 @@ public class SesionModel extends ConnectionDB {
 			pst.setString(1, SesionID);
 			pst.setString(2, CodigoUsuario);
 			pst.setString(3, Created);
+			pst.setString(4, SesionTableName);
 			
 			ResultSet rs = pst.executeQuery();
 			
