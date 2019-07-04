@@ -187,7 +187,8 @@ public class RegistroCliente extends JFrame {
 		txtCelular.setBounds(191, 148, 150, 20);
 		contentPane.add(txtCelular);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		JButton btnAceptar = new JButton("Guardar");
+		btnAceptar.setIcon(new ImageIcon(RegistroCliente.class.getResource("/images/iconos22x22/disco-flexible.png")));
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -195,7 +196,7 @@ public class RegistroCliente extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnAceptar.setBounds(306, 442, 113, 23);
+		btnAceptar.setBounds(306, 442, 113, 33);
 		contentPane.add(btnAceptar);
 		
 		JLabel lblPorFavorIngrese = new JLabel("Por favor ingrese sus datos");
@@ -232,6 +233,7 @@ public class RegistroCliente extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(RegistroCliente.class.getResource("/images/iconos22x22/cancelar.png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -241,7 +243,7 @@ public class RegistroCliente extends JFrame {
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnCancelar.setBounds(461, 442, 113, 23);
+		btnCancelar.setBounds(461, 442, 113, 33);
 		contentPane.add(btnCancelar);
 		
 		

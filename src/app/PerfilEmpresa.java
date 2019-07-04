@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class PerfilEmpresa extends JFrame {
 
@@ -58,7 +59,7 @@ public class PerfilEmpresa extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Actualizar Datos de Empresa", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(new Color(224, 255, 255));
 		panel.setBounds(10, 11, 472, 307);
 		contentPane.add(panel);
 		
@@ -136,13 +137,19 @@ public class PerfilEmpresa extends JFrame {
 		panel.add(btnCambiar);
 		
 		JButton btnAcualizar = new JButton("Actualizar");
+		btnAcualizar.setIcon(new ImageIcon(PerfilEmpresa.class.getResource("/images/iconos22x22/intercambio.png")));
 		btnAcualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null, "Datos Actualizados");
 			}
 		});
-		btnAcualizar.setBounds(193, 329, 103, 23);
+		btnAcualizar.setBounds(59, 329, 120, 23);
 		contentPane.add(btnAcualizar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(PerfilEmpresa.class.getResource("/images/iconos22x22/cancelar.png")));
+		btnCancelar.setBounds(286, 329, 120, 23);
+		contentPane.add(btnCancelar);
 	}
 
 }
