@@ -19,8 +19,8 @@ public class Config {
 	final public static String ClientLastname = "apellidos";
 	final public static String ClientAge = "edad";
 	final public static String ClientGender = "genero";
-	final public static String ClientAddress = "correo";
-	final public static String ClientEmail = "email";
+	final public static String ClientAddress = "direccion";
+	final public static String ClientEmail = "correo";
 	final public static String ClientPhone = "telefono";
 	final public static String ClientCellPhone = "celular";
 	final public static String ClientURL = "profile_url";
