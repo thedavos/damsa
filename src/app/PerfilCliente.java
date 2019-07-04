@@ -2,11 +2,18 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import clases.Cliente;
+import models.ClientModel;
+import utils.FileManager;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,6 +22,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class PerfilCliente extends JFrame {
 
@@ -27,6 +42,10 @@ public class PerfilCliente extends JFrame {
 	private JTextField txtcorreo;
 	private JTextField txtTelefono;
 	private JTextField txtCelular;
+	private File fileSelected = null;
+	public static Cliente cliente = null;
+	private JComboBox cboGenro;
+	private JLabel lblImagen;
 
 	/**
 	 * Launch the application.
@@ -35,7 +54,7 @@ public class PerfilCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PerfilCliente frame = new PerfilCliente();
+					PerfilCliente frame = new PerfilCliente(cliente);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +66,24 @@ public class PerfilCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PerfilCliente() {
+	
+	
+	public PerfilCliente(Cliente cliente) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txtNombre.setText(cliente.getName());
+				txtApellido.setText(cliente.getLastname());
+				txtDireccion.setText(cliente.getAddress());
+				txtcorreo.setText(cliente.getEmail());
+				txtDNI.setText(cliente.getDni() + "");
+				txtEdad.setText(cliente.getAge() + "");
+				txtTelefono.setText(cliente.getPhone() + "");
+				txtCelular.setText(cliente.getCellphone() + "");
+				cboGenro.setSelectedIndex(cliente.getGender() == 'M' ? 1 : 2);
+				lblImagen.setIcon(FileManager.ConvertURLToIcon(cliente.getProfileUrl()));
+			}
+		});
 		setTitle("Cliente - Perfil");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 522, 487);
@@ -107,7 +143,8 @@ public class PerfilCliente extends JFrame {
 		lblGenero.setBounds(203, 154, 71, 14);
 		panel.add(lblGenero);
 		
-		JComboBox cboGenro = new JComboBox();
+		cboGenro = new JComboBox();
+		cboGenro.setModel(new DefaultComboBoxModel(new String[] {"", "M", "F"}));
 		cboGenro.setBounds(284, 151, 52, 20);
 		panel.add(cboGenro);
 		
@@ -147,9 +184,32 @@ public class PerfilCliente extends JFrame {
 		txtCelular.setBounds(113, 352, 130, 20);
 		panel.add(txtCelular);
 		
-		JLabel lblImagen = new JLabel("imagen...");
+		lblImagen = new JLabel();
+		lblImagen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				fileSelected = FileManager.openFileSystem(1);
+				String filePath = null;
+				
+				try {
+					filePath = fileSelected.getPath();
+				} catch (NullPointerException err) {
+					System.err.println(err);
+				}
+				System.out.println(filePath);
+				
+				try {
+					if (filePath != null) {
+						ImageIcon iconResized = FileManager.ResizeImageIcon(filePath, 180, 180);
+						lblImagen.setIcon(iconResized);
+					}
+				} catch (Exception err) {
+					 JOptionPane.showMessageDialog(null, "Ups! Error abriendo la imagen " + err);
+				}
+			}
+		});
 		lblImagen.setForeground(Color.BLACK);
-		lblImagen.setBounds(271, 194, 194, 153);
+		lblImagen.setBounds(284, 192, 180, 180);
 		panel.add(lblImagen);
 		
 		JButton btnCambiar = new JButton("Cambiar");
@@ -165,8 +225,44 @@ public class PerfilCliente extends JFrame {
 		JButton btnActualizar = new JButton("Actualizar");
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// nombre, apellidos, dni, edad, direccion, genero, correo, telefono, celular, imageurl
+				String nombre, apellidos, direccion, correo;
+				int dni, age, telefono, celular;
+				char genero;
+				ClientModel cm = new ClientModel();
 				
-				JOptionPane.showMessageDialog(null, "Datos Actualizados");
+				nombre = txtNombre.getText();
+				apellidos = txtApellido.getText();
+				direccion = txtDireccion.getText();
+				correo = txtcorreo.getText();
+				dni = Integer.parseInt(txtDNI.getText());
+				age = Integer.parseInt(txtEdad.getText());
+				telefono = Integer.parseInt(txtTelefono.getText());
+				celular = Integer.parseInt(txtCelular.getText());
+				genero = cboGenro.getSelectedItem().toString().charAt(0);
+				
+				cliente.setName(nombre);
+				cliente.setLastname(apellidos);
+				cliente.setDni(dni);
+				cliente.setAge(age);
+				cliente.setAddress(direccion);
+				cliente.setGender(genero);
+				cliente.setEmail(correo);
+				cliente.setPhone(telefono);
+				cliente.setCellphone(celular);
+				if(fileSelected != null) {
+					cliente.saveFile(fileSelected, fileSelected.getPath());
+					cliente.setProfileUrl(cliente.getDownload(cliente.getFolder(), fileSelected.getName()));
+				} 
+				
+				int result = cm.updateClient(cliente, dni);
+				
+				if(result != 0) {
+					JOptionPane.showMessageDialog(null, "Datos Actualizados");
+				} else {
+					JOptionPane.showMessageDialog(null, "Los datos no han sido actualizados, probablemente hubo un error");
+				}
+				
 			}
 		});
 		btnActualizar.setBounds(207, 422, 105, 23);

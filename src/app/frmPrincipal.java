@@ -108,7 +108,7 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
 		mnContacto.add(mntmDesarrolladores);
 	}
-		void diseño(){
+		void diseno(){
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -128,7 +128,7 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PerfilCliente pc=new PerfilCliente();
+				PerfilCliente pc=new PerfilCliente(cliente);
 				pc.setVisible(true);
 				
 			}
@@ -192,9 +192,8 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				PerfilCliente pc=new PerfilCliente();
-				pc.setVisible(true);
+				PerfilEmpresa pe = new PerfilEmpresa();
+				pe.setVisible(true);
 				dispose();
 			}
 		});
