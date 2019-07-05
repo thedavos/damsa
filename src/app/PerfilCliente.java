@@ -72,6 +72,7 @@ public class PerfilCliente extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				
 				txtNombre.setText(cliente.getName());
 				txtApellido.setText(cliente.getLastname());
 				txtDireccion.setText(cliente.getAddress());
