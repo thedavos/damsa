@@ -6,6 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clases.*;
+import models.AdminModel;
+import models.ClientModel;
+import models.EnterpriseModel;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -20,6 +26,9 @@ public class CambiarContrasena extends JFrame {
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
 	private JPasswordField passwordField_2;
+	private JLabel lblContraseaActual;
+	private JLabel lblContraseaNueva;
+	private JLabel lblConfirmarNueva;
 
 	/**
 	 * Launch the application.
@@ -40,7 +49,107 @@ public class CambiarContrasena extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CambiarContrasena() {
+	public CambiarContrasena() {}
+	public CambiarContrasena(Cliente cliente) {
+		doDesign();
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = 0;
+				ClientModel cm = new ClientModel();
+				
+				String newPassword = passwordField_1.getText();
+				String actualPassword = passwordField.getText();
+				String passwordConfirmed = passwordField_2.getText(); 
+				
+				if (newPassword.equals(passwordConfirmed)) {
+					cliente.setPassword(newPassword);
+					cm.updatePassword(cliente, cliente.getDni());
+					
+					if (result != 0) {
+						JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+					}
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
+				}
+			}
+		});
+		btnAceptar.setBounds(197, 136, 89, 23);
+		contentPane.add(btnAceptar);
+	}
+	
+	public CambiarContrasena(Empresa empresa) {
+		doDesign();
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = 0;
+				EnterpriseModel em = new EnterpriseModel();
+				
+				String newPassword = passwordField_1.getText();
+				String actualPassword = passwordField.getText();
+				String passwordConfirmed = passwordField_2.getText(); 
+				
+				if (newPassword.equals(passwordConfirmed)) {
+					empresa.setPassword(newPassword);
+					em.updatePassword(empresa, empresa.getRuc());
+					
+					if (result != 0) {
+						JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+					}
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
+				}
+			}
+		});
+		btnAceptar.setBounds(197, 136, 89, 23);
+		contentPane.add(btnAceptar);
+	}
+	
+	public CambiarContrasena(Admin admin) {
+		doDesign();
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int result = 0;
+				AdminModel am = new AdminModel();
+				String newPassword = passwordField_1.getText();
+				String actualPassword = passwordField.getText();
+				String passwordConfirmed = passwordField_2.getText(); 
+				
+				if (newPassword.equals(passwordConfirmed)) {
+					admin.setPassword(newPassword);
+					am.updatePassword(admin, admin.getDni());
+					
+					if (result != 0) {
+						JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+						dispose();
+					} else {
+						JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+					}
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
+				}
+				
+			}
+		});
+		btnAceptar.setBounds(197, 136, 89, 23);
+		contentPane.add(btnAceptar);
+	}
+	
+	void doDesign() {
 		setResizable(false);
 		setTitle("Cambiar Contrase\u00F1a");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -50,25 +159,15 @@ public class CambiarContrasena extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblContraseaActual = new JLabel("Contrase\u00F1a Actual");
+		lblContraseaActual = new JLabel("Contrase\u00F1a Actual");
 		lblContraseaActual.setBounds(21, 25, 106, 14);
 		contentPane.add(lblContraseaActual);
 		
-		JLabel lblContraseaNueva = new JLabel("Contrase\u00F1a Nueva");
+		lblContraseaNueva = new JLabel("Contrase\u00F1a Nueva");
 		lblContraseaNueva.setBounds(21, 61, 106, 14);
 		contentPane.add(lblContraseaNueva);
 		
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
-				dispose();
-			}
-		});
-		btnAceptar.setBounds(197, 136, 89, 23);
-		contentPane.add(btnAceptar);
-		
-		JLabel lblConfirmarNueva = new JLabel("Confirmar Contrase\u00F1a");
+		lblConfirmarNueva = new JLabel("Confirmar Contrase\u00F1a");
 		lblConfirmarNueva.setBounds(21, 102, 134, 14);
 		contentPane.add(lblConfirmarNueva);
 		

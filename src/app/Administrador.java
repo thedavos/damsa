@@ -145,7 +145,7 @@ public class Administrador extends JDialog {
 	
 	void openMenu(Admin admin, Object usuario, String password) {
 		if (Validation.isAdminValid(admin, usuario, password)) {
-			frmPrincipal frm = new frmPrincipal();
+			frmPrincipal frm = new frmPrincipal(admin);
 			frm.setVisible(true);
 			dispose();
 		}

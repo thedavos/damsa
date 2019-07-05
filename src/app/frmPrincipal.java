@@ -16,6 +16,10 @@ import java.awt.Dialog;
 import java.awt.SystemColor;
 import app.*;
 import clases.*;
+import models.AdminModel;
+import models.ClientModel;
+import models.EnterpriseModel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -45,8 +49,12 @@ public class frmPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	
-	//entrada de admin
 	public frmPrincipal() {
+		
+	}
+	
+	// Menú Admin
+	public frmPrincipal(Admin admin) {
 		setBounds(100, 100, 562, 361);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -58,7 +66,7 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PerfilAdministrador pc=new PerfilAdministrador();
+				PerfilAdministrador pc=new PerfilAdministrador(admin);
 				pc.setVisible(true);
 				dispose();
 			}
@@ -66,6 +74,22 @@ public class frmPrincipal extends JFrame {
 		mnPerfil.add(mntmMiperfil);
 		
 		JMenuItem mntmDarseDeBaja = new JMenuItem("Darse de Baja");
+		mntmDarseDeBaja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int input =JOptionPane.showConfirmDialog(null, "Seguro cerra cuenta", "Eliminar Cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (input==0) {
+					
+					AdminModel am = new AdminModel();
+					
+					am.deleteAdmin(admin, admin.getDni());
+					
+					JOptionPane.showMessageDialog(null, "Cuenta Eliminado");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Sin Cambios");
+				}
+			}
+		});
 		
 		mnPerfil.add(mntmDarseDeBaja);
 		
@@ -115,7 +139,8 @@ public class frmPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 	}
-
+		
+		// Menú Cliente
 		public frmPrincipal(Cliente cliente) {
 		setBounds(100, 100, 562, 361);
 		
@@ -140,6 +165,10 @@ public class frmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int input =JOptionPane.showConfirmDialog(null, "Seguro cerra cuenta", "Eliminar Cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (input==0) {
+					ClientModel cm = new ClientModel();
+					
+					cm.deleteClient(cliente, cliente.getDni());
+					
 					JOptionPane.showMessageDialog(null, "Cuenta Eliminado");
 				}
 				else {
@@ -179,7 +208,8 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
 		mnContacto.add(mntmDesarrolladores);
 	}
-	
+		
+		// Menú Empresa
 		public frmPrincipal(Empresa empresa) {
 		setBounds(100, 100, 562, 361);
 		
@@ -192,7 +222,7 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PerfilEmpresa pe = new PerfilEmpresa();
+				PerfilEmpresa pe = new PerfilEmpresa(empresa);
 				pe.setVisible(true);
 				dispose();
 			}
@@ -201,6 +231,21 @@ public class frmPrincipal extends JFrame {
 		mnPerfil.add(mntmMiperfil);
 		
 		JMenuItem mntmDarseDeBaja = new JMenuItem("Darse de Baja");
+		mntmDarseDeBaja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int input =JOptionPane.showConfirmDialog(null, "Seguro cerra cuenta", "Eliminar Cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (input==0) {
+					EnterpriseModel em = new EnterpriseModel();
+					
+					em.deleteEnterprise(empresa, empresa.getRuc());
+					
+					JOptionPane.showMessageDialog(null, "Cuenta Eliminado");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Sin Cambios");
+				}
+			}
+		});
 		mnPerfil.add(mntmDarseDeBaja);
 		
 		JMenu mnNewMenu = new JMenu("Materiales");
