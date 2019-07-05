@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class frmPrincipal extends JFrame {
 
@@ -53,6 +54,7 @@ public class frmPrincipal extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnPerfil = new JMenu("Perfil");
+		mnPerfil.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/modificar.png")));
 		menuBar.add(mnPerfil);
 		
 		setLocationRelativeTo(null);
@@ -72,6 +74,7 @@ public class frmPrincipal extends JFrame {
 		mnPerfil.add(mntmDarseDeBaja);
 		
 		JMenu mnReporte = new JMenu("Reporte");
+		mnReporte.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/Reporte.png")));
 		menuBar.add(mnReporte);
 		
 		JMenuItem mntmReporteDeCliente = new JMenuItem("Reporte de Cliente y Empresas\r\n");
@@ -87,6 +90,7 @@ public class frmPrincipal extends JFrame {
 		mnReporte.add(mntmReporteDeBoletas);
 		
 		JMenu mnNewMenu_1 = new JMenu("Control de Usuario");
+		mnNewMenu_1.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/group.png")));
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCrearUsuarioNormal = new JMenuItem("Crear Usuario Normal");
@@ -118,6 +122,7 @@ public class frmPrincipal extends JFrame {
 		mnNewMenu_1.add(mntmModificarUsuario);
 		
 		JMenu mnContacto = new JMenu("Contacto");
+		mnContacto.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/bricks.png")));
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");

@@ -33,17 +33,17 @@ import javax.swing.DefaultComboBoxModel;
 public class RegistroCliente extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtDni;
-	private JTextField txtContra;
-	private JTextField txtNombres;
-	private JTextField txtApellidos;
+	private JTextField txtxNombre;
+	private JTextField txtApellido;
+	private JTextField txtConfrContra;
+	private JTextField txtContraseña;
 	private JTextField txtEdad;
 	private JTextField txtGenero;
 	private JTextField txtDirecc;
+	private JTextField txtTelefono;
 	private JTextField txtCorreo;
-	private JTextField txtTelef;
+	private JTextField txtDni;
 	private JTextField txtCelular;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -88,10 +88,10 @@ public class RegistroCliente extends JFrame {
 		lblDn.setBounds(10, 148, 150, 20);
 		contentPane.add(lblDn);
 		
-		txtDni = new JTextField();
-		txtDni.setBounds(191, 64, 327, 20);
-		contentPane.add(txtDni);
-		txtDni.setColumns(10);
+		txtxNombre = new JTextField();
+		txtxNombre.setBounds(191, 64, 327, 20);
+		contentPane.add(txtxNombre);
+		txtxNombre.setColumns(10);
 		
 		JLabel lblContraseas = new JLabel("Contrase\u00F1a");
 		lblContraseas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,10 +99,10 @@ public class RegistroCliente extends JFrame {
 		lblContraseas.setBounds(10, 190, 150, 20);
 		contentPane.add(lblContraseas);
 		
-		txtContra = new JTextField();
-		txtContra.setColumns(10);
-		txtContra.setBounds(191, 106, 327, 20);
-		contentPane.add(txtContra);
+		txtApellido = new JTextField();
+		txtApellido.setColumns(10);
+		txtApellido.setBounds(191, 106, 327, 20);
+		contentPane.add(txtApellido);
 		
 		JLabel lblNombre = new JLabel("Nombres");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,10 +110,10 @@ public class RegistroCliente extends JFrame {
 		lblNombre.setBounds(10, 64, 150, 20);
 		contentPane.add(lblNombre);
 		
-		txtNombres = new JTextField();
-		txtNombres.setColumns(10);
-		txtNombres.setBounds(191, 232, 229, 20);
-		contentPane.add(txtNombres);
+		txtConfrContra = new JTextField();
+		txtConfrContra.setColumns(10);
+		txtConfrContra.setBounds(191, 232, 229, 20);
+		contentPane.add(txtConfrContra);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
 		lblApellidos.setHorizontalAlignment(SwingConstants.CENTER);
@@ -121,10 +121,10 @@ public class RegistroCliente extends JFrame {
 		lblApellidos.setBounds(10, 106, 150, 20);
 		contentPane.add(lblApellidos);
 		
-		txtApellidos = new JTextField();
-		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(191, 190, 229, 20);
-		contentPane.add(txtApellidos);
+		txtContraseña = new JTextField();
+		txtContraseña.setColumns(10);
+		txtContraseña.setBounds(191, 190, 229, 20);
+		contentPane.add(txtContraseña);
 		
 		JLabel lblEdad = new JLabel("Edad");
 		lblEdad.setHorizontalAlignment(SwingConstants.CENTER);
@@ -160,10 +160,10 @@ public class RegistroCliente extends JFrame {
 		lblCorreo.setBounds(10, 358, 150, 20);
 		contentPane.add(lblCorreo);
 		
-		txtCorreo = new JTextField();
-		txtCorreo.setColumns(10);
-		txtCorreo.setBounds(191, 400, 100, 20);
-		contentPane.add(txtCorreo);
+		txtTelefono = new JTextField();
+		txtTelefono.setColumns(10);
+		txtTelefono.setBounds(191, 400, 100, 20);
+		contentPane.add(txtTelefono);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
 		lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,10 +171,10 @@ public class RegistroCliente extends JFrame {
 		lblTelefono.setBounds(10, 400, 150, 20);
 		contentPane.add(lblTelefono);
 		
-		txtTelef = new JTextField();
-		txtTelef.setColumns(10);
-		txtTelef.setBounds(191, 358, 327, 20);
-		contentPane.add(txtTelef);
+		txtCorreo = new JTextField();
+		txtCorreo.setColumns(10);
+		txtCorreo.setBounds(191, 358, 327, 20);
+		contentPane.add(txtCorreo);
 		
 		JLabel lblCelular = new JLabel("Celular");
 		lblCelular.setHorizontalAlignment(SwingConstants.CENTER);
@@ -182,20 +182,21 @@ public class RegistroCliente extends JFrame {
 		lblCelular.setBounds(270, 400, 150, 20);
 		contentPane.add(lblCelular);
 		
-		txtCelular = new JTextField();
-		txtCelular.setColumns(10);
-		txtCelular.setBounds(191, 148, 150, 20);
-		contentPane.add(txtCelular);
+		txtDni = new JTextField();
+		txtDni.setColumns(10);
+		txtDni.setBounds(191, 148, 150, 20);
+		contentPane.add(txtDni);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		JButton btnAceptar = new JButton("Guardar");
+		btnAceptar.setIcon(new ImageIcon(RegistroCliente.class.getResource("/images/iconos22x22/disco-flexible.png")));
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				JOptionPane.showMessageDialog(null,"Creacion de ususario correcto");
+				JOptionPane.showMessageDialog(null,"Vales verga PRRO");
 				System.exit(0);
 			}
 		});
-		btnAceptar.setBounds(306, 442, 113, 23);
+		btnAceptar.setBounds(306, 442, 113, 33);
 		contentPane.add(btnAceptar);
 		
 		JLabel lblPorFavorIngrese = new JLabel("Por favor ingrese sus datos");
@@ -210,16 +211,16 @@ public class RegistroCliente extends JFrame {
 		contentPane.add(lblConfirmarContrasea);
 		
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Georgia", Font.PLAIN, 13));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"F", "M"}));
-		comboBox.setBounds(417, 274, 86, 20);
-		contentPane.add(comboBox);
+		JComboBox cbogenero = new JComboBox();
+		cbogenero.setFont(new Font("Georgia", Font.PLAIN, 13));
+		cbogenero.setModel(new DefaultComboBoxModel(new String[] {"F", "M"}));
+		cbogenero.setBounds(417, 274, 86, 20);
+		contentPane.add(cbogenero);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(384, 400, 134, 20);
-		contentPane.add(textField);
+		txtCelular = new JTextField();
+		txtCelular.setColumns(10);
+		txtCelular.setBounds(384, 400, 134, 20);
+		contentPane.add(txtCelular);
 		
 		JLabel lblImagen = new JLabel("imagen");
 		lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
@@ -232,6 +233,7 @@ public class RegistroCliente extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(RegistroCliente.class.getResource("/images/iconos22x22/cancelar.png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -241,7 +243,7 @@ public class RegistroCliente extends JFrame {
 			}
 		});
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnCancelar.setBounds(461, 442, 113, 23);
+		btnCancelar.setBounds(461, 442, 113, 33);
 		contentPane.add(btnCancelar);
 		
 		

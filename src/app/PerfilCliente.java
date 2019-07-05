@@ -94,7 +94,7 @@ public class PerfilCliente extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 494, 393);
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(new Color(224, 255, 255));
 		panel.setBorder(new TitledBorder(null, "Actualizar Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -223,6 +223,7 @@ public class PerfilCliente extends JFrame {
 		panel.add(btnCambiar);
 		
 		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.setIcon(new ImageIcon(PerfilCliente.class.getResource("/images/iconos22x22/intercambio.png")));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// nombre, apellidos, dni, edad, direccion, genero, correo, telefono, celular, imageurl
@@ -265,8 +266,13 @@ public class PerfilCliente extends JFrame {
 				
 			}
 		});
-		btnActualizar.setBounds(207, 422, 105, 23);
+		btnActualizar.setBounds(96, 414, 121, 23);
 		contentPane.add(btnActualizar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(PerfilCliente.class.getResource("/images/iconos22x22/cancelar.png")));
+		btnCancelar.setBounds(288, 415, 121, 23);
+		contentPane.add(btnCancelar);
 		
 	}
 }
