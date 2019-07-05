@@ -18,12 +18,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Color;
+import javax.swing.DefaultComboBoxModel;
 
 public class Materialesingreso extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtPeso;
-	private JTextField txtEstado;
 	private JTextField txtPrecioEstimado;
 
 	/**
@@ -55,7 +55,7 @@ public class Materialesingreso extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblMaterial = new JLabel("Material");
+		JLabel lblMaterial = new JLabel("Tipo");
 		lblMaterial.setBounds(22, 41, 46, 14);
 		contentPane.add(lblMaterial);
 		
@@ -69,6 +69,7 @@ public class Materialesingreso extends JFrame {
 		txtPeso.setColumns(10);
 		
 		JComboBox cboMaterial = new JComboBox();
+		cboMaterial.setModel(new DefaultComboBoxModel(new String[] {"Plastico", "Carton", "Vidrio", "Metal"}));
 		cboMaterial.setBounds(116, 48, 86, 20);
 		contentPane.add(cboMaterial);
 		
@@ -77,13 +78,8 @@ public class Materialesingreso extends JFrame {
 		contentPane.add(lblJjjj);
 		
 		JLabel lblPrecioEstimado = new JLabel("Precio estimado:");
-		lblPrecioEstimado.setBounds(22, 153, 99, 14);
+		lblPrecioEstimado.setBounds(22, 153, 84, 14);
 		contentPane.add(lblPrecioEstimado);
-		
-		txtEstado = new JTextField();
-		txtEstado.setBounds(116, 111, 86, 20);
-		contentPane.add(txtEstado);
-		txtEstado.setColumns(10);
 		
 		txtPrecioEstimado = new JTextField();
 		txtPrecioEstimado.setBounds(116, 150, 86, 20);
@@ -103,5 +99,10 @@ public class Materialesingreso extends JFrame {
 		btnCancelar.setIcon(new ImageIcon(Materialesingreso.class.getResource("/images/iconos22x22/cancelar.png")));
 		btnCancelar.setBounds(260, 213, 112, 42);
 		contentPane.add(btnCancelar);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Optimo", "Regular", "Malo"}));
+		comboBox.setBounds(116, 114, 86, 20);
+		contentPane.add(comboBox);
 	}
 }
