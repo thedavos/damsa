@@ -11,6 +11,7 @@ import clases.*;
 import models.AdminModel;
 import models.ClientModel;
 import models.EnterpriseModel;
+import utils.Encryption;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -64,20 +65,27 @@ public class CambiarContrasena extends JFrame {
 				String actualPassword = passwordField.getText();
 				String passwordConfirmed = passwordField_2.getText(); 
 				
-				if (newPassword.equals(passwordConfirmed) && actualPassword.equals(cliente.getPassword())) {
-					cliente.setPassword(newPassword);
-					cm.updatePassword(cliente, cliente.getDni());
+				try {
 					
-					if (result != 0) {
-						JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
-						dispose();
+					if (newPassword.equals(passwordConfirmed) && Encryption.SHA1(actualPassword).equals(cliente.getPassword())) {
+						cliente.setPassword(newPassword);
+						cm.updatePassword(cliente, cliente.getDni());
+						
+						if (result != 0) {
+							JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+						}
+						
 					} else {
-						JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+						JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
 					}
 					
-				} else {
-					JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
+				} catch (Exception err) {
+					System.out.println(err.getMessage());
 				}
+				
 			}
 		});
 		btnAceptar.setBounds(197, 136, 89, 23);
@@ -97,20 +105,27 @@ public class CambiarContrasena extends JFrame {
 				String actualPassword = passwordField.getText();
 				String passwordConfirmed = passwordField_2.getText(); 
 				
-				if (newPassword.equals(passwordConfirmed) && actualPassword.equals(empresa.getPassword())) {
-					empresa.setPassword(newPassword);
-					em.updatePassword(empresa, empresa.getRuc());
+				try {
 					
-					if (result != 0) {
-						JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
-						dispose();
+					if (newPassword.equals(passwordConfirmed) && Encryption.SHA1(actualPassword).equals(empresa.getPassword()))  {
+						empresa.setPassword(newPassword);
+						em.updatePassword(empresa, empresa.getRuc());
+						
+						if (result != 0) {
+							JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+						}
+						
 					} else {
-						JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+						JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
 					}
 					
-				} else {
-					JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
+				} catch (Exception err) {
+					System.out.println(err.getMessage());
 				}
+				
 			}
 		});
 		btnAceptar.setBounds(197, 136, 89, 23);
@@ -128,20 +143,26 @@ public class CambiarContrasena extends JFrame {
 				String newPassword = passwordField_1.getText();
 				String actualPassword = passwordField.getText();
 				String passwordConfirmed = passwordField_2.getText(); 
-				
-				if (newPassword.equals(passwordConfirmed) && actualPassword.equals(admin.getPassword())) {
-					admin.setPassword(newPassword);
-					am.updatePassword(admin, admin.getDni());
+
+				try {
 					
-					if (result != 0) {
-						JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
-						dispose();
+					if (newPassword.equals(passwordConfirmed) && Encryption.SHA1(actualPassword).equals(admin.getPassword()))  {
+						admin.setPassword(newPassword);
+						am.updatePassword(admin, admin.getDni());
+						
+						if (result != 0) {
+							JOptionPane.showMessageDialog(null, "Datos actualizados correctamente");
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+						}
+						
 					} else {
-						JOptionPane.showMessageDialog(null, "Error al actualizar datos");
+						JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
 					}
 					
-				} else {
-					JOptionPane.showMessageDialog(null, "La contraseña nueva no coincide con la contraseña confirmada");
+				} catch (Exception err) {
+					System.out.println(err.getMessage());
 				}
 				
 			}
