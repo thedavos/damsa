@@ -48,7 +48,7 @@ public class Materialesingreso extends JFrame {
 	public Materialesingreso() {
 		setTitle("Ingreso de Materiales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 488, 321);
+		setBounds(100, 100, 567, 359);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(230, 230, 250));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,13 +64,13 @@ public class Materialesingreso extends JFrame {
 		contentPane.add(lblPeso);
 		
 		txtPeso = new JTextField();
-		txtPeso.setBounds(116, 83, 86, 20);
+		txtPeso.setBounds(116, 83, 109, 20);
 		contentPane.add(txtPeso);
 		txtPeso.setColumns(10);
 		
 		JComboBox cboMaterial = new JComboBox();
 		cboMaterial.setModel(new DefaultComboBoxModel(new String[] {"Plastico", "Carton", "Vidrio", "Metal"}));
-		cboMaterial.setBounds(116, 48, 86, 20);
+		cboMaterial.setBounds(116, 48, 109, 20);
 		contentPane.add(cboMaterial);
 		
 		JLabel lblJjjj = new JLabel("Estado:");
@@ -82,27 +82,27 @@ public class Materialesingreso extends JFrame {
 		contentPane.add(lblPrecioEstimado);
 		
 		txtPrecioEstimado = new JTextField();
-		txtPrecioEstimado.setBounds(116, 150, 86, 20);
+		txtPrecioEstimado.setBounds(116, 150, 109, 20);
 		contentPane.add(txtPrecioEstimado);
 		txtPrecioEstimado.setColumns(10);
 		
 		JLabel lblJpg = new JLabel("Jpg....");
-		lblJpg.setBounds(303, 76, 46, 14);
+		lblJpg.setBounds(416, 86, 46, 14);
 		contentPane.add(lblJpg);
 		
 		JButton btnGuardar = new JButton("Guardar");
 		btnGuardar.setIcon(new ImageIcon(Materialesingreso.class.getResource("/images/iconos22x22/disco-flexible.png")));
-		btnGuardar.setBounds(113, 213, 112, 42);
+		btnGuardar.setBounds(116, 267, 112, 42);
 		contentPane.add(btnGuardar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setIcon(new ImageIcon(Materialesingreso.class.getResource("/images/iconos22x22/cancelar.png")));
-		btnCancelar.setBounds(260, 213, 112, 42);
+		btnCancelar.setBounds(304, 267, 112, 42);
 		contentPane.add(btnCancelar);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Optimo", "Regular", "Malo"}));
-		comboBox.setBounds(116, 114, 86, 20);
+		comboBox.setBounds(116, 114, 109, 20);
 		contentPane.add(comboBox);
 	}
 }
