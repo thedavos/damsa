@@ -32,7 +32,7 @@ public class Cliente extends PersonaUsuario implements IRepoManager {
 	}
 	
 	/**
-	 * Creación de una instancia Cliente sin password, ni datos no obligatorios
+	 * Creacion de una instancia Cliente sin password, ni datos no obligatorios
 	 */
 	public Cliente(int dni, String password, String name, String lastname, char gender, int age) {
 		super(dni, password, name, lastname, gender, age);

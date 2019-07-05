@@ -19,6 +19,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 import clases.Admin;
 import models.AdminModel;
@@ -94,7 +95,7 @@ public class PerfilAdministrador extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Actualizar Datos del Administrador", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(new Color(224, 255, 255));
 		panel.setBounds(10, 11, 494, 393);
 		contentPane.add(panel);
 		
@@ -221,6 +222,7 @@ public class PerfilAdministrador extends JFrame {
 		panel.add(btnCambiar);
 		
 		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.setIcon(new ImageIcon(PerfilAdministrador.class.getResource("/images/iconos22x22/intercambio.png")));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// nombre, apellidos, dni, edad, direccion, genero, correo, telefono, celular, imageurl
@@ -262,8 +264,13 @@ public class PerfilAdministrador extends JFrame {
 				}
 			}
 		});
-		btnActualizar.setBounds(203, 415, 104, 23);
+		btnActualizar.setBounds(107, 415, 119, 23);
 		contentPane.add(btnActualizar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(PerfilAdministrador.class.getResource("/images/iconos22x22/cancelar.png")));
+		btnCancelar.setBounds(290, 415, 113, 23);
+		contentPane.add(btnCancelar);
 	}
 
 }
