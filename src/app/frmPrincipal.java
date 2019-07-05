@@ -56,6 +56,9 @@ public class frmPrincipal extends JFrame {
 	
 	// Menú Admin
 	public frmPrincipal(Admin admin) {
+		
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setBounds(100, 100, 562, 361);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -169,6 +172,8 @@ public class frmPrincipal extends JFrame {
 		
 		// Menú Cliente
 		public frmPrincipal(Cliente cliente) {
+
+	    setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setBounds(100, 100, 562, 361);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -246,6 +251,8 @@ public class frmPrincipal extends JFrame {
   
 		// Menú Empresa
 		public frmPrincipal(Empresa empresa) {
+
+	    setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setBounds(100, 100, 562, 361);
 		
 		JMenuBar menuBar = new JMenuBar();
