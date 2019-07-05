@@ -82,7 +82,9 @@ public class PerfilCliente extends JFrame {
 				txtTelefono.setText(cliente.getPhone() + "");
 				txtCelular.setText(cliente.getCellphone() + "");
 				cboGenro.setSelectedIndex(cliente.getGender() == 'M' ? 1 : 2);
-				lblImagen.setIcon(FileManager.ConvertURLToIcon(cliente.getProfileUrl()));
+				if (cliente.getProfileUrl() != null) {
+					lblImagen.setIcon(FileManager.ResizeImageIcon(FileManager.ConvertURLToIcon(cliente.getProfileUrl())));
+				}
 			}
 		});
 		setTitle("Cliente - Perfil");
@@ -194,16 +196,15 @@ public class PerfilCliente extends JFrame {
 				
 				try {
 					filePath = fileSelected.getPath();
-				} catch (NullPointerException err) {
-					System.err.println(err);
-				}
-				System.out.println(filePath);
-				
-				try {
+					
+					System.out.println(filePath);
+					
 					if (filePath != null) {
 						ImageIcon iconResized = FileManager.ResizeImageIcon(filePath, 180, 180);
 						lblImagen.setIcon(iconResized);
 					}
+				} catch (NullPointerException err) {
+					System.err.println(err);
 				} catch (Exception err) {
 					 JOptionPane.showMessageDialog(null, "Ups! Error abriendo la imagen " + err);
 				}
@@ -216,7 +217,7 @@ public class PerfilCliente extends JFrame {
 		JButton btnCambiar = new JButton("Cambiar");
 		btnCambiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CambiarContrasena cm = new CambiarContrasena();
+				CambiarContrasena cm = new CambiarContrasena(cliente);
 				cm.setVisible(true);
 			}
 		});
@@ -253,7 +254,7 @@ public class PerfilCliente extends JFrame {
 				cliente.setPhone(telefono);
 				cliente.setCellphone(celular);
 				if(fileSelected != null) {
-					cliente.saveFile(fileSelected, fileSelected.getPath());
+					cliente.saveFile(fileSelected, cliente.getFolder() + "/");
 					cliente.setProfileUrl(cliente.getDownload(cliente.getFolder(), fileSelected.getName()));
 				} 
 				

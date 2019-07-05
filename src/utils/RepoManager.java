@@ -44,6 +44,7 @@ public class RepoManager {
 		B2FileVersion fileVersion = null;
 		
 		final B2ContentSource source = B2FileContentSource.build(file);
+		System.out.println(path + file.getName());
 		B2UploadFileRequest request = B2UploadFileRequest.builder(
 				getDamsaBucket().getBucketId(), 
 				path + file.getName(), 
