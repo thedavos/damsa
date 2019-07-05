@@ -18,8 +18,9 @@ import utils.Encryption;
 
 public class EnterpriseModel extends ConnectionDB {
 	
-	public void createEnterprise(Empresa empresa) {
+	public int createEnterprise(Empresa empresa) {
 		String query = "";
+		int result = 0;
 		
 		try {
 			query = "INSERT INTO empresa("
@@ -43,14 +44,16 @@ public class EnterpriseModel extends ConnectionDB {
 			preparedStmt.setInt(7, empresa.getCellphone());
 			preparedStmt.setString(8, empresa.getPassword());
 			
-			preparedStmt.execute();
+			result = preparedStmt.executeUpdate();
 			
-			preparedStmt.close();
-			this.conn.close();
-			this.conn = null;
+			closeConnection(preparedStmt);
+			
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return result;
 	}
 	
 	public Empresa getEnterprise(String ruc) {
@@ -73,7 +76,7 @@ public class EnterpriseModel extends ConnectionDB {
 				String name = result.getString("nombre");
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
-				String password = result.getString("contraseña");
+				String profileUrl = result.getString("profile_url");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -89,6 +92,7 @@ public class EnterpriseModel extends ConnectionDB {
 				empresa.setId(id);
 				empresa.setCode(code);
 				empresa.setPassword(password);
+				empresa.setProfileUrl(profileUrl);
 				
 				return empresa;
 			}
@@ -124,7 +128,8 @@ public class EnterpriseModel extends ConnectionDB {
 				String name = result.getString("nombre");
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
-				String password = result.getString("contraseña");
+				String profileUrl = result.getString("profile_url");
+
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -140,6 +145,7 @@ public class EnterpriseModel extends ConnectionDB {
 				empresa.setId(id);
 				empresa.setCode(code);
 				empresa.setPassword(password);
+				empresa.setProfileUrl(profileUrl);
 				
 				return empresa;
 			}
@@ -172,6 +178,7 @@ public class EnterpriseModel extends ConnectionDB {
 				String name = result.getString("nombre");
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
+				String profileUrl = result.getString("profile_url");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -186,6 +193,7 @@ public class EnterpriseModel extends ConnectionDB {
 				
 				enterprise.setId(id);
 				enterprise.setCode(code);
+				enterprise.setProfileUrl(profileUrl);
 				
 				enterprises.add(enterprise);
 			}

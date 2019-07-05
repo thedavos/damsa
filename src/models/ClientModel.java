@@ -17,8 +17,9 @@ import static db.Config.*;
 
 public class ClientModel extends ConnectionDB {
 	
-	public void createClient(Cliente cliente) {
+	public int createClient(Cliente cliente) {
 		String query = "";
+		int isCreated = 0;
 		
 		try {
 			query = "INSERT INTO " + ClientTableName + " ("
@@ -32,7 +33,7 @@ public class ClientModel extends ConnectionDB {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseña, "
+					+ "contraseÃ±a, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -49,14 +50,16 @@ public class ClientModel extends ConnectionDB {
 			preparedStmt.setInt(10, cliente.getCellphone());
 			preparedStmt.setString(11, cliente.getPassword());
 			preparedStmt.setString(12, cliente.getProfileUrl());
-			preparedStmt.execute();
 			
-			preparedStmt.close();
-			this.conn.close();
-			this.conn = null;
+			isCreated = preparedStmt.executeUpdate();
+			closeConnection(preparedStmt);
+			
+			return isCreated;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return isCreated;
 	}
 	
 	public Cliente getClient(int dni) {
@@ -85,7 +88,7 @@ public class ClientModel extends ConnectionDB {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				
 				client = new Cliente(
 						dnii, 
@@ -144,7 +147,7 @@ public class ClientModel extends ConnectionDB {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				
 				client = new Cliente(
 						dnii, 
