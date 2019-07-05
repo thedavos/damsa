@@ -21,7 +21,7 @@ public class Stock extends JFrame {
 	private JTable jTVer;
 	private DefaultTableModel modelo;
 	private JButton btnFiltrar;
-	final Object []object = new Object[6];
+	final Object []object = new Object[11];
 
 	/**
 	 * Launch the application.
@@ -44,7 +44,7 @@ public class Stock extends JFrame {
 	 */
 	public Stock() {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 852, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

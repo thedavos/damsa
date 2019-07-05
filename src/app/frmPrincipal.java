@@ -220,6 +220,12 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnCompraYVenta);
 		
 		JMenuItem mntmStock = new JMenuItem("Stock");
+		mntmStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Stock s =new Stock();
+				s.setVisible(true);
+			}
+		});
 		mnCompraYVenta.add(mntmStock);
 		
 		JMenu mnReporte = new JMenu("Reporte");

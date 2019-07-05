@@ -5,7 +5,7 @@ import interfaces.IRepoManager;
 
 public class Material implements IRepoManager {
 	private int id, cantidad;
-	private String codUser, codMat, nombre, desc, tipo, estado, materialUrl;
+	private String codUser, codMat, nombre, desc, tipo, estado, materialUrl,codmate;
 	private double precioVenta;
 	private Date inicio,modificacion;
 	final private String folder = "materials";
@@ -142,10 +142,11 @@ public class Material implements IRepoManager {
 	public String getCodMat() {
 		return codMat;
 	}
-
+	public String generateCodMat(){
+		return getCodUser()+"-"+getNombre();
+	}
 	public void setCodMat(String codMat) {
 		this.codMat = codMat;
 	};
-	
 }
 

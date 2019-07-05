@@ -6,14 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import app.*;
-import clases.*;
+import clases.Cliente;
+import clases.Material;
 import utils.FileManager;
+import models.*;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,6 +34,8 @@ import javax.swing.JTextPane;
 import javax.swing.UIManager;
 
 public class Materialesingreso extends JFrame {
+	public Materialesingreso() {
+	}
 
 	private JPanel contentPane;
 	private JTextField txtcantidad;
@@ -36,6 +43,7 @@ public class Materialesingreso extends JFrame {
 	private JTextField txtprecio;
 	private File fileSelected = null;
 	private JTextField txtdescripcion;
+	private JComboBox cboestado;
 
 	/**
 	 * Launch the application.
@@ -56,7 +64,9 @@ public class Materialesingreso extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Materialesingreso() {
+	
+	
+	public Materialesingreso(Cliente cliente) {
 		
 		setTitle("Ingreso de Materiales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,6 +108,38 @@ public class Materialesingreso extends JFrame {
 		contentPane.add(lblPrecioEstimado);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nombre,descripcion,tipo,estado,img,codmate;
+				Cliente codusu;
+				double precio;
+				int cant;
+				
+				Material mat = new Material();
+				
+				codusu= cliente;
+				nombre = txtnombre.getText();
+				descripcion = txtdescripcion.getText();
+				precio = Double.parseDouble(txtprecio.getText());
+				cant = Integer.parseInt(txtcantidad.getText());
+				tipo = cboMaterial.getSelectedItem().toString();
+				estado=cboestado.getSelectedItem().toString();
+				
+				mat.setCodUser(cliente.getCode());
+				mat.setCodMat(mat.generateCodMat());
+				mat.setNombre(nombre);
+				mat.setDesc(descripcion);
+				mat.setPrecioVenta(precio);
+				mat.setCantidad(cant);
+				mat.setTipo(tipo);
+				mat.setEstado(estado);
+				if(fileSelected != null){
+					mat.saveFile(fileSelected, mat.getFolder()+"/");
+					mat.setMaterialUrl(mat.getDownload(mat.getFolder(), fileSelected.getName()));
+				}
+					
+			}
+		});
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnGuardar.setBounds(211, 314, 126, 33);
 		btnGuardar.setIcon(new ImageIcon(Materialesingreso.class.getResource("/images/iconos22x22/disco-flexible.png")));
@@ -109,7 +151,7 @@ public class Materialesingreso extends JFrame {
 		btnCancelar.setIcon(new ImageIcon(Materialesingreso.class.getResource("/images/iconos22x22/cancelar.png")));
 		contentPane.add(btnCancelar);
 		
-		JComboBox cboestado = new JComboBox();
+		cboestado = new JComboBox();
 		cboestado.setBounds(185, 274, 109, 20);
 		cboestado.setModel(new DefaultComboBoxModel(new String[] {"Optimo", "Regular", "Malo"}));
 		contentPane.add(cboestado);
@@ -117,7 +159,7 @@ public class Materialesingreso extends JFrame {
 		JLabel lblNombre = new JLabel("Nombre :");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre.setFont(new Font("Georgia", Font.PLAIN, 13));
-		lblNombre.setBounds(10, 29, 147, 20);
+		lblNombre.setBounds(10, 28, 147, 20);
 		contentPane.add(lblNombre);
 		
 		txtnombre = new JTextField();
@@ -152,6 +194,10 @@ public class Materialesingreso extends JFrame {
 				
 				try {
 					filePath = fileSelected.getPath();
+					if(filePath != null ){
+						ImageIcon iconResized = FileManager.ResizeImageIcon(filePath,180,180);
+						lblimagen.setIcon(iconResized);
+					}
 				} catch (NullPointerException err) {
 					System.err.println(err);
 				}
