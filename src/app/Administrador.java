@@ -99,8 +99,9 @@ public class Administrador extends JDialog {
 				
 				AdminModel am = new AdminModel();
 				admin = usuario == 0 ? am.getAdmin(cod) : am.getAdmin(usuario);
+				Login.logSession(admin.getCode());
 				openMenu(admin, cod != null ? cod : usuario, password);
-						
+				
 				JOptionPane.showMessageDialog(null, "Accceso correcto");
 			}
 		});

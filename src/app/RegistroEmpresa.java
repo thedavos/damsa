@@ -186,7 +186,7 @@ public class RegistroEmpresa extends JFrame {
 				} 
 				
 				if (em.createEnterprise(empresa) != 0) {
-					JOptionPane.showMessageDialog(null,"Creacion correcta, " + empresa.getName() + " ha sido registrado exitosamente");
+					JOptionPane.showMessageDialog(null,"La empresa con el código: " + empresa.getCode() + " ha sido registrado exitosamente");
 					
 					Login l =new Login();
 					l.setVisible(true);

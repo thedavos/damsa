@@ -231,7 +231,7 @@ public class RegistroCliente extends JFrame {
 				} 
 				
 				if (cm.createClient(cliente) != 0) {
-					JOptionPane.showMessageDialog(null,"El usuario " + cliente.getName() + " ha sido creado");
+					JOptionPane.showMessageDialog(null,"El usuario con código: " + cliente.getCode() + " ha sido creado");
 					
 					Login l =new Login();
 					l.setVisible(true);
