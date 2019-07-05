@@ -1,18 +1,26 @@
 package models;
 
+import static db.Config.*;
+
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import clases.Admin;
+import clases.Cliente;
 import clases.Empresa;
 import db.ConnectionDB;
+import utils.Encryption;
 
 public class EnterpriseModel extends ConnectionDB {
 	
-	public void createEnterprise(Empresa empresa) {
+	public int createEnterprise(Empresa empresa) {
 		String query = "";
+		int result = 0;
 		
 		try {
 			query = "INSERT INTO empresa("
@@ -36,14 +44,16 @@ public class EnterpriseModel extends ConnectionDB {
 			preparedStmt.setInt(7, empresa.getCellphone());
 			preparedStmt.setString(8, empresa.getPassword());
 			
-			preparedStmt.execute();
+			result = preparedStmt.executeUpdate();
 			
-			preparedStmt.close();
-			this.conn.close();
-			this.conn = null;
+			closeConnection(preparedStmt);
+			
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return result;
 	}
 	
 	public Empresa getEnterprise(String ruc) {
@@ -67,6 +77,7 @@ public class EnterpriseModel extends ConnectionDB {
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
 				String password = result.getString("contraseña");
+				String profileUrl = result.getString("profile_url");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -82,6 +93,7 @@ public class EnterpriseModel extends ConnectionDB {
 				empresa.setId(id);
 				empresa.setCode(code);
 				empresa.setPassword(password);
+				empresa.setProfileUrl(profileUrl);
 				
 				return empresa;
 			}
@@ -118,6 +130,7 @@ public class EnterpriseModel extends ConnectionDB {
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
 				String password = result.getString("contraseña");
+				String profileUrl = result.getString("profile_url");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -133,6 +146,7 @@ public class EnterpriseModel extends ConnectionDB {
 				empresa.setId(id);
 				empresa.setCode(code);
 				empresa.setPassword(password);
+				empresa.setProfileUrl(profileUrl);
 				
 				return empresa;
 			}
@@ -165,6 +179,7 @@ public class EnterpriseModel extends ConnectionDB {
 				String name = result.getString("nombre");
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
+				String profileUrl = result.getString("profile_url");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -179,6 +194,7 @@ public class EnterpriseModel extends ConnectionDB {
 				
 				enterprise.setId(id);
 				enterprise.setCode(code);
+				enterprise.setProfileUrl(profileUrl);
 				
 				enterprises.add(enterprise);
 			}
@@ -193,23 +209,96 @@ public class EnterpriseModel extends ConnectionDB {
 		return enterprises;	
 	}
 	
-	public void updateEnterpriseField(Empresa enterprise, String field, Object value) {
+	public int updateEnterprise(Empresa enterprise, String ruc) {
 		String query = "";
+		int result = 0;
 		
 		try {
-			query = "UPDATE empresa SET ? = ? WHERE ruc = ?";
+			query = "UPDATE " + EnterpriseTableName + " SET " + 
+					EnterpriseRUC + "=?, " +
+					EnterpriseCod + "=?, " +
+					EnterpriseName + "=?, " +
+					EnterpriseAddress + "=?, " +
+					EnterpriseEmail + "=?, " +
+					EnterprisePhone + "=?, " +
+					EnterpriseCellPhone + "=?, " +
+					EnterpriseURL + "=? " +
+					"WHERE " + EnterpriseRUC + "=?";
+			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
-			preparedStmt.setString(1, field);
-			preparedStmt.setObject(2, value);
-			preparedStmt.setString(3, enterprise.getRuc());
+			preparedStmt.setString(1, enterprise.getRuc());
+			preparedStmt.setString(2, enterprise.getCode());
+			preparedStmt.setString(3, enterprise.getName());
+			preparedStmt.setString(4, enterprise.getAddress());
+			preparedStmt.setString(5, enterprise.getEmail());
+			preparedStmt.setInt(6, enterprise.getPhone());
+			preparedStmt.setInt(7, enterprise.getCellphone());
+			preparedStmt.setString(8, enterprise.getProfileUrl());
+			preparedStmt.setString(9, ruc);
 			
-			preparedStmt.executeUpdate();
+			result = preparedStmt.executeUpdate();
 			
-			preparedStmt.close();
-			this.conn.close();
-			this.conn = null;
+			closeConnection(preparedStmt);
+			
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return result;
+	}
+	
+	public int updatePassword(Empresa empresa, String ruc) {
+		String query = "";
+		int result = 0;
+		
+		try {
+			query = "UPDATE " + EnterpriseTableName + " SET " + 
+					EnterprisePassword + "=? " +
+					"WHERE " + EnterpriseRUC + "=?";
+			
+			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
+			preparedStmt.setString(1, Encryption.SHA1(empresa.getPassword()));
+			preparedStmt.setString(2, ruc);
+			
+			result = preparedStmt.executeUpdate();
+			
+			closeConnection(preparedStmt);
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int deleteEnterprise(Empresa empresa, String ruc) {
+		String query = "";
+		int result = 0;
+		
+		try {
+			query = "UPDATE " + EnterpriseTableName + " SET " + 
+					EnterpriseState + "=? " +
+					"WHERE " + EnterpriseRUC + "=?";
+			
+			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
+			preparedStmt.setInt(1, 0);
+			preparedStmt.setString(2, empresa.getRuc());
+			
+			result = preparedStmt.executeUpdate();
+			
+			closeConnection(preparedStmt);
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }

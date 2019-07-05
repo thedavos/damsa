@@ -3,10 +3,15 @@ package models;
 //Java packages
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import clases.Admin;
+import clases.Cliente;
+import clases.Empresa;
 import db.ConnectionDB;
+import utils.Encryption;
 
 import static db.Config.*;
 
@@ -170,5 +175,105 @@ public class AdminModel extends ConnectionDB {
 			e.printStackTrace();
 		}
 		return admin;
+	}
+	
+	public int updateAdmin(Admin admin, int dni) {
+		String query = "";
+		int result = 0;
+		
+		try {
+			query = "UPDATE " + AdminTableName + " SET " + 
+					AdminDNI + "=?, " + 
+					AdminCod + "=?, " +
+					AdminName + "=?, " +
+					AdminLastname + "=?, " +
+					AdminAge + "=?, " +
+					AdminGender + "=?, " +
+					AdminAddress + "=?, " +
+					AdminEmail + "=?, " +
+					AdminPhone + "=?, " +
+					AdminCellPhone + "=?, " +
+					AdminURL + "=? " +
+					"WHERE " + AdminDNI + "=?";
+			
+			System.out.println(query);
+			
+			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
+			preparedStmt.setInt(1, admin.getDni());
+			preparedStmt.setString(2, admin.getCode());
+			preparedStmt.setString(3, admin.getName());
+			preparedStmt.setString(4, admin.getLastname());
+			preparedStmt.setInt(5, admin.getAge());
+			preparedStmt.setString(6, String.valueOf(admin.getGender()));
+			preparedStmt.setString(7, admin.getAddress());
+			preparedStmt.setString(8, admin.getEmail());
+			preparedStmt.setInt(9, admin.getPhone());
+			preparedStmt.setInt(10, admin.getCellphone());
+			preparedStmt.setString(11, admin.getProfileUrl());
+			preparedStmt.setInt(12, dni);
+			result = preparedStmt.executeUpdate();
+			
+			closeConnection(preparedStmt);
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int updatePassword(Admin admin, int dni) {
+		String query = "";
+		int result = 0;
+		
+		try {
+			query = "UPDATE " + AdminTableName + " SET " + 
+					AdminPassword + "=? " +
+					"WHERE " + AdminDNI + "=?";
+			
+			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
+			preparedStmt.setString(1, Encryption.SHA1(admin.getPassword()));
+			preparedStmt.setInt(2, admin.getDni());
+			
+			result = preparedStmt.executeUpdate();
+			
+			closeConnection(preparedStmt);
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int deleteAdmin(Admin admin, int dni) {
+		String query = "";
+		int result = 0;
+		
+		try {
+			query = "UPDATE " + AdminTableName + " SET " + 
+					AdminState + "=? " +
+					"WHERE " + AdminDNI + "=?";
+			
+			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
+			preparedStmt.setInt(1, 0);
+			preparedStmt.setInt(2, admin.getDni());
+			
+			result = preparedStmt.executeUpdate();
+			
+			closeConnection(preparedStmt);
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 }

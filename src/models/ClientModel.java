@@ -4,17 +4,22 @@ package models;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import clases.Cliente;
 import db.ConnectionDB;
+import utils.Encryption;
+
 import static db.Config.*;
 
 public class ClientModel extends ConnectionDB {
 	
-	public void createClient(Cliente cliente) {
+	public int createClient(Cliente cliente) {
 		String query = "";
+		int isCreated = 0;
 		
 		try {
 			query = "INSERT INTO " + ClientTableName + " ("
@@ -28,7 +33,7 @@ public class ClientModel extends ConnectionDB {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseña, "
+					+ "contraseÃ±a, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -45,14 +50,16 @@ public class ClientModel extends ConnectionDB {
 			preparedStmt.setInt(10, cliente.getCellphone());
 			preparedStmt.setString(11, cliente.getPassword());
 			preparedStmt.setString(12, cliente.getProfileUrl());
-			preparedStmt.execute();
 			
-			preparedStmt.close();
-			this.conn.close();
-			this.conn = null;
+			isCreated = preparedStmt.executeUpdate();
+			closeConnection(preparedStmt);
+			
+			return isCreated;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return isCreated;
 	}
 	
 	public Cliente getClient(int dni) {
@@ -81,7 +88,7 @@ public class ClientModel extends ConnectionDB {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				
 				client = new Cliente(
 						dnii, 
@@ -140,7 +147,7 @@ public class ClientModel extends ConnectionDB {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				
 				client = new Cliente(
 						dnii, 
@@ -274,6 +281,60 @@ public class ClientModel extends ConnectionDB {
 			preparedStmt.setString(11, cliente.getProfileUrl());
 			// Condicional
 			preparedStmt.setInt(12, dni);
+			result = preparedStmt.executeUpdate();
+			
+			closeConnection(preparedStmt);
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int updatePassword(Cliente cliente, int dni) {
+		String query = "";
+		int result = 0;
+		
+		try {
+			query = "UPDATE " + ClientTableName + " SET " + 
+					ClientPassword + "=? " +
+					"WHERE " + ClientDNI + "=?";
+			
+			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
+			preparedStmt.setString(1, Encryption.SHA1(cliente.getPassword()));
+			preparedStmt.setInt(2, cliente.getDni());
+			
+			result = preparedStmt.executeUpdate();
+			
+			closeConnection(preparedStmt);
+			
+			return result;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int deleteClient(Cliente cliente, int dni) {
+		String query = "";
+		int result = 0;
+		
+		try {
+			query = "UPDATE " + ClientTableName + " SET " + 
+					ClientState + "=? " +
+					"WHERE " + ClientDNI + "=?";
+			
+			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
+			preparedStmt.setInt(1, 0);
+			preparedStmt.setInt(2, cliente.getDni());
+			
 			result = preparedStmt.executeUpdate();
 			
 			closeConnection(preparedStmt);
