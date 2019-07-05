@@ -19,6 +19,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 
 public class CambiarContrasena extends JFrame {
 
@@ -153,7 +154,7 @@ public class CambiarContrasena extends JFrame {
 		setResizable(false);
 		setTitle("Cambiar Contrase\u00F1a");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 313, 203);
+		setBounds(100, 100, 327, 225);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -186,5 +187,10 @@ public class CambiarContrasena extends JFrame {
 		passwordField_2 = new JPasswordField();
 		passwordField_2.setBounds(170, 102, 116, 23);
 		contentPane.add(passwordField_2);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(CambiarContrasena.class.getResource("/images/iconos22x22/dialog-cancel-3.png")));
+		btnCancelar.setBounds(170, 162, 116, 23);
+		contentPane.add(btnCancelar);
 	}
 }
