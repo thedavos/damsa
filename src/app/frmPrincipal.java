@@ -1,4 +1,4 @@
-package app;
+﻿package app;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -154,10 +154,10 @@ public class frmPrincipal extends JFrame {
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
 		mntmDesarrolladores.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				Desarrolladores d = new Desarrolladores();
-				d.setVisible(true);
+
+			public void actionPerformed(ActionEvent arg0) {
+				Desarrolladores de = new Desarrolladores();
+				de.setVisible(true);
 			}
 		});
 		mnContacto.add(mntmDesarrolladores);
@@ -246,6 +246,12 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
+		mntmDesarrolladores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Desarrolladores de = new Desarrolladores();
+				de.setVisible(true);
+			}
+		});
 		mnContacto.add(mntmDesarrolladores);
 	}
   
@@ -327,6 +333,12 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
+		mntmDesarrolladores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Desarrolladores de = new Desarrolladores();
+				de.setVisible(true);
+			}
+		});
 		mnContacto.add(mntmDesarrolladores);
 	}
 }
