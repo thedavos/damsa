@@ -72,6 +72,7 @@ public class PerfilCliente extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
+				
 				txtNombre.setText(cliente.getName());
 				txtApellido.setText(cliente.getLastname());
 				txtDireccion.setText(cliente.getAddress());
@@ -81,7 +82,9 @@ public class PerfilCliente extends JFrame {
 				txtTelefono.setText(cliente.getPhone() + "");
 				txtCelular.setText(cliente.getCellphone() + "");
 				cboGenro.setSelectedIndex(cliente.getGender() == 'M' ? 1 : 2);
-				lblImagen.setIcon(FileManager.ConvertURLToIcon(cliente.getProfileUrl()));
+				if (cliente.getProfileUrl() != null) {
+					lblImagen.setIcon(FileManager.ResizeImageIcon(FileManager.ConvertURLToIcon(cliente.getProfileUrl())));
+				}
 			}
 		});
 		setTitle("Cliente - Perfil");
@@ -94,7 +97,7 @@ public class PerfilCliente extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 11, 494, 393);
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(new Color(224, 255, 255));
 		panel.setBorder(new TitledBorder(null, "Actualizar Datos", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -193,16 +196,15 @@ public class PerfilCliente extends JFrame {
 				
 				try {
 					filePath = fileSelected.getPath();
-				} catch (NullPointerException err) {
-					System.err.println(err);
-				}
-				System.out.println(filePath);
-				
-				try {
+					
+					System.out.println(filePath);
+					
 					if (filePath != null) {
 						ImageIcon iconResized = FileManager.ResizeImageIcon(filePath, 180, 180);
 						lblImagen.setIcon(iconResized);
 					}
+				} catch (NullPointerException err) {
+					System.err.println(err);
 				} catch (Exception err) {
 					 JOptionPane.showMessageDialog(null, "Ups! Error abriendo la imagen " + err);
 				}
@@ -215,7 +217,7 @@ public class PerfilCliente extends JFrame {
 		JButton btnCambiar = new JButton("Cambiar");
 		btnCambiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CambiarContrasena cm = new CambiarContrasena();
+				CambiarContrasena cm = new CambiarContrasena(cliente);
 				cm.setVisible(true);
 			}
 		});
@@ -223,6 +225,7 @@ public class PerfilCliente extends JFrame {
 		panel.add(btnCambiar);
 		
 		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.setIcon(new ImageIcon(PerfilCliente.class.getResource("/images/iconos22x22/intercambio.png")));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// nombre, apellidos, dni, edad, direccion, genero, correo, telefono, celular, imageurl
@@ -251,7 +254,7 @@ public class PerfilCliente extends JFrame {
 				cliente.setPhone(telefono);
 				cliente.setCellphone(celular);
 				if(fileSelected != null) {
-					cliente.saveFile(fileSelected, fileSelected.getPath());
+					cliente.saveFile(fileSelected, cliente.getFolder() + "/");
 					cliente.setProfileUrl(cliente.getDownload(cliente.getFolder(), fileSelected.getName()));
 				} 
 				
@@ -265,8 +268,13 @@ public class PerfilCliente extends JFrame {
 				
 			}
 		});
-		btnActualizar.setBounds(207, 422, 105, 23);
+		btnActualizar.setBounds(96, 414, 121, 23);
 		contentPane.add(btnActualizar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(PerfilCliente.class.getResource("/images/iconos22x22/cancelar.png")));
+		btnCancelar.setBounds(288, 415, 121, 23);
+		contentPane.add(btnCancelar);
 		
 	}
 }

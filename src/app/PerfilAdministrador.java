@@ -15,7 +15,21 @@ import javax.swing.JComboBox;
 import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+
+import clases.Admin;
+import models.AdminModel;
+import models.ClientModel;
+import utils.FileManager;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PerfilAdministrador extends JFrame {
 
@@ -28,6 +42,10 @@ public class PerfilAdministrador extends JFrame {
 	private JTextField txtCorreo;
 	private JTextField txtTelefono;
 	private JTextField txtCelular;
+	public static Admin admin = null; 
+	private JLabel lblImagen;
+	private JComboBox cboGenero;
+	private File fileSelected = null;
 
 	/**
 	 * Launch the application.
@@ -36,7 +54,7 @@ public class PerfilAdministrador extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PerfilAdministrador frame = new PerfilAdministrador();
+					PerfilAdministrador frame = new PerfilAdministrador(admin);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +66,24 @@ public class PerfilAdministrador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PerfilAdministrador() {
+	public PerfilAdministrador(Admin admin) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				txtNombre.setText(admin.getName());
+				txtApellidos.setText(admin.getLastname());
+				txtDireccion.setText(admin.getAddress());
+				txtCorreo.setText(admin.getEmail());
+				txtDNI.setText(admin.getDni() + "");
+				txtEdad.setText(admin.getAge() + "");
+				txtTelefono.setText(admin.getPhone() + "");
+				txtCelular.setText(admin.getCellphone() + "");
+				cboGenero.setSelectedIndex(admin.getGender() == 'M' ? 1 : 2);
+				if (admin.getProfileUrl() != null) {
+					lblImagen.setIcon(FileManager.ResizeImageIcon(FileManager.ConvertURLToIcon(admin.getProfileUrl())));
+				}
+			}
+		});
 		setTitle("Administrador - Perfil");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 527, 486);
@@ -60,7 +95,7 @@ public class PerfilAdministrador extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Actualizar Datos del Administrador", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(new Color(224, 255, 255));
 		panel.setBounds(10, 11, 494, 393);
 		contentPane.add(panel);
 		
@@ -108,7 +143,8 @@ public class PerfilAdministrador extends JFrame {
 		label_5.setBounds(203, 154, 71, 14);
 		panel.add(label_5);
 		
-		JComboBox cboGenero = new JComboBox();
+		cboGenero = new JComboBox();
+		cboGenero.setModel(new DefaultComboBoxModel(new String[] {"", "M", "F"}));
 		cboGenero.setBounds(284, 151, 61, 20);
 		panel.add(cboGenero);
 		
@@ -148,15 +184,37 @@ public class PerfilAdministrador extends JFrame {
 		txtCelular.setBounds(113, 352, 130, 20);
 		panel.add(txtCelular);
 		
-		JLabel lblImagen = new JLabel("imagen...");
+		lblImagen = new JLabel("");
+		lblImagen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				fileSelected = FileManager.openFileSystem(1);
+				String filePath = null;
+				
+				try {
+					filePath = fileSelected.getPath();
+					
+					System.out.println(filePath);
+					
+					if (filePath != null) {
+						ImageIcon iconResized = FileManager.ResizeImageIcon(filePath, 180, 180);
+						lblImagen.setIcon(iconResized);
+					}
+				} catch (NullPointerException err) {
+					System.err.println(err);
+				} catch (Exception err) {
+					 JOptionPane.showMessageDialog(null, "Ups! Error abriendo la imagen " + err);
+				}
+			}
+		});
 		lblImagen.setForeground(Color.BLACK);
-		lblImagen.setBounds(279, 208, 194, 153);
+		lblImagen.setBounds(284, 183, 180, 180);
 		panel.add(lblImagen);
 		
 		JButton btnCambiar = new JButton("Cambiar");
 		btnCambiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CambiarContrasena cm =new CambiarContrasena();
+				CambiarContrasena cm =new CambiarContrasena(admin);
 				cm.setVisible(true);
 			}
 		});
@@ -164,13 +222,55 @@ public class PerfilAdministrador extends JFrame {
 		panel.add(btnCambiar);
 		
 		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.setIcon(new ImageIcon(PerfilAdministrador.class.getResource("/images/iconos22x22/intercambio.png")));
 		btnActualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Datos Actualizados");
+				// nombre, apellidos, dni, edad, direccion, genero, correo, telefono, celular, imageurl
+				String nombre, apellidos, direccion, correo;
+				int dni, age, telefono, celular;
+				char genero;
+				AdminModel am = new AdminModel();
+				
+				nombre = txtNombre.getText();
+				apellidos = txtApellidos.getText();
+				direccion = txtDireccion.getText();
+				correo = txtCorreo.getText();
+				dni = Integer.parseInt(txtDNI.getText());
+				age = Integer.parseInt(txtEdad.getText());
+				telefono = Integer.parseInt(txtTelefono.getText());
+				celular = Integer.parseInt(txtCelular.getText());
+				genero = cboGenero.getSelectedItem().toString().charAt(0);
+				
+				admin.setName(nombre);
+				admin.setLastname(apellidos);
+				admin.setDni(dni);
+				admin.setAge(age);
+				admin.setAddress(direccion);
+				admin.setGender(genero);
+				admin.setEmail(correo);
+				admin.setPhone(telefono);
+				admin.setCellphone(celular);
+				if(fileSelected != null) {
+					admin.saveFile(fileSelected, admin.getFolder() + "/");
+					admin.setProfileUrl(admin.getDownload(admin.getFolder(), fileSelected.getName()));
+				} 
+				
+				int result = am.updateAdmin(admin, dni);
+				
+				if(result != 0) {
+					JOptionPane.showMessageDialog(null, "Datos Actualizados");
+				} else {
+					JOptionPane.showMessageDialog(null, "Los datos no han sido actualizados, probablemente hubo un error");
+				}
 			}
 		});
-		btnActualizar.setBounds(203, 415, 104, 23);
+		btnActualizar.setBounds(107, 415, 119, 23);
 		contentPane.add(btnActualizar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(PerfilAdministrador.class.getResource("/images/iconos22x22/cancelar.png")));
+		btnCancelar.setBounds(290, 415, 113, 23);
+		contentPane.add(btnCancelar);
 	}
 
 }

@@ -58,18 +58,28 @@ public class FileManager {
 		return iconResized;
 	}
 	
+	public static ImageIcon ResizeImageIcon(ImageIcon icon) {
+		Image imageResized = icon.getImage().getScaledInstance(180, 180, Image.SCALE_DEFAULT);
+		ImageIcon iconResized = new ImageIcon(imageResized);
+		
+		return iconResized;
+	}
+	
 	public static ImageIcon ConvertURLToIcon(String urlRepo) {
 		Image image;
+		ImageIcon iconFromRepo = null;
 		try {
-			URL url = new URL(urlRepo);
-			image = ImageIO.read(url);
-			ImageIcon iconFromRepo = new ImageIcon(image);
-			
-			return iconFromRepo;
+			if (urlRepo != null && !urlRepo.equals("")) {
+				URL url = new URL(urlRepo);
+				image = ImageIO.read(url);
+				iconFromRepo = new ImageIcon(image);
+				
+				return iconFromRepo;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return iconFromRepo;
 	}
 }

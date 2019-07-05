@@ -104,9 +104,9 @@ public class Administrador extends JDialog {
 				JOptionPane.showMessageDialog(null, "Accceso correcto");
 			}
 		});
-		button.setIcon(new ImageIcon(Administrador.class.getResource("/images/iconos22x22/dialog-accept.png")));
+		button.setIcon(new ImageIcon(Administrador.class.getResource("/images/iconos22x22/iniciar-la-sesion.png")));
 		button.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button.setBounds(45, 116, 122, 31);
+		button.setBounds(45, 116, 122, 38);
 		button.setActionCommand("OK");
 		contentPanel.add(button);
 		
@@ -123,7 +123,7 @@ public class Administrador extends JDialog {
 		});
 		button_1.setIcon(new ImageIcon(Administrador.class.getResource("/images/iconos22x22/dialog-cancel-3.png")));
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		button_1.setBounds(189, 116, 132, 31);
+		button_1.setBounds(189, 116, 132, 38);
 		button_1.setActionCommand("Cancel");
 		contentPanel.add(button_1);
 	}
@@ -145,7 +145,7 @@ public class Administrador extends JDialog {
 	
 	void openMenu(Admin admin, Object usuario, String password) {
 		if (Validation.isAdminValid(admin, usuario, password)) {
-			frmPrincipal frm = new frmPrincipal();
+			frmPrincipal frm = new frmPrincipal(admin);
 			frm.setVisible(true);
 			dispose();
 		}

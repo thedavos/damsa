@@ -16,10 +16,15 @@ import java.awt.Dialog;
 import java.awt.SystemColor;
 import app.*;
 import clases.*;
+import models.AdminModel;
+import models.ClientModel;
+import models.EnterpriseModel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class frmPrincipal extends JFrame {
 
@@ -45,20 +50,27 @@ public class frmPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	
-	//entrada de admin
 	public frmPrincipal() {
+		
+	}
+	
+	// Menú Admin
+	public frmPrincipal(Admin admin) {
 		setBounds(100, 100, 562, 361);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
 		JMenu mnPerfil = new JMenu("Perfil");
+		mnPerfil.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/modificar.png")));
 		menuBar.add(mnPerfil);
+		
+		setLocationRelativeTo(null);
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PerfilAdministrador pc=new PerfilAdministrador();
+				PerfilAdministrador pc=new PerfilAdministrador(admin);
 				pc.setVisible(true);
 				dispose();
 			}
@@ -66,17 +78,31 @@ public class frmPrincipal extends JFrame {
 		mnPerfil.add(mntmMiperfil);
 		
 		JMenuItem mntmDarseDeBaja = new JMenuItem("Darse de Baja");
+		mntmDarseDeBaja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int input =JOptionPane.showConfirmDialog(null, "Seguro cerra cuenta", "Eliminar Cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (input==0) {
+					
+					AdminModel am = new AdminModel();
+					
+					am.deleteAdmin(admin, admin.getDni());
+					
+					JOptionPane.showMessageDialog(null, "Cuenta Eliminado");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Sin Cambios");
+				}
+			}
+		});
 		
 		mnPerfil.add(mntmDarseDeBaja);
 		
 		JMenu mnReporte = new JMenu("Reporte");
+		mnReporte.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/Reporte.png")));
 		menuBar.add(mnReporte);
 		
 		JMenuItem mntmReporteDeCliente = new JMenuItem("Reporte de Cliente y Empresas\r\n");
 		mnReporte.add(mntmReporteDeCliente);
-		
-		JMenuItem mntmReporteDeLas = new JMenuItem("Reporte de todas las Compras");
-		mnReporte.add(mntmReporteDeLas);
 		
 		JMenuItem mntmReporteDeTodos = new JMenuItem("Reporte de todos los materiales donados");
 		mnReporte.add(mntmReporteDeTodos);
@@ -88,12 +114,29 @@ public class frmPrincipal extends JFrame {
 		mnReporte.add(mntmReporteDeBoletas);
 		
 		JMenu mnNewMenu_1 = new JMenu("Control de Usuario");
+		mnNewMenu_1.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/group.png")));
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCrearUsuarioNormal = new JMenuItem("Crear Usuario Normal");
+		mntmCrearUsuarioNormal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegistrodeCliente rg = new RegistrodeCliente();
+				rg.setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_1.add(mntmCrearUsuarioNormal);
 		
 		JMenuItem mntmCrearUsuarioEmpresa = new JMenuItem("Crear Usuario Empresa");
+		mntmCrearUsuarioEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegistrodeEmpresa rg = new RegistrodeEmpresa();
+				rg.setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_1.add(mntmCrearUsuarioEmpresa);
 		
 		JMenuItem mntmVisualizarUsuarios = new JMenuItem("Visualizar Usuarios");
@@ -103,9 +146,17 @@ public class frmPrincipal extends JFrame {
 		mnNewMenu_1.add(mntmModificarUsuario);
 		
 		JMenu mnContacto = new JMenu("Contacto");
+		mnContacto.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/bricks.png")));
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
+		mntmDesarrolladores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Desarrolladores d = new Desarrolladores();
+				d.setVisible(true);
+			}
+		});
 		mnContacto.add(mntmDesarrolladores);
 	}
 		void diseno(){
@@ -115,7 +166,8 @@ public class frmPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 	}
-
+		
+		// Menú Cliente
 		public frmPrincipal(Cliente cliente) {
 		setBounds(100, 100, 562, 361);
 		
@@ -125,12 +177,14 @@ public class frmPrincipal extends JFrame {
 		JMenu mnPerfil = new JMenu("Perfil");
 		menuBar.add(mnPerfil);
 		
+		setLocationRelativeTo(null);
+		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PerfilCliente pc=new PerfilCliente(cliente);
 				pc.setVisible(true);
-				
+				dispose();
 			}
 		});
 		mnPerfil.add(mntmMiperfil);
@@ -140,6 +194,10 @@ public class frmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int input =JOptionPane.showConfirmDialog(null, "Seguro cerra cuenta", "Eliminar Cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (input==0) {
+					ClientModel cm = new ClientModel();
+					
+					cm.deleteClient(cliente, cliente.getDni());
+					
 					JOptionPane.showMessageDialog(null, "Cuenta Eliminado");
 				}
 				else {
@@ -179,7 +237,8 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
 		mnContacto.add(mntmDesarrolladores);
 	}
-	
+  
+		// Menú Empresa
 		public frmPrincipal(Empresa empresa) {
 		setBounds(100, 100, 562, 361);
 		
@@ -189,10 +248,13 @@ public class frmPrincipal extends JFrame {
 		JMenu mnPerfil = new JMenu("Perfil");
 		menuBar.add(mnPerfil);
 		
+		
+		setLocationRelativeTo(null);
+		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PerfilEmpresa pe = new PerfilEmpresa();
+				PerfilEmpresa pe = new PerfilEmpresa(empresa);
 				pe.setVisible(true);
 				dispose();
 			}
@@ -201,6 +263,21 @@ public class frmPrincipal extends JFrame {
 		mnPerfil.add(mntmMiperfil);
 		
 		JMenuItem mntmDarseDeBaja = new JMenuItem("Darse de Baja");
+		mntmDarseDeBaja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int input =JOptionPane.showConfirmDialog(null, "Seguro cerra cuenta", "Eliminar Cuenta", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (input==0) {
+					EnterpriseModel em = new EnterpriseModel();
+					
+					em.deleteEnterprise(empresa, empresa.getRuc());
+					
+					JOptionPane.showMessageDialog(null, "Cuenta Eliminado");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Sin Cambios");
+				}
+			}
+		});
 		mnPerfil.add(mntmDarseDeBaja);
 		
 		JMenu mnNewMenu = new JMenu("Materiales");

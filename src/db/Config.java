@@ -36,8 +36,8 @@ public class Config {
 	final public static String AdminLastname = "apellidos";
 	final public static String AdminAge = "edad";
 	final public static String AdminGender = "genero";
-	final public static String AdminAddress = "correo";
-	final public static String AdminEmail = "email";
+	final public static String AdminAddress = "direccion";
+	final public static String AdminEmail = "correo";
 	final public static String AdminPhone = "telefono";
 	final public static String AdminCellPhone = "celular";
 	final public static String AdminURL = "profile_url";
@@ -50,8 +50,8 @@ public class Config {
 	final public static String EnterpriseRUC = "ruc";
 	final public static String EnterprisePassword = "contraseña";
 	final public static String EnterpriseName = "nombre";
-	final public static String EnterpriseAddress = "correo";
-	final public static String EnterpriseEmail = "email";
+	final public static String EnterpriseAddress = "direccion";
+	final public static String EnterpriseEmail = "correo";
 	final public static String EnterprisePhone = "telefono";
 	final public static String EnterpriseCellPhone = "celular";
 	final public static String EnterpriseURL = "profile_url";

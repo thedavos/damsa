@@ -126,7 +126,7 @@ public class Reporte implements IRepoManager {
 		makeReport();
 		File file = getTemporalFile();
 		String path = getFolder() + "/";
-		System.out.println(saveFile(file, path).getFileName());;
+		saveFile(file, path);
 		file.delete();
 	}
 	
