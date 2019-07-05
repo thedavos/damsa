@@ -25,6 +25,7 @@ import app.*;
 import models.*;
 import clases.Cliente;
 import clases.Empresa;
+import clases.Sesion;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -161,11 +162,13 @@ public class Login extends JDialog {
 						case 0:
 							ClientModel cli = new ClientModel();
 							cliente = usuario == 0 ? cli.getClient(cod) : cli.getClient(usuario);
+							logSession(cliente.getCode());
 							openMenu(cliente, cod != null ? cod : usuario, tipoUsuario, password);
 							break;
 						case 1:
 							EnterpriseModel em = new EnterpriseModel();
 							empresa = usuario == 0 ? em.getEnterprise((Object) cod) : em.getEnterprise(usuario + "");
+							logSession(empresa.getCode());
 							openMenu(empresa, cod != null ? cod : usuario + "", tipoUsuario, password);
 							break;
 						default:
@@ -238,6 +241,14 @@ public class Login extends JDialog {
 			dialog.dispose();
 		}
 		else JOptionPane.showMessageDialog(null,"No existe ni empresa, Ni un usuario");
+	}
+	
+	public static void logSession(String codUser) {
+		Sesion sesion = new Sesion();
+		sesion.setCod_user(codUser);
+		SesionModel sm = new SesionModel();
+		
+		sm.createSesion(sesion);
 	}
 	
 	public static void initThread() throws Throwable {

@@ -13,34 +13,28 @@ import java.util.Date;
 
 public class SesionModel extends ConnectionDB {
 	
-	public Sesion createSesion(Sesion sesion) {
+	public int createSesion(Sesion sesion) {
 		String query = "";
-		Sesion ssn = null;
+		int result = 0;
 		
 		try {
-			query = "INSERT INTO ? (?) VALUES (?)";
+			query = "INSERT INTO " + SesionTableName +
+					" (" + CodigoUsuario +
+					") VALUES (?)";
 					
 			PreparedStatement pst = this.connect().prepareStatement(query);
-			pst.setString(1, SesionTableName);
-			pst.setString(2, CodigoUsuario);
-			pst.setString(3, sesion.getCod_user());
+			pst.setString(1, sesion.getCod_user());
 			
-			ResultSet rs = pst.executeQuery();
-			
-			int id = rs.getInt(SesionID);
-			String code = rs.getString(CodigoUsuario);
-			Date date = (Date) rs.getDate(Created);
-			
-			ssn = new Sesion(id, code, date);
+			result = pst.executeUpdate();
 			
 			closeConnection(pst);
 			
-			return ssn; 
+			return result; 
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		
-		return ssn;
+		return result;
 	}
 	
 	public Sesion getSesion(int SesionId) {
@@ -49,15 +43,15 @@ public class SesionModel extends ConnectionDB {
 		
 		try {
 			
-			query = "SELECT ?, ?, ? FROM ? WHERE ?=?";
+			query = "SELECT " + 
+					SesionID + ", " +
+					CodigoUsuario + ", " +
+					Created + ", " +
+					"FROM " + SesionTableName +
+					" WHERE " + SesionID + "=?";
 			
 			PreparedStatement pst = this.connect().prepareStatement(query);
-			pst.setString(1, SesionID);
-			pst.setString(2, CodigoUsuario);
-			pst.setString(3, Created);
-			pst.setString(4, SesionTableName);
-			pst.setString(5, SesionID);
-			pst.setInt(6, SesionId);
+			pst.setInt(1, SesionId);
 			
 			ResultSet rs = pst.executeQuery();
 			
@@ -83,14 +77,14 @@ public class SesionModel extends ConnectionDB {
 		String query = null;
 		
 		try {
-			query = "SELECT ?, ?, ? FROM ?";
+			query = "SELECT " + 
+					SesionID + ", " +
+					CodigoUsuario + ", " +
+					Created + ", " +
+					"FROM " + SesionTableName;
+			
 			
 			PreparedStatement pst = this.connect().prepareStatement(query);
-			pst.setString(1, SesionID);
-			pst.setString(2, CodigoUsuario);
-			pst.setString(3, Created);
-			pst.setString(4, SesionTableName);
-			
 			ResultSet rs = pst.executeQuery();
 			
 			do {
