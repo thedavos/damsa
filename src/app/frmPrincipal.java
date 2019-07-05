@@ -111,6 +111,12 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
+		mntmDesarrolladores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Desarrolladores de = new Desarrolladores();
+				de.setVisible(true);
+			}
+		});
 		mnContacto.add(mntmDesarrolladores);
 	}
 		void diseno(){
@@ -182,6 +188,12 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
+		mntmDesarrolladores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Desarrolladores de = new Desarrolladores();
+				de.setVisible(true);
+			}
+		});
 		mnContacto.add(mntmDesarrolladores);
 	}
 	
@@ -242,6 +254,12 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
+		mntmDesarrolladores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Desarrolladores de = new Desarrolladores();
+				de.setVisible(true);
+			}
+		});
 		mnContacto.add(mntmDesarrolladores);
 	}
 }

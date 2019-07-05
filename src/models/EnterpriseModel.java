@@ -23,7 +23,7 @@ public class EnterpriseModel extends ConnectionDB {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseÃ±a)"
+					+ "contraseña)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
@@ -66,7 +66,7 @@ public class EnterpriseModel extends ConnectionDB {
 				String name = result.getString("nombre");
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
-				String password = result.getString("contraseÃ±a");
+				String password = result.getString("contraseña");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
@@ -117,7 +117,7 @@ public class EnterpriseModel extends ConnectionDB {
 				String name = result.getString("nombre");
 				String address = result.getString("direccion");
 				String email = result.getString("correo");
-				String password = result.getString("contraseÃ±a");
+				String password = result.getString("contraseña");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				
