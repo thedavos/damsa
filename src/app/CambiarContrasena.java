@@ -63,7 +63,7 @@ public class CambiarContrasena extends JFrame {
 				String actualPassword = passwordField.getText();
 				String passwordConfirmed = passwordField_2.getText(); 
 				
-				if (newPassword.equals(passwordConfirmed)) {
+				if (newPassword.equals(passwordConfirmed) && actualPassword.equals(cliente.getPassword())) {
 					cliente.setPassword(newPassword);
 					cm.updatePassword(cliente, cliente.getDni());
 					
@@ -96,7 +96,7 @@ public class CambiarContrasena extends JFrame {
 				String actualPassword = passwordField.getText();
 				String passwordConfirmed = passwordField_2.getText(); 
 				
-				if (newPassword.equals(passwordConfirmed)) {
+				if (newPassword.equals(passwordConfirmed) && actualPassword.equals(empresa.getPassword())) {
 					empresa.setPassword(newPassword);
 					em.updatePassword(empresa, empresa.getRuc());
 					
@@ -128,7 +128,7 @@ public class CambiarContrasena extends JFrame {
 				String actualPassword = passwordField.getText();
 				String passwordConfirmed = passwordField_2.getText(); 
 				
-				if (newPassword.equals(passwordConfirmed)) {
+				if (newPassword.equals(passwordConfirmed) && actualPassword.equals(admin.getPassword())) {
 					admin.setPassword(newPassword);
 					am.updatePassword(admin, admin.getDni());
 					

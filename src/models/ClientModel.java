@@ -17,8 +17,9 @@ import static db.Config.*;
 
 public class ClientModel extends ConnectionDB {
 	
-	public void createClient(Cliente cliente) {
+	public int createClient(Cliente cliente) {
 		String query = "";
+		int isCreated = 0;
 		
 		try {
 			query = "INSERT INTO " + ClientTableName + " ("
@@ -49,14 +50,16 @@ public class ClientModel extends ConnectionDB {
 			preparedStmt.setInt(10, cliente.getCellphone());
 			preparedStmt.setString(11, cliente.getPassword());
 			preparedStmt.setString(12, cliente.getProfileUrl());
-			preparedStmt.execute();
 			
-			preparedStmt.close();
-			this.conn.close();
-			this.conn = null;
+			isCreated = preparedStmt.executeUpdate();
+			closeConnection(preparedStmt);
+			
+			return isCreated;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return isCreated;
 	}
 	
 	public Cliente getClient(int dni) {

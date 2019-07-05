@@ -9,6 +9,11 @@ import javax.swing.border.EmptyBorder;
 
 import com.google.gson.JsonSyntaxException;
 
+import clases.Cliente;
+import models.ClientModel;
+import utils.Encryption;
+import utils.FileManager;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -33,17 +38,19 @@ import javax.swing.DefaultComboBoxModel;
 public class RegistroCliente extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtDni;
-	private JTextField txtContra;
-	private JTextField txtNombres;
-	private JTextField txtApellidos;
+	private JTextField txtNombre;
+	private JTextField txtApe;
+	private JTextField txtConfirmPassword;
+	private JTextField txtPassword;
 	private JTextField txtEdad;
 	private JTextField txtGenero;
 	private JTextField txtDirecc;
-	private JTextField txtCorreo;
-	private JTextField txtTelef;
+	private JTextField txtTelefono;
+	private JTextField txtEmail;
+	private JTextField txtDNI;
 	private JTextField txtCelular;
-	private JTextField textField;
+	private File fileSelected;
+	private JComboBox cboGenero;
 
 	/**
 	 * Launch the application.
@@ -88,10 +95,10 @@ public class RegistroCliente extends JFrame {
 		lblDn.setBounds(10, 148, 150, 20);
 		contentPane.add(lblDn);
 		
-		txtDni = new JTextField();
-		txtDni.setBounds(191, 64, 327, 20);
-		contentPane.add(txtDni);
-		txtDni.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(191, 64, 327, 20);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
 		
 		JLabel lblContraseas = new JLabel("Contrase\u00F1a");
 		lblContraseas.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,10 +106,10 @@ public class RegistroCliente extends JFrame {
 		lblContraseas.setBounds(10, 190, 150, 20);
 		contentPane.add(lblContraseas);
 		
-		txtContra = new JTextField();
-		txtContra.setColumns(10);
-		txtContra.setBounds(191, 106, 327, 20);
-		contentPane.add(txtContra);
+		txtApe = new JTextField();
+		txtApe.setColumns(10);
+		txtApe.setBounds(191, 106, 327, 20);
+		contentPane.add(txtApe);
 		
 		JLabel lblNombre = new JLabel("Nombres");
 		lblNombre.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,10 +117,10 @@ public class RegistroCliente extends JFrame {
 		lblNombre.setBounds(10, 64, 150, 20);
 		contentPane.add(lblNombre);
 		
-		txtNombres = new JTextField();
-		txtNombres.setColumns(10);
-		txtNombres.setBounds(191, 232, 229, 20);
-		contentPane.add(txtNombres);
+		txtConfirmPassword = new JTextField();
+		txtConfirmPassword.setColumns(10);
+		txtConfirmPassword.setBounds(191, 232, 229, 20);
+		contentPane.add(txtConfirmPassword);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
 		lblApellidos.setHorizontalAlignment(SwingConstants.CENTER);
@@ -121,10 +128,10 @@ public class RegistroCliente extends JFrame {
 		lblApellidos.setBounds(10, 106, 150, 20);
 		contentPane.add(lblApellidos);
 		
-		txtApellidos = new JTextField();
-		txtApellidos.setColumns(10);
-		txtApellidos.setBounds(191, 190, 229, 20);
-		contentPane.add(txtApellidos);
+		txtPassword = new JTextField();
+		txtPassword.setColumns(10);
+		txtPassword.setBounds(191, 190, 229, 20);
+		contentPane.add(txtPassword);
 		
 		JLabel lblEdad = new JLabel("Edad");
 		lblEdad.setHorizontalAlignment(SwingConstants.CENTER);
@@ -160,10 +167,10 @@ public class RegistroCliente extends JFrame {
 		lblCorreo.setBounds(10, 358, 150, 20);
 		contentPane.add(lblCorreo);
 		
-		txtCorreo = new JTextField();
-		txtCorreo.setColumns(10);
-		txtCorreo.setBounds(191, 400, 100, 20);
-		contentPane.add(txtCorreo);
+		txtTelefono = new JTextField();
+		txtTelefono.setColumns(10);
+		txtTelefono.setBounds(191, 400, 100, 20);
+		contentPane.add(txtTelefono);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
 		lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,10 +178,10 @@ public class RegistroCliente extends JFrame {
 		lblTelefono.setBounds(10, 400, 150, 20);
 		contentPane.add(lblTelefono);
 		
-		txtTelef = new JTextField();
-		txtTelef.setColumns(10);
-		txtTelef.setBounds(191, 358, 327, 20);
-		contentPane.add(txtTelef);
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		txtEmail.setBounds(191, 358, 327, 20);
+		contentPane.add(txtEmail);
 		
 		JLabel lblCelular = new JLabel("Celular");
 		lblCelular.setHorizontalAlignment(SwingConstants.CENTER);
@@ -182,17 +189,53 @@ public class RegistroCliente extends JFrame {
 		lblCelular.setBounds(270, 400, 150, 20);
 		contentPane.add(lblCelular);
 		
-		txtCelular = new JTextField();
-		txtCelular.setColumns(10);
-		txtCelular.setBounds(191, 148, 150, 20);
-		contentPane.add(txtCelular);
+		txtDNI = new JTextField();
+		txtDNI.setColumns(10);
+		txtDNI.setBounds(191, 148, 150, 20);
+		contentPane.add(txtDNI);
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Cliente cliente = null;
+				ClientModel cm = new ClientModel();
+				String password = txtPassword.getText();
+				String confirmPassword = txtConfirmPassword.getText();
 				
-				JOptionPane.showMessageDialog(null,"Creacion de ususario correcto");
-				System.exit(0);
+				if (!password.equals(confirmPassword)) {
+					JOptionPane.showMessageDialog(null,"Contraseñas no coinciden");
+					return;
+				}
+				
+				try {
+					cliente = new Cliente(
+							Integer.parseInt(txtDNI.getText()),
+							Encryption.SHA1(password),
+							txtNombre.getText(),
+							txtApe.getText(),
+							cboGenero.getSelectedItem().toString().charAt(0),
+							Integer.parseInt(txtEdad.getText()),
+							txtEmail.getText(),
+							txtDirecc.getText(),
+							Integer.parseInt(txtTelefono.getText()),
+							Integer.parseInt(txtCelular.getText())
+						);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+				
+				if(fileSelected != null && cliente != null) {
+					cliente.saveFile(fileSelected, cliente.getFolder() + "/");
+					cliente.setProfileUrl(cliente.getDownload(cliente.getFolder(), fileSelected.getName()));
+				} 
+				
+				if (cm.createClient(cliente) != 0) {
+					JOptionPane.showMessageDialog(null,"El usuario " + cliente.getName() + " ha sido creado");
+					
+					Login l =new Login();
+					l.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		btnAceptar.setBounds(306, 442, 113, 23);
@@ -210,26 +253,47 @@ public class RegistroCliente extends JFrame {
 		contentPane.add(lblConfirmarContrasea);
 		
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setFont(new Font("Georgia", Font.PLAIN, 13));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"F", "M"}));
-		comboBox.setBounds(417, 274, 86, 20);
-		contentPane.add(comboBox);
+		cboGenero = new JComboBox();
+		cboGenero.setFont(new Font("Georgia", Font.PLAIN, 13));
+		cboGenero.setModel(new DefaultComboBoxModel(new String[] {"","F", "M"}));
+		cboGenero.setBounds(417, 274, 86, 20);
+		contentPane.add(cboGenero);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(384, 400, 134, 20);
-		contentPane.add(textField);
+		txtCelular = new JTextField();
+		txtCelular.setColumns(10);
+		txtCelular.setBounds(384, 400, 134, 20);
+		contentPane.add(txtCelular);
 		
-		JLabel lblImagen = new JLabel("imagen");
+		JLabel lblImagen = new JLabel("");
 		lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
-		lblImagen.setBounds(598, 106, 187, 162);
+		lblImagen.setBounds(598, 106, 180, 180);
 		contentPane.add(lblImagen);
 		
-		JButton btnNewButton = new JButton("Subir Foto");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnNewButton.setBounds(641, 298, 100, 23);
-		contentPane.add(btnNewButton);
+		JButton btnSubirFoto = new JButton("Subir Foto");
+		btnSubirFoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				fileSelected = FileManager.openFileSystem(1);
+				String filePath = null;
+				
+				try {
+					filePath = fileSelected.getPath();
+					
+					System.out.println(filePath);
+					
+					if (filePath != null) {
+						ImageIcon iconResized = FileManager.ResizeImageIcon(filePath, 180, 180);
+						lblImagen.setIcon(iconResized);
+					}
+				} catch (NullPointerException err) {
+					System.err.println(err);
+				} catch (Exception err) {
+					 JOptionPane.showMessageDialog(null, "Ups! Error abriendo la imagen " + err);
+				}
+			}
+		});
+		btnSubirFoto.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnSubirFoto.setBounds(641, 315, 100, 23);
+		contentPane.add(btnSubirFoto);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -243,23 +307,5 @@ public class RegistroCliente extends JFrame {
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCancelar.setBounds(461, 442, 113, 23);
 		contentPane.add(btnCancelar);
-		
-		
-
-		/*JButton btnSubirImagen = new JButton("Subir Imagen");
-		btnSubirImagen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				FileManager fm = new FileManager();
-				
-				try {
-					fm.saveImage();
-				} catch (IOException | JsonSyntaxException | NoSuchAlgorithmException e) {
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		btnSubirImagen.setBounds(280, 218, 150, 25);
-		contentPane.add(btnSubirImagen);*/
 	}
 }
