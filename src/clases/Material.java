@@ -1,11 +1,13 @@
 package clases;
 
+import java.util.Date;
 import interfaces.IRepoManager;
 
 public class Material implements IRepoManager {
 	private int id, cantidad;
 	private String codUser, codMat, nombre, desc, tipo, estado, materialUrl;
 	private double precioVenta;
+	private Date inicio,modificacion;
 	final private String folder = "materials";
 	
 	public Material() {}
@@ -117,6 +119,22 @@ public class Material implements IRepoManager {
 		return codUser;
 	}
 
+	public Date getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(Date inicio) {
+		this.inicio = inicio;
+	}
+
+	public Date getModificacion() {
+		return modificacion;
+	}
+
+	public void setModificacion(Date modificacion) {
+		this.modificacion = modificacion;
+	}
+
 	public void setCodUser(String codUser) {
 		this.codUser = codUser;
 	}
@@ -130,3 +148,4 @@ public class Material implements IRepoManager {
 	};
 	
 }
+

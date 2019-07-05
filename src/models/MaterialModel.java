@@ -14,16 +14,19 @@ public class MaterialModel extends ConnectionDB {
 		
 		try {
 			query = "INSERT INTO " + MaterialTableName + " ("
-					+ "codigo_usuario, "
-					+ "codigo_material, "
+					+ "material_id, "
+					+ "codigo_usuario,"
+					+ "codigo_material "
 					+ "nombre, "
 					+ "descripcion, "
 					+ "precio_venta, "
 					+ "cantidad, "
 					+ "tipo, "
 					+ "estado, "
-					+ "material_img)"
-					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "material_img,"
+					+ "creado,"
+					+ "modificado)"
+					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
 			preparedStmt.setString(1, mat.getCodUser());
@@ -47,6 +50,14 @@ public class MaterialModel extends ConnectionDB {
 			this.conn = null;
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	public void buscamaterial(Material mat){
+		String query="";
+		try {
+			query="visualizar_stock";
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 }
