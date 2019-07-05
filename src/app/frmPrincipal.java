@@ -55,6 +55,8 @@ public class frmPrincipal extends JFrame {
 		JMenu mnPerfil = new JMenu("Perfil");
 		menuBar.add(mnPerfil);
 		
+		setLocationRelativeTo(null);
+		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -75,9 +77,6 @@ public class frmPrincipal extends JFrame {
 		JMenuItem mntmReporteDeCliente = new JMenuItem("Reporte de Cliente y Empresas\r\n");
 		mnReporte.add(mntmReporteDeCliente);
 		
-		JMenuItem mntmReporteDeLas = new JMenuItem("Reporte de todas las Compras");
-		mnReporte.add(mntmReporteDeLas);
-		
 		JMenuItem mntmReporteDeTodos = new JMenuItem("Reporte de todos los materiales donados");
 		mnReporte.add(mntmReporteDeTodos);
 		
@@ -91,9 +90,25 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnNewMenu_1);
 		
 		JMenuItem mntmCrearUsuarioNormal = new JMenuItem("Crear Usuario Normal");
+		mntmCrearUsuarioNormal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegistrodeCliente rg = new RegistrodeCliente();
+				rg.setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_1.add(mntmCrearUsuarioNormal);
 		
 		JMenuItem mntmCrearUsuarioEmpresa = new JMenuItem("Crear Usuario Empresa");
+		mntmCrearUsuarioEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegistrodeEmpresa rg = new RegistrodeEmpresa();
+				rg.setVisible(true);
+				dispose();
+			}
+		});
 		mnNewMenu_1.add(mntmCrearUsuarioEmpresa);
 		
 		JMenuItem mntmVisualizarUsuarios = new JMenuItem("Visualizar Usuarios");
@@ -106,6 +121,13 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
+		mntmDesarrolladores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Desarrolladores d = new Desarrolladores();
+				d.setVisible(true);
+			}
+		});
 		mnContacto.add(mntmDesarrolladores);
 	}
 		void diseno(){
@@ -116,6 +138,8 @@ public class frmPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 	}
 
+		
+		
 		public frmPrincipal(Cliente cliente) {
 		setBounds(100, 100, 562, 361);
 		
@@ -125,12 +149,14 @@ public class frmPrincipal extends JFrame {
 		JMenu mnPerfil = new JMenu("Perfil");
 		menuBar.add(mnPerfil);
 		
+		setLocationRelativeTo(null);
+		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PerfilCliente pc=new PerfilCliente(cliente);
 				pc.setVisible(true);
-				
+				dispose();
 			}
 		});
 		mnPerfil.add(mntmMiperfil);
@@ -180,6 +206,9 @@ public class frmPrincipal extends JFrame {
 		mnContacto.add(mntmDesarrolladores);
 	}
 	
+		
+		
+		
 		public frmPrincipal(Empresa empresa) {
 		setBounds(100, 100, 562, 361);
 		
@@ -188,6 +217,9 @@ public class frmPrincipal extends JFrame {
 		
 		JMenu mnPerfil = new JMenu("Perfil");
 		menuBar.add(mnPerfil);
+		
+		
+		setLocationRelativeTo(null);
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
