@@ -37,8 +37,8 @@ public class Stock extends JFrame {
 	private JTable jTVer;
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private JButton btnFiltrar;
-	ArrayList<Material> materials = null;
-	
+	public MaterialModel mm = new MaterialModel();
+	public ArrayList<Material> materials = mm.getMaterials();
 
 	/**
 	 * Launch the application.
@@ -63,11 +63,6 @@ public class Stock extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
-				
-				MaterialModel mm = new MaterialModel();
-				
-				materials = mm.getMaterials();
-				
 				fillTable(materials);
 			}
 		});
@@ -131,6 +126,9 @@ public class Stock extends JFrame {
 		btnFiltrar = new JButton("Filtrar");
 		btnFiltrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+
+				filtrarMaterial(txtBusca.getText());
+
 				String value = txtBusca.getText();
 				clearTable();
 				fillTable(filtrarMaterial(value));
@@ -145,6 +143,24 @@ public class Stock extends JFrame {
 		centerRender.setHorizontalAlignment(JLabel.CENTER);
 		jTVer.setDefaultRenderer(String.class, centerRender);
 		
+	}
+	public ArrayList<Material> filtrarMaterial(String data) {
+		ArrayList<Material> materialsFiltrados = new ArrayList<Material>();
+		
+		for (int i = 0; i < materials.size(); i++) {
+			Material mat = materials.get(i);
+			if (
+					mat.getNombre().contains(data.toString()) ||
+					mat.getCodUser().contains(data.toString()) ||
+					mat.getDesc().contains(data.toString()) ||
+					mat.getTipo().contains(data.toString()) ||
+					mat.getEstado().contains(data.toString())
+				) {
+				materialsFiltrados.add(mat);
+			}
+		}
+		
+		return materialsFiltrados;
 	}
 	
 	private ArrayList<Material> filtrarMaterial(String data) {

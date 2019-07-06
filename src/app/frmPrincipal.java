@@ -75,7 +75,7 @@ public class frmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				PerfilAdministrador pc=new PerfilAdministrador(admin);
 				pc.setVisible(true);
-				dispose();
+				
 			}
 		});
 		mnPerfil.add(mntmMiperfil);
@@ -126,7 +126,7 @@ public class frmPrincipal extends JFrame {
 				
 				RegistrodeCliente rg = new RegistrodeCliente();
 				rg.setVisible(true);
-				dispose();
+				
 			}
 		});
 		mnNewMenu_1.add(mntmCrearUsuarioNormal);
@@ -137,7 +137,7 @@ public class frmPrincipal extends JFrame {
 				
 				RegistrodeEmpresa rg = new RegistrodeEmpresa();
 				rg.setVisible(true);
-				dispose();
+				
 			}
 		});
 		mnNewMenu_1.add(mntmCrearUsuarioEmpresa);
@@ -170,7 +170,7 @@ public class frmPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 	}
 		
-		//****************************************************************************************************************************
+		//*************************************************************************************************************************************+
 		// Menú Cliente
 		public frmPrincipal(Cliente cliente) {
 
@@ -191,7 +191,7 @@ public class frmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				PerfilCliente pc=new PerfilCliente(cliente);
 				pc.setVisible(true);
-				dispose();
+				
 			}
 		});
 		mnPerfil.add(mntmMiperfil);
@@ -286,7 +286,7 @@ public class frmPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				PerfilEmpresa pe = new PerfilEmpresa(empresa);
 				pe.setVisible(true);
-				dispose();
+				
 			}
 		});
 		

@@ -272,6 +272,11 @@ public class PerfilCliente extends JFrame {
 		contentPane.add(btnActualizar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		btnCancelar.setIcon(new ImageIcon(PerfilCliente.class.getResource("/images/iconos22x22/cancelar.png")));
 		btnCancelar.setBounds(288, 415, 121, 23);
 		contentPane.add(btnCancelar);

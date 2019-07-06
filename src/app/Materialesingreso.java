@@ -124,8 +124,9 @@ public class Materialesingreso extends JFrame {
 				estado=cboestado.getSelectedItem().toString();
 				
 				mat.setCodUser(cliente.getCode());
-				mat.setNombre(nombre);
+				mat.setNombre(nombre); 
 				mat.setCodMat(mat.generateCodMat());
+				System.out.println(mat.getCodMat());
 				mat.setDesc(descripcion);
 				mat.setPrecioVenta(precio);
 				mat.setCantidad(cant);
@@ -153,6 +154,11 @@ public class Materialesingreso extends JFrame {
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		btnCancelar.setBounds(365, 314, 126, 33);
 		btnCancelar.setIcon(new ImageIcon(Materialesingreso.class.getResource("/images/iconos22x22/cancelar.png")));
 		contentPane.add(btnCancelar);
