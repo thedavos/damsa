@@ -230,6 +230,11 @@ public class PerfilEmpresa extends JFrame {
 		contentPane.add(btnAcualizar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setIcon(new ImageIcon(PerfilEmpresa.class.getResource("/images/iconos22x22/cancelar.png")));
 		btnCancelar.setBounds(286, 329, 120, 23);
 		contentPane.add(btnCancelar);
