@@ -206,7 +206,18 @@ public class frmPrincipal extends JFrame {
 				rg.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmCrearUsuarioEmpresa);
+		mnNewMenu_1.add(mntmCrearUsuarioNormal);
+		
+		JMenuItem mntmCrearEmpresa = new JMenuItem("Crear Empresa");
+		mntmCrearEmpresa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				RegistrodeEmpresa rg = new RegistrodeEmpresa();
+				rg.setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmCrearEmpresa);
+		
 		
 		JMenuItem mntmVisualizarUsuarios = new JMenuItem("Visualizar Usuarios");
 		mnNewMenu_1.add(mntmVisualizarUsuarios);
