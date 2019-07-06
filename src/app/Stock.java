@@ -144,6 +144,8 @@ public class Stock extends JFrame {
 		jTVer.setDefaultRenderer(String.class, centerRender);
 		
 	}
+	
+	/*
 	public ArrayList<Material> filtrarMaterial(String data) {
 		ArrayList<Material> materialsFiltrados = new ArrayList<Material>();
 		
@@ -162,6 +164,8 @@ public class Stock extends JFrame {
 		
 		return materialsFiltrados;
 	}
+	
+	*/
 	
 	private ArrayList<Material> filtrarMaterial(String data) {
 		ArrayList<Material> materialsFiltrados = new ArrayList<Material>();

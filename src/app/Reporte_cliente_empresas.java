@@ -12,8 +12,13 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import clases.Cliente;
+import clases.Usuario;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class Reporte_cliente_empresas extends JFrame {
@@ -79,6 +84,7 @@ public class Reporte_cliente_empresas extends JFrame {
 				return columnEditables[column];
 			}
 		});
+
 		scrollPane.setViewportView(Clientes);
 		
 		JLabel lblEmpresas = new JLabel("Empresas :");
@@ -128,5 +134,7 @@ public class Reporte_cliente_empresas extends JFrame {
 		JButton btnVerReporte = new JButton("Ver Reporte");
 		btnVerReporte.setBounds(709, 629, 137, 23);
 		contentPane.add(btnVerReporte);
+		
+
 	}
 }

@@ -40,4 +40,8 @@ public class Cliente extends PersonaUsuario implements IRepoManager {
 		setCode(code);
 		setRole("Cliente");
 	}
+	
+	
+	
+	
 }

@@ -251,7 +251,7 @@ public class frmPrincipal extends JFrame {
 		lblusuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblusuario.setBackground(Color.GREEN);
 		
-		lblusuario.setText("USUARIO: " + Usuario);
+		lblusuario.setText("Administrador: " + Usuario);
 		
 		lblhora = new JLabel("HORA");
 		lblhora.setHorizontalAlignment(SwingConstants.CENTER);
@@ -401,7 +401,7 @@ public class frmPrincipal extends JFrame {
 		lblusuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblusuario.setBackground(Color.GREEN);
 		
-		lblusuario.setText("USUARIO: " + Usuario);
+		lblusuario.setText("Cliente: " + Usuario);
 		
 		lblhora = new JLabel("HORA");
 		lblhora.setHorizontalAlignment(SwingConstants.CENTER);
@@ -540,7 +540,7 @@ public class frmPrincipal extends JFrame {
 		lblusuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblusuario.setBackground(Color.GREEN);
 		
-		lblusuario.setText("USUARIO: " + Usuario);
+		lblusuario.setText("Empresa: " + Usuario);
 		
 		lblhora = new JLabel("HORA");
 		lblhora.setHorizontalAlignment(SwingConstants.CENTER);
