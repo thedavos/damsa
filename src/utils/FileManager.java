@@ -65,6 +65,13 @@ public class FileManager {
 		return iconResized;
 	}
 	
+	public static ImageIcon ResizeImageIcon(ImageIcon icon, int width, int height) {
+		Image imageResized = icon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT);
+		ImageIcon iconResized = new ImageIcon(imageResized);
+		
+		return iconResized;
+	}
+	
 	public static ImageIcon ConvertURLToIcon(String urlRepo) {
 		Image image;
 		ImageIcon iconFromRepo = null;
