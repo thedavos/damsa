@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.SystemColor;
+import utils.*;
 import app.*;
 import clases.*;
 import models.AdminModel;
@@ -22,13 +23,23 @@ import models.EnterpriseModel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.Box;
+import javax.swing.JToolBar;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 
 public class frmPrincipal extends JFrame {
 
 	private JPanel contentPane;
+	private JLabel lblusuario;
 	private static frmPrincipal frame = new frmPrincipal();
 	/**
 	 * Launch the application.
@@ -51,15 +62,75 @@ public class frmPrincipal extends JFrame {
 	 */
 	
 	public frmPrincipal() {
+		setResizable(false);
+		setBounds(100, 100, 1375, 740);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
+
+
+		
+		panel = new JPanel();
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBounds(0, 629, 1387, 55);
+		getContentPane().add(panel);
+		
+		lblusuario = new JLabel("");
+		lblusuario.setBounds(10, 11, 291, 34);
+		lblusuario.setForeground(Color.BLUE);
+		lblusuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblusuario.setBackground(Color.GREEN);
+		
+		lblusuario.setText("USUARIO: " + Usuario);
+		
+		lblhora = new JLabel("HORA");
+		lblhora.setHorizontalAlignment(SwingConstants.CENTER);
+		lblhora.setBounds(1050, 11, 167, 34);
+		lblhora.setForeground(Color.BLUE);
+		lblhora.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblhora.setBackground(Color.GREEN);
+		
+		
+		//hilo de la hora -- llamo ala clase hora
+		hora hilo= new hora(lblhora);
+		panel.setLayout(null);
+		panel.add(lblusuario);
+		panel.add(lblhora);
+		
+		lblfecha = new JLabel("FECHA");
+		lblfecha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblfecha.setBounds(839, 11, 167, 34);
+		panel.add(lblfecha);
+		lblfecha.setForeground(Color.BLUE);
+		lblfecha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblfecha.setBackground(Color.GREEN);
+		//inicio el hilo
+		hilo.start();
+		//fecha
+		fecha();
+		
 		
 	}
+	
+	public static String Usuario = "DESCONOCIDO";
+	private JLabel lblfecha;
+	private JLabel lblhora;
+	private JPanel panel;
+	
+	
 	//**********************************************************************************************************************************
 	// Menú Admin
 	public frmPrincipal(Admin admin) {
 		
-
+		setBounds(100, 100, 1375, 740);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setBounds(100, 100, 562, 361);
+        
+        setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
+		//setResizable(false);
+		
+		Usuario = admin.getName();
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -105,6 +176,13 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnReporte);
 		
 		JMenuItem mntmReporteDeCliente = new JMenuItem("Reporte de Cliente y Empresas\r\n");
+		mntmMiperfil.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Reporte_cliente_empresas rc = new Reporte_cliente_empresas();
+				rc.setVisible(true);
+			}
+		});
 		mnReporte.add(mntmReporteDeCliente);
 		
 		JMenuItem mntmReporteDeTodos = new JMenuItem("Reporte de todos los materiales donados");
@@ -126,21 +204,20 @@ public class frmPrincipal extends JFrame {
 				
 				RegistrodeCliente rg = new RegistrodeCliente();
 				rg.setVisible(true);
-				
 			}
 		});
 		mnNewMenu_1.add(mntmCrearUsuarioNormal);
 		
-		JMenuItem mntmCrearUsuarioEmpresa = new JMenuItem("Crear Usuario Empresa");
-		mntmCrearUsuarioEmpresa.addActionListener(new ActionListener() {
+		JMenuItem mntmCrearEmpresa = new JMenuItem("Crear Empresa");
+		mntmCrearEmpresa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				RegistrodeEmpresa rg = new RegistrodeEmpresa();
 				rg.setVisible(true);
-				
 			}
 		});
-		mnNewMenu_1.add(mntmCrearUsuarioEmpresa);
+		mnNewMenu_1.add(mntmCrearEmpresa);
+		
 		
 		JMenuItem mntmVisualizarUsuarios = new JMenuItem("Visualizar Usuarios");
 		mnNewMenu_1.add(mntmVisualizarUsuarios);
@@ -161,29 +238,77 @@ public class frmPrincipal extends JFrame {
 			}
 		});
 		mnContacto.add(mntmDesarrolladores);
+		
+		
+		panel = new JPanel();
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBounds(0, 629, 1387, 55);
+		getContentPane().add(panel);
+		
+		lblusuario = new JLabel("");
+		lblusuario.setBounds(10, 11, 291, 34);
+		lblusuario.setForeground(Color.BLUE);
+		lblusuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblusuario.setBackground(Color.GREEN);
+		
+		lblusuario.setText("USUARIO: " + Usuario);
+		
+		lblhora = new JLabel("HORA");
+		lblhora.setHorizontalAlignment(SwingConstants.CENTER);
+		lblhora.setBounds(1050, 11, 167, 34);
+		lblhora.setForeground(Color.BLUE);
+		lblhora.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblhora.setBackground(Color.GREEN);
+		
+		
+		//hilo de la hora -- llamo ala clase hora
+		hora hilo= new hora(lblhora);
+		panel.setLayout(null);
+		panel.add(lblusuario);
+		panel.add(lblhora);
+		
+		lblfecha = new JLabel("FECHA");
+		lblfecha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblfecha.setBounds(839, 11, 167, 34);
+		panel.add(lblfecha);
+		lblfecha.setForeground(Color.BLUE);
+		lblfecha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblfecha.setBackground(Color.GREEN);
+		//inicio el hilo
+		hilo.start();
+		//fecha
+		fecha();
 	}
 		void diseno(){
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout(0, 0));
+		contentPane.setLayout(new BorderLayout(0, 0));	
+		
 	}
 		
 		//*************************************************************************************************************************************+
 		// Menú Cliente
 		public frmPrincipal(Cliente cliente) {
-
+		
+		setBounds(100, 100, 1375, 740);
 	    setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setBounds(100, 100, 562, 361);
+	        
+	    setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
+		//setResizable(false);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		Usuario = cliente.getName();
 		
 		JMenu mnPerfil = new JMenu("Perfil");
 		menuBar.add(mnPerfil);
 		
 		setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mnPerfil.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/modificar.png")));
@@ -242,6 +367,7 @@ public class frmPrincipal extends JFrame {
 		mnCompraYVenta.add(mntmStock);
 		
 		JMenu mnReporte = new JMenu("Reporte");
+		mnReporte.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/Reporte.png")));
 		menuBar.add(mnReporte);
 		
 		JMenuItem mntmReporteCompra = new JMenuItem("Reporte Compras");
@@ -251,6 +377,7 @@ public class frmPrincipal extends JFrame {
 		mnReporte.add(mntmReporteMaterial);
 		
 		JMenu mnContacto = new JMenu("Contacto");
+		mnContacto.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/bricks.png")));
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
@@ -261,6 +388,46 @@ public class frmPrincipal extends JFrame {
 			}
 		});
 		mnContacto.add(mntmDesarrolladores);
+		
+		
+		panel = new JPanel();
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBounds(0, 629, 1387, 55);
+		getContentPane().add(panel);
+		
+		lblusuario = new JLabel("");
+		lblusuario.setBounds(10, 11, 291, 34);
+		lblusuario.setForeground(Color.BLUE);
+		lblusuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblusuario.setBackground(Color.GREEN);
+		
+		lblusuario.setText("USUARIO: " + Usuario);
+		
+		lblhora = new JLabel("HORA");
+		lblhora.setHorizontalAlignment(SwingConstants.CENTER);
+		lblhora.setBounds(1050, 11, 167, 34);
+		lblhora.setForeground(Color.BLUE);
+		lblhora.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblhora.setBackground(Color.GREEN);
+		
+		
+		//hilo de la hora -- llamo ala clase hora
+		hora hilo= new hora(lblhora);
+		panel.setLayout(null);
+		panel.add(lblusuario);
+		panel.add(lblhora);
+		
+		lblfecha = new JLabel("FECHA");
+		lblfecha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblfecha.setBounds(839, 11, 167, 34);
+		panel.add(lblfecha);
+		lblfecha.setForeground(Color.BLUE);
+		lblfecha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblfecha.setBackground(Color.GREEN);
+		//inicio el hilo
+		hilo.start();
+		//fecha
+		fecha();
 	}
   
 		
@@ -269,8 +436,13 @@ public class frmPrincipal extends JFrame {
 		// Menú Empresa
 		public frmPrincipal(Empresa empresa) {
 
+		setBounds(100, 100, 1375, 740);
 	    setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setBounds(100, 100, 562, 361);
+	        
+	    setLocationRelativeTo(null);
+	    getContentPane().setLayout(null);
+		//setResizable(false);
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -278,8 +450,10 @@ public class frmPrincipal extends JFrame {
 		JMenu mnPerfil = new JMenu("Perfil");
 		menuBar.add(mnPerfil);
 		
+		Usuario = empresa.getName();
 		
 		setLocationRelativeTo(null);
+		getContentPane().setLayout(null);
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
 		mntmMiperfil.addActionListener(new ActionListener() {
@@ -329,6 +503,7 @@ public class frmPrincipal extends JFrame {
 		mnCompraYVenta.add(mMaterialVender);
 		
 		JMenu mnReporte = new JMenu("Reporte");
+		mnReporte.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/Reporte.png")));
 		menuBar.add(mnReporte);
 		
 		JMenuItem mntmReporteCompra = new JMenuItem("Reporte Compras");
@@ -341,6 +516,7 @@ public class frmPrincipal extends JFrame {
 		mnReporte.add(mntmReporteVentas);
 		
 		JMenu mnContacto = new JMenu("Contacto");
+		mnContacto.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/bricks.png")));
 		menuBar.add(mnContacto);
 		
 		JMenuItem mntmDesarrolladores = new JMenuItem("Desarrolladores");
@@ -351,5 +527,91 @@ public class frmPrincipal extends JFrame {
 			}
 		});
 		mnContacto.add(mntmDesarrolladores);
+		
+		
+		panel = new JPanel();
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBounds(0, 629, 1387, 55);
+		getContentPane().add(panel);
+		
+		lblusuario = new JLabel("");
+		lblusuario.setBounds(10, 11, 291, 34);
+		lblusuario.setForeground(Color.BLUE);
+		lblusuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblusuario.setBackground(Color.GREEN);
+		
+		lblusuario.setText("USUARIO: " + Usuario);
+		
+		lblhora = new JLabel("HORA");
+		lblhora.setHorizontalAlignment(SwingConstants.CENTER);
+		lblhora.setBounds(1050, 11, 167, 34);
+		lblhora.setForeground(Color.BLUE);
+		lblhora.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblhora.setBackground(Color.GREEN);
+		
+		
+		//hilo de la hora -- llamo ala clase hora
+		hora hilo= new hora(lblhora);
+		panel.setLayout(null);
+		panel.add(lblusuario);
+		panel.add(lblhora);
+		
+		lblfecha = new JLabel("FECHA");
+		lblfecha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblfecha.setBounds(839, 11, 167, 34);
+		panel.add(lblfecha);
+		lblfecha.setForeground(Color.BLUE);
+		lblfecha.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblfecha.setBackground(Color.GREEN);
+		//inicio el hilo
+		hilo.start();
+		//fecha
+		fecha();
 	}
+		
+		
+		public void fecha()
+		{
+			//llamo al metodo fecha
+			String fecha = Fecha();
+			lblfecha.setText(fecha);	
+		}
+		
+		public String nombre(int mes)
+		{
+			switch (mes)
+			{
+			case 1: return "Enero";
+			case 2: return "Febrero";
+			case 3: return "Marzo";
+			case 4: return "Abril";
+			case 5: return "Mayo";
+			case 6: return "Junio";
+			case 7: return "Julio";
+			case 8: return "Agosto";
+			case 9: return "Septiembre";
+			case 10: return "Octubre";
+			case 11: return "Noviembre";
+			case 12: return "Diciembre";
+			}
+			return "Error";
+		}
+
+		public String Fecha()
+		{
+			//importo la libreria GregorianCalendar para hacer la funcion de fecha
+			GregorianCalendar fecha = new GregorianCalendar();
+			//declaro como entero el dia
+			int dia = fecha.get(fecha.DAY_OF_MONTH);
+			//declaro como entero el mes
+			int mes = fecha.get(fecha.MONTH);
+			//declaro como entero el aÃ±o
+			int año = fecha.get(fecha.YEAR);
+			// le asigno a mifecha el formtato dia/mes/aÃ±o
+			String mifecha = String.valueOf(dia)+"/"+nombre(mes)+"/"+String.valueOf(año);
+			//retorna mifecha
+			return mifecha;
+		}
 }
+
+
