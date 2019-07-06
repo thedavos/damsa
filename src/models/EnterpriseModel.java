@@ -31,7 +31,7 @@ public class EnterpriseModel extends ConnectionDB {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseña)"
+					+ "contraseña"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = this.connect().prepareStatement(query);
