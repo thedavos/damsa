@@ -12,6 +12,8 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Desarrolladores extends JFrame {
 
@@ -37,8 +39,14 @@ public class Desarrolladores extends JFrame {
 	 * Create the frame.
 	 */
 	public Desarrolladores() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				dispose();
+			}
+		});
 		setTitle("Desarrolladores");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 487, 387);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

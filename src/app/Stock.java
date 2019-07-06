@@ -29,6 +29,8 @@ import utils.FileManager;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Stock extends JFrame {
 
@@ -60,6 +62,12 @@ public class Stock extends JFrame {
 	 * Create the frame.
 	 */
 	public Stock() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				dispose();
+			}
+		});
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
@@ -68,7 +76,7 @@ public class Stock extends JFrame {
 		});
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1236, 437);
+		setBounds(100, 100, 1236, 395);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -118,10 +126,6 @@ public class Stock extends JFrame {
 		modelo.addColumn("Imagen");
 		modelo.addColumn("Creado");
 		scrollPane.setViewportView(jTVer);
-		
-		JButton btnCerrar = new JButton("Cerrar");
-		btnCerrar.setBounds(539, 365, 89, 23);
-		contentPane.add(btnCerrar);
 		
 		btnFiltrar = new JButton("Filtrar");
 		btnFiltrar.addActionListener(new ActionListener() {

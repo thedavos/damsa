@@ -67,6 +67,12 @@ public class PerfilAdministrador extends JFrame {
 	 * Create the frame.
 	 */
 	public PerfilAdministrador(Admin admin) {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {

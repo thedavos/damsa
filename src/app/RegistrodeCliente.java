@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -65,6 +67,12 @@ public class RegistrodeCliente extends JFrame {
 	 * Create the frame.
 	 */
 	public RegistrodeCliente() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		setResizable(false);
 		
 		
