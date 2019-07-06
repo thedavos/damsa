@@ -32,7 +32,7 @@ public class AdminModel extends ConnectionDB {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseña, "
+					+ "contraseÃ±a, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -84,7 +84,7 @@ public class AdminModel extends ConnectionDB {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				String profileUrl = result.getString("profile_url");
 				
 				admin = new Admin(
@@ -144,7 +144,7 @@ public class AdminModel extends ConnectionDB {
 				String email = result.getString("correo");
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				String profileUrl = result.getString("profile_url");
 				
 				admin = new Admin(
