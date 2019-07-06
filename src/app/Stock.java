@@ -168,24 +168,7 @@ public class Stock extends JFrame {
 		jTVer.setDefaultRenderer(String.class, centerRender);
 		
 	}
-	public ArrayList<Material> filtrarMaterial(String data) {
-		ArrayList<Material> materialsFiltrados = new ArrayList<Material>();
-		
-		for (int i = 0; i < materials.size(); i++) {
-			Material mat = materials.get(i);
-			if (
-					mat.getNombre().contains(data.toString()) ||
-					mat.getCodUser().contains(data.toString()) ||
-					mat.getDesc().contains(data.toString()) ||
-					mat.getTipo().contains(data.toString()) ||
-					mat.getEstado().contains(data.toString())
-				) {
-				materialsFiltrados.add(mat);
-			}
-		}
-		
-		return materialsFiltrados;
-	}
+	
 	
 	private ArrayList<Material> filtrarMaterial(String data) {
 		ArrayList<Material> materialsFiltrados = new ArrayList<Material>();
