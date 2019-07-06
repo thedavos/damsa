@@ -22,6 +22,8 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.awt.event.ActionEvent;
 
@@ -61,6 +63,12 @@ public class RegistroEmpresa extends JFrame {
 	 * Create the frame.
 	 */
 	public RegistroEmpresa() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		setResizable(false);
 		
 		

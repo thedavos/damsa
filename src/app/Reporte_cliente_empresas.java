@@ -18,7 +18,10 @@ import clases.Usuario;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import java.awt.event.ActionEvent;
 
 public class Reporte_cliente_empresas extends JFrame {
@@ -47,6 +50,12 @@ public class Reporte_cliente_empresas extends JFrame {
 	 * Create the frame.
 	 */
 	public Reporte_cliente_empresas() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		
 		setResizable(false);
 		setTitle("Ver Clientes y Empresas");

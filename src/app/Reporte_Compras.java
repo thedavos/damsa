@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -39,6 +42,12 @@ public class Reporte_Compras extends JFrame {
 	 * Create the frame.
 	 */
 	public Reporte_Compras() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 840, 608);
 		contentPane = new JPanel();

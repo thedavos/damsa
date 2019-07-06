@@ -67,6 +67,12 @@ public class Materialesingreso extends JFrame {
 	
 	
 	public Materialesingreso(Cliente cliente) {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		
 		setTitle("Ingreso de Materiales");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -69,6 +69,12 @@ public class PerfilCliente extends JFrame {
 	
 	
 	public PerfilCliente(Cliente cliente) {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
