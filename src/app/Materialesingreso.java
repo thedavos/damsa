@@ -111,13 +111,11 @@ public class Materialesingreso extends JFrame {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nombre,descripcion,tipo,estado,img,codmate;
-				Cliente codusu;
 				double precio;
 				int cant;
 				
 				Material mat = new Material();
 				
-				codusu= cliente;
 				nombre = txtnombre.getText();
 				descripcion = txtdescripcion.getText();
 				precio = Double.parseDouble(txtprecio.getText());
@@ -126,8 +124,8 @@ public class Materialesingreso extends JFrame {
 				estado=cboestado.getSelectedItem().toString();
 				
 				mat.setCodUser(cliente.getCode());
-				mat.setCodMat(mat.generateCodMat());
 				mat.setNombre(nombre);
+				mat.setCodMat(mat.generateCodMat());
 				mat.setDesc(descripcion);
 				mat.setPrecioVenta(precio);
 				mat.setCantidad(cant);
@@ -138,6 +136,14 @@ public class Materialesingreso extends JFrame {
 					mat.setMaterialUrl(mat.getDownload(mat.getFolder(), fileSelected.getName()));
 				}
 					
+				MaterialModel mm = new MaterialModel();
+				int result =mm.createMaterial(mat);
+				
+				if(result != 0){
+				JOptionPane.showMessageDialog(null, "Se registro correctamente su material");
+				}else
+					JOptionPane.showMessageDialog(null, "No se ha registrado");
+				
 			}
 		});
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 12));

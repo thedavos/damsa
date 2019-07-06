@@ -29,7 +29,7 @@ import javax.swing.ImageIcon;
 public class frmPrincipal extends JFrame {
 
 	private JPanel contentPane;
-
+	private static frmPrincipal frame = new frmPrincipal();
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +37,7 @@ public class frmPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frmPrincipal frame = new frmPrincipal();
+					
 					frame.setVisible(true);					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -218,6 +218,12 @@ public class frmPrincipal extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Almacenar");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Materialesingreso mi = new Materialesingreso(cliente);
+				mi.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem);
 		
 		JMenuItem mntmVisualizar = new JMenuItem("Visualizar");
