@@ -33,8 +33,8 @@ public class Stock extends JFrame {
 	private JTable jTVer;
 	private DefaultTableModel modelo = new DefaultTableModel();
 	private JButton btnFiltrar;
-	ArrayList<Material> materials = null;
-	
+	public MaterialModel mm = new MaterialModel();
+	public ArrayList<Material> materials = mm.getMaterials();
 
 	/**
 	 * Launch the application.
@@ -59,10 +59,6 @@ public class Stock extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
-				
-				MaterialModel mm = new MaterialModel();
-				
-				materials = mm.getMaterials();
 				
 				for (int i = 0; i < materials.size(); i++) {
 					Material mat = materials.get(i);
