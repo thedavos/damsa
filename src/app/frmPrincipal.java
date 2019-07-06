@@ -53,7 +53,7 @@ public class frmPrincipal extends JFrame {
 	public frmPrincipal() {
 		
 	}
-	
+	//**********************************************************************************************************************************
 	// Menú Admin
 	public frmPrincipal(Admin admin) {
 		
@@ -170,6 +170,7 @@ public class frmPrincipal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 	}
 		
+		//****************************************************************************************************************************
 		// Menú Cliente
 		public frmPrincipal(Cliente cliente) {
 
@@ -185,6 +186,7 @@ public class frmPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JMenuItem mntmMiperfil = new JMenuItem("MiPerfil");
+		mnPerfil.setIcon(new ImageIcon(frmPrincipal.class.getResource("/images/iconos16x16/modificar.png")));
 		mntmMiperfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PerfilCliente pc=new PerfilCliente(cliente);
@@ -255,6 +257,9 @@ public class frmPrincipal extends JFrame {
 		mnContacto.add(mntmDesarrolladores);
 	}
   
+		
+		
+		//********************************************************************************************************************************
 		// Menú Empresa
 		public frmPrincipal(Empresa empresa) {
 
