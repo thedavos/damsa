@@ -175,7 +175,7 @@ public class CambiarContrasena extends JFrame {
 		setResizable(false);
 		setTitle("Cambiar Contrase\u00F1a");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 344, 235);
+		setBounds(100, 100, 327, 225);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -188,7 +188,8 @@ public class CambiarContrasena extends JFrame {
 		lblContraseaNueva = new JLabel("Contrase\u00F1a Nueva");
 		lblContraseaNueva.setBounds(21, 61, 106, 14);
 		contentPane.add(lblContraseaNueva);
-
+		
+		lblConfirmarNueva = new JLabel("Confirmar Contrase\u00F1a");
 		lblConfirmarNueva.setBounds(21, 102, 134, 14);
 		contentPane.add(lblConfirmarNueva);
 		
@@ -197,20 +198,20 @@ public class CambiarContrasena extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(170, 25, 134, 23);
+		passwordField.setBounds(170, 25, 116, 23);
 		contentPane.add(passwordField);
 		
 		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(170, 61, 134, 23);
+		passwordField_1.setBounds(170, 61, 116, 23);
 		contentPane.add(passwordField_1);
 		
 		passwordField_2 = new JPasswordField();
-		passwordField_2.setBounds(170, 102, 134, 23);
+		passwordField_2.setBounds(170, 102, 116, 23);
 		contentPane.add(passwordField_2);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setIcon(new ImageIcon(CambiarContrasena.class.getResource("/images/iconos22x22/dialog-cancel-3.png")));
-		btnCancelar.setBounds(182, 162, 116, 23);
+		btnCancelar.setBounds(170, 162, 116, 23);
 		contentPane.add(btnCancelar);
 	}
 }

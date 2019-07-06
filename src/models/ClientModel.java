@@ -33,7 +33,7 @@ public class ClientModel extends ConnectionDB {
 					+ "correo, "
 					+ "telefono, "
 					+ "celular, "
-					+ "contraseña, "
+					+ "contraseÃ±a, "
 					+ "profile_url)"
 					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
@@ -88,7 +88,7 @@ public class ClientModel extends ConnectionDB {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				
 				client = new Cliente(
 						dnii, 
@@ -147,7 +147,7 @@ public class ClientModel extends ConnectionDB {
 				int phone = result.getInt("telefono");
 				int cellPhone = result.getInt("celular");
 				String profileUrl = result.getString("profile_url");
-				String password = result.getString("contraseña");
+				String password = result.getString("contraseÃ±a");
 				
 				client = new Cliente(
 						dnii, 
