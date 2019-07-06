@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -23,6 +25,8 @@ import java.util.Date;
 import app.*;
 import clases.Material;
 import models.*;
+import utils.FileManager;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -64,37 +68,7 @@ public class Stock extends JFrame {
 				
 				materials = mm.getMaterials();
 				
-				for (int i = 0; i < materials.size(); i++) {
-					Material mat = materials.get(i);
-					
-					int id = mat.getId();
-					String codUser = mat.getCodUser();
-					String codMat = mat.getCodMat();
-					String nombre = mat.getNombre();
-					String desc = mat.getDesc();
-					String tipo = mat.getTipo();
-					String estado = mat.getEstado();
-					
-					Double precioVenta = mat.getPrecioVenta();
-					int cantidad = mat.getCantidad();
-					Date inicio = mat.getInicio();
-					
-					Object[] data = {
-							id, 
-							codUser, 
-							codMat, 
-							nombre, 
-							desc, 
-							precioVenta, 
-							cantidad, 
-							tipo, 
-							estado, 
-							"Ver Imagen", 
-							inicio
-							};
-					modelo.addRow(data);
-				}
-				centrarValoreDeTabla();
+				fillTable(materials);
 			}
 		});
 		
@@ -132,8 +106,11 @@ public class Stock extends JFrame {
 		contentPane.add(scrollPane);
 		
 		
-		jTVer = new JTable();
-		jTVer.setModel(modelo);
+		jTVer = new JTable(modelo) {
+			public Class getColumnClass(int column) {
+				return (column == 9) ? ImageIcon.class : Object.class;
+			}
+		};
 		modelo.addColumn("Id Material");
 		modelo.addColumn("Usuario");
 		modelo.addColumn("Cod. Material");
@@ -210,6 +187,13 @@ public class Stock extends JFrame {
 			Double precioVenta = mat.getPrecioVenta();
 			int cantidad = mat.getCantidad();
 			Date inicio = mat.getInicio();
+			String notFoundURL = "https://f002.backblazeb2.com/file/damsa-files/materials/notfound.png";
+			ImageIcon icon = null;
+			
+			ImageIcon notFound = FileManager.ResizeImageIcon(FileManager.ConvertURLToIcon(notFoundURL), 30, 30);
+			if (mat.getMaterialUrl() != null) {
+				icon = FileManager.ResizeImageIcon(FileManager.ConvertURLToIcon(mat.getMaterialUrl()), 30, 30);
+			}
 			
 			Object[] data = {
 					id, 
@@ -221,7 +205,7 @@ public class Stock extends JFrame {
 					cantidad, 
 					tipo, 
 					estado, 
-					"Ver Perfil", 
+					icon == null ? notFound : icon, 
 					inicio
 					};
 			modelo.addRow(data);
